@@ -115,3 +115,8 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .empty-state { color: var(--muted); font-size: 14px; }
 .meta { color: var(--muted); font-size: 12px; }
 .brief > *, .messages > * { flex-shrink: 0; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.card-title { font-weight: 700; }
+.translate { font-size: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+.translate .term { color: var(--violet); font-weight: 600; }
+.route.refuse { background: var(--warn-soft); }
