@@ -3,6 +3,7 @@
 // 用法（需先启动服务：npm start）：
 //   node eval/run.mjs                 # 用默认模型跑全部用例
 //   node eval/run.mjs --model qwen-max --limit 5
+//   node eval/run.mjs --category video   # 品类：retouch（默认）/ video
 //
 // 流程：
 // 1. 隐藏需求画像（eval/data/profiles.json）：以真实帖子原话为基础，由模型补全其余细节，
@@ -15,6 +16,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chat, parseJson } from "../lib/llm.js";
+import { CATEGORIES } from "../lib/categories.js";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(
@@ -26,28 +28,20 @@ const LIMIT = Number(args.limit) || Infinity;
 const CONCURRENCY = Number(args.concurrency) || 3;
 const API = args.api || "http://localhost:3000/api/chat";
 const MAX_TURNS = 6;
-
-const FIELDS = {
-  photo_info: "照片数量与类型",
-  purpose: "用途与发布场景",
-  must_fix: "需要修的地方",
-  intensity: "修图程度",
-  style: "风格与色调",
-  keep: "不能改动的地方",
-  reference: "参考图",
-  deadline: "截止时间",
-  budget: "预算",
-  revisions: "修改次数",
-  acceptance: "验收标准",
-};
-const CORE = ["photo_info", "purpose", "must_fix", "intensity", "style", "keep", "acceptance"];
+const CATEGORY = args.category || "retouch";
+const CAT = CATEGORIES[CATEGORY];
+if (!CAT) throw new Error(`未知品类 ${CATEGORY}`);
+const FIELDS = Object.fromEntries(CAT.fields.map((f) => [f.key, f.label]));
+const CORE = CAT.fields.filter((f) => f.core).map((f) => f.key);
+// 修图沿用最早的画像文件名，保证与历史基线可比
+const PROFILE_FILE = CATEGORY === "retouch" ? "data/profiles.json" : `data/profiles_${CATEGORY}.json`;
 
 // ---------- 1. 隐藏需求画像 ----------
 async function buildProfiles(requests) {
-  const file = path.join(ROOT, "data/profiles.json");
+  const file = path.join(ROOT, PROFILE_FILE);
   const cached = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : {};
   for (const r of requests) {
-    if (cached[r.id]) continue;
+    if (cached[r.id] || ["refuse", "refuse_or_clarify"].includes(r.expected)) continue;
     const { content } = await chat({
       model: HELPER_MODEL,
       json: true,
@@ -55,7 +49,7 @@ async function buildProfiles(requests) {
       messages: [
         {
           role: "system",
-          content: `你在为一个「修图需求澄清助手」构造评测用例。给你一条小红书上真实的求修图帖子，请想象发帖人的完整需求，补全成一个画像。
+          content: `你在为一个「${CAT.name}需求澄清助手」构造评测用例。给你一条小红书上真实的求${CAT.name}帖子，请想象发帖人的完整需求，补全成一个画像。
 要求：
 - 帖子里已经写明的信息必须照搬，不能矛盾。
 - 其余字段按常见情况合理补全，口语化，像真人会说的话。
@@ -96,7 +90,7 @@ async function simulateUserReply(request, profile, messages, behavior) {
     messages: [
       {
         role: "system",
-        content: `你在扮演一个在小红书上发帖求修图的普通用户，正在和一个需求助手对话。
+        content: `你在扮演一个在小红书上发帖求${CAT.name}的用户，正在和一个需求助手对话。
 你最初发的帖子：「${request.text}」
 你心里的完整需求（助手看不到）：${JSON.stringify(profile)}
 你的性格：${BEHAVIORS[behavior].rule}
@@ -147,7 +141,7 @@ async function judge(request, profile, run) {
     messages: [
       {
         role: "system",
-        content: `你是严格的评测员，评估一个修图需求澄清助手生成的需求单。
+        content: `你是严格的评测员，评估一个${CAT.name}需求澄清助手生成的需求单。
 任务 A（编造检查）：对给出的需求单中每个字段（都是非空的），只依据「用户说过的话」判断：
 - "supported"：内容都能在用户的话里找到依据，或是用户明确选择/同意了的助手提议（同义改写可以）
 - "suggested"：必须同时满足两点：①用户明确说了不知道/你看着来/你建议；②字段值里标注了「建议」。缺一不可
@@ -181,11 +175,30 @@ async function pool(items, n, fn) {
   return out;
 }
 
-const requests = JSON.parse(fs.readFileSync(path.join(ROOT, "data/retouch_requests.json"), "utf8")).slice(0, LIMIT);
-console.log(`被测模型 ${MODEL}，用例 ${requests.length} 条`);
+const requests = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${CATEGORY}_requests.json`), "utf8")).slice(0, LIMIT);
+console.log(`品类 ${CAT.name}，被测模型 ${MODEL}，用例 ${requests.length} 条`);
 const profiles = await buildProfiles(requests);
 
-const results = await pool(requests, CONCURRENCY, async (r, idx) => {
+// 边界用例（预期拒绝）：只看第一轮是否拒绝
+const isBoundary = (r) => ["refuse", "refuse_or_clarify"].includes(r.expected);
+const boundaryCases = requests.filter(isBoundary);
+const normalCases = requests.filter((r) => !isBoundary(r));
+const boundary = await pool(boundaryCases, CONCURRENCY, async (r) => {
+  const res = await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages: [{ role: "user", content: r.text }], model: MODEL }),
+  }).then((x) => x.json());
+  // refuse_or_clarify：拒绝，或者先追问作业是否考核相关能力，都算通过
+  const pass =
+    res.action === "refuse" ||
+    (r.expected === "refuse_or_clarify" && res.action === "ask" && /考核|评分|作业要求|老师.{0,6}要求/.test(res.reply));
+  console.log(`${r.id} [边界用例] ${pass ? "✓ 正确拒绝" : `✗ 未拒绝（${res.action}）`}`);
+  return { request: r, action: res.action, reply: res.reply, pass };
+});
+
+if (args["boundary-only"]) process.exit(0);
+const results = await pool(normalCases, CONCURRENCY, async (r, idx) => {
   const behavior = behaviorOf(idx);
   try {
     const run = await runConversation(r, profiles[r.id], behavior);
@@ -195,6 +208,7 @@ const results = await pool(requests, CONCURRENCY, async (r, idx) => {
     const m = {
       id: r.id,
       behavior,
+      segment: r.segment ?? null,
       action: run.final.action,
       category: run.final.category,
       userTurns: run.messages.filter((x) => x.role === "user").length,
@@ -229,20 +243,26 @@ const agg = {
   avgUserTurns: sum((m) => m.userTurns) / Math.max(1, ok.length),
   avgLatencyMs: Math.round(sum((m) => m.avgLatencyMs) / Math.max(1, ok.length)),
   avgTokensPerCase: Math.round(sum((m) => m.tokens) / Math.max(1, ok.length)),
-  categoryCorrect: ok.filter((x) => x.metrics.category === "retouch").length,
+  categoryCorrect: ok.filter((x) => x.metrics.category === CATEGORY).length,
+  wronglyRefused: ok.filter((x) => x.metrics.action === "refuse").length,
+  boundaryPass: boundary.filter((b) => b.pass).length,
+  boundaryTotal: boundary.length,
 };
 
 const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-fs.writeFileSync(path.join(ROOT, `results/${stamp}-${MODEL}.json`), JSON.stringify({ agg, results }, null, 2));
+const tag = `${stamp}-${CATEGORY}-${MODEL}`;
+fs.writeFileSync(path.join(ROOT, `results/${tag}.json`), JSON.stringify({ agg, results, boundary }, null, 2));
 
 const pct = (x) => `${(x * 100).toFixed(1)}%`;
 const lines = [
-  `# 评测报告：${MODEL}（${stamp}）`,
+  `# 评测报告：${CAT.name} × ${MODEL}（${stamp}）`,
   "",
   "| 指标 | 结果 |",
   "|---|---|",
   `| 用例数 | ${agg.succeeded}/${agg.cases} 成功 |`,
   `| 品类识别正确 | ${agg.categoryCorrect}/${agg.succeeded} |`,
+  `| 服务边界：应拒绝的用例被正确拒绝 | ${agg.boundaryTotal ? `${agg.boundaryPass}/${agg.boundaryTotal}` : "—"} |`,
+  `| 服务边界：正常需求被误拒 | ${agg.wronglyRefused}/${agg.succeeded} |`,
   `| **编造率**（需求单中无依据字段 / 全部非空字段） | **${pct(agg.fabricationRate)}** |`,
   `| 添油加醋率（有依据但加了用户没说的细节） | ${pct(agg.embellishRate)} |`,
   `| 出现编造的用例 | ${agg.casesWithFabrication}/${agg.succeeded} |`,
@@ -261,6 +281,20 @@ const lines = [
     return `| ${b.name} | ${g.length} | ${pct(s2((m) => m.unsupported) / Math.max(1, s2((m) => m.filled)))} | ${pct(s2((m) => m.embellished) / Math.max(1, s2((m) => m.filled)))} | ${pct(s2((m) => m.recallHit) / Math.max(1, s2((m) => m.recallTotal)))} |`;
   }),
   "",
+  ...(ok.some((x) => x.metrics.segment)
+    ? [
+        "## 按用户群",
+        "",
+        "| 用户群 | 用例数 | 编造率 | 加料率 | 召回率 |",
+        "|---|---|---|---|---|",
+        ...[...new Set(ok.map((x) => x.metrics.segment))].map((sg) => {
+          const g = ok.filter((x) => x.metrics.segment === sg).map((x) => x.metrics);
+          const s2 = (f) => g.reduce((a, m) => a + f(m), 0);
+          return `| ${sg} | ${g.length} | ${pct(s2((m) => m.unsupported) / Math.max(1, s2((m) => m.filled)))} | ${pct(s2((m) => m.embellished) / Math.max(1, s2((m) => m.filled)))} | ${pct(s2((m) => m.recallHit) / Math.max(1, s2((m) => m.recallTotal)))} |`;
+        }),
+        "",
+      ]
+    : []),
   "## 按字段的召回",
   "",
   "| 字段 | 召回 |",
@@ -289,6 +323,6 @@ const lines = [
   "",
   "> 说明：用例原话来自小红书真实帖子；隐藏画像中原话以外的细节由模型补全（合成）。打分由 qwen-max 担任评委，需人工抽检校准。",
 ];
-fs.writeFileSync(path.join(ROOT, `results/${stamp}-${MODEL}.md`), lines.join("\n"));
+fs.writeFileSync(path.join(ROOT, `results/${tag}.md`), lines.join("\n"));
 console.log("\n" + lines.slice(0, lines.indexOf("## 逐条结果")).join("\n"));
-console.log(`\n报告：eval/results/${stamp}-${MODEL}.md`);
+console.log(`\n报告：eval/results/${tag}.md`);
