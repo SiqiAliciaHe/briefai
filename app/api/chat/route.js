@@ -1,3 +1,6 @@
+// Vercel 函数最长运行时间（秒）：模型单次调用约 10–15 秒，默认上限可能不够
+export const maxDuration = 60;
+
 import { chat, parseJson, ALLOWED_MODELS } from "@/lib/llm";
 import { clarifySystemPrompt, MAX_TURNS } from "@/lib/prompts";
 import { CATEGORIES, fieldsOf } from "@/lib/categories";
