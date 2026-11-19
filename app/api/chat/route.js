@@ -46,8 +46,14 @@ export async function POST(req) {
     }
     // 来源标注：AI 提议、用户未确认的内容，在需求单上明确标出「待确认」
     const unconfirmed = Array.isArray(parsed.unconfirmed) ? parsed.unconfirmed : [];
+    // 代码校验：内容在用户原话里能找到的，说明是用户自己说的，不标「待确认」（模型自标常把用户原话误标）
+    const userText = messages.filter((m) => m.role === "user").map((m) => m.content).join("\n");
+    const saidByUser = (v) => {
+      const core = String(v).replace(/（[^）]*）|\([^)]*\)/g, "").trim();
+      return core.length > 0 && userText.includes(core);
+    };
     for (const k of unconfirmed) {
-      if (brief[k] && !/待确认/.test(brief[k])) brief[k] = `${brief[k]}（待确认）`;
+      if (brief[k] && !/待确认/.test(brief[k]) && !saidByUser(brief[k])) brief[k] = `${brief[k]}（待确认）`;
     }
 
     // 快速选择题：只允许事实型字段，最多 3 个
@@ -57,7 +63,13 @@ export async function POST(req) {
         ? parsed.quick_form
             .filter((q) => q?.field && q?.question && Array.isArray(q.options) && q.options.length && !FORM_BLOCKED.includes(q.field) && !brief[q.field])
             .slice(0, 3)
-            .map((q) => ({ field: q.field, question: q.question, options: q.options.slice(0, 4) }))
+            .map((q) => ({
+              field: q.field,
+              question: String(q.question).replace(/[（(]可多选[）)]/g, "").trim(),
+              options: q.options.slice(0, 5),
+              // 「需要修的地方」这类天然可多选的字段，强制允许多选
+              multi: q.multi === true || ["must_fix", "music_text"].includes(q.field),
+            }))
         : [];
     const styleTranslation = Array.isArray(parsed.style_translation)
       ? parsed.style_translation.filter((s) => s?.term && s?.spec)
@@ -73,7 +85,7 @@ export async function POST(req) {
       quickForm,
       // 写入对话历史的助手发言：主问题 + 快速选择题，保证下一轮模型（和评测里的模拟用户）都能看到
       transcript: quickForm.length
-        ? `${parsed.reply}\n（顺便快速选一下：${quickForm.map((q) => `${q.question}【${q.options.join(" / ")}】`).join("；")}）`
+        ? `${parsed.reply}\n（顺便快速选一下：${quickForm.map((q) => `${q.question}${q.multi ? "（可多选）" : ""}【${q.options.join(" / ")}】`).join("；")}）`
         : parsed.reply || "",
       brief,
       styleTranslation,

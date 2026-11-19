@@ -99,9 +99,20 @@ export default function Home() {
     }
   }
 
+  // 快速选择：多选题可以选多个，单选题再点一次取消或换成另一个
+  function togglePick(q, o) {
+    setPicks((p) => {
+      const cur = p[q.field] || [];
+      const next = cur.includes(o) ? cur.filter((x) => x !== o) : q.multi ? [...cur, o] : [o];
+      return { ...p, [q.field]: next };
+    });
+  }
+
   // 把快速选择的结果和输入框文字合成一条回答
   function composeAnswer(choice) {
-    const picked = quickForm.filter((q) => picks[q.field]).map((q) => `${q.question.replace(/[？?]$/, "")}：${picks[q.field]}`);
+    const picked = quickForm
+      .filter((q) => picks[q.field]?.length)
+      .map((q) => `${q.question.replace(/[？?]$/, "")}：${picks[q.field].join("、")}`);
     return [choice ?? input.trim(), picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
   }
 
@@ -208,13 +219,13 @@ export default function Home() {
                 <div className="sub">顺便快速选一下（可跳过）：</div>
                 {quickForm.map((q) => (
                   <div key={q.field} className="qf-row">
-                    <span className="qf-q">{q.question}</span>
+                    <span className="qf-q">{q.question}{q.multi && <span className="sub">（可多选）</span>}</span>
                     <div className="chips">
                       {q.options.map((o) => (
                         <button
                           key={o}
-                          className={`chip ${picks[q.field] === o ? "picked" : ""}`}
-                          onClick={() => setPicks((p) => ({ ...p, [q.field]: p[q.field] === o ? undefined : o }))}
+                          className={`chip ${(picks[q.field] || []).includes(o) ? "picked" : ""}`}
+                          onClick={() => togglePick(q, o)}
                           disabled={loading}
                         >{o}</button>
                       ))}
@@ -243,7 +254,7 @@ export default function Home() {
                   }
                 }}
               />
-              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !Object.values(picks).some(Boolean))}>发送</button>
+              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !Object.values(picks).some((v) => v?.length))}>发送</button>
             </div>
             <div className="hint">
               <span>{messages.length ? `第 ${userTurns} / ${MAX_TURNS} 轮` : "Enter 发送，Shift+Enter 换行"}</span>
