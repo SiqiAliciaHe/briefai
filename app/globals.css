@@ -126,3 +126,4 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .qf-q { font-size: 13px; }
 .chip.picked { background: var(--brand); border-color: var(--brand); color: #fff; }
 .chip.picked, .chip.picked:hover:not(:disabled) { background: var(--brand); border-color: var(--brand); color: #fff; }
+.guide { white-space: pre-wrap; font-size: 14px; }

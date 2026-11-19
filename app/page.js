@@ -45,6 +45,8 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [trace, setTrace] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [guide, setGuide] = useState(null);
+  const [guiding, setGuiding] = useState(false);
   const endRef = useRef(null);
 
   useEffect(() => {
@@ -103,7 +105,28 @@ export default function Home() {
     return [choice ?? input.trim(), picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
   }
 
+  async function makeGuide() {
+    setGuiding(true);
+    setError("");
+    try {
+      const res = await fetch("/api/guide", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category: view.category, brief: view.brief, styleTranslation: view.styleTranslation, model }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setGuide(data);
+      setTrace((t) => [...t, { at: new Date().toISOString(), input: "(生成自助操作指引)", output: data }]);
+    } catch (e) {
+      setError(e.message || "生成失败，请重试");
+    } finally {
+      setGuiding(false);
+    }
+  }
+
   function reset() {
+    setGuide(null);
     setMessages([]); setOptions([]); setQuickForm([]); setPicks({}); setState(null); setView(null);
     setDone(false); setError(""); setInput(""); setTrace([]); setFreshKeys([]);
   }
@@ -291,7 +314,19 @@ export default function Home() {
                 {done && (
                   <div className="actions">
                     <button className="btn" onClick={copyBrief}>{copied ? "已复制 ✓" : "复制需求单，发给服务方"}</button>
+                    {view.routing?.type !== "human" && (
+                      <button className="btn ghost" onClick={makeGuide} disabled={guiding}>
+                        {guiding ? "生成中…" : "🛠️ 教我用 AI 工具自己做"}
+                      </button>
+                    )}
                     <button className="btn ghost" onClick={exportTrace}>导出对话记录</button>
+                  </div>
+                )}
+                {guide && (
+                  <div className="card">
+                    <div className="card-title">🛠️ 用{guide.tool}自己做</div>
+                    <div className="guide">{guide.guide}</div>
+                    <div className="meta">步骤由 AI 生成，App 的具体菜单名称以实际版本为准。</div>
                   </div>
                 )}
               </>
