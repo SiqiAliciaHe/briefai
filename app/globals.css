@@ -50,7 +50,7 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 
 .main {
   display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px;
-  max-width: 1200px; margin: 0 auto; padding: 16px;
+  max-width: 1680px; margin: 0 auto; padding: 16px 24px;
   height: calc(100vh - 62px);
 }
 @media (max-width: 860px) {
@@ -128,3 +128,6 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .chip.picked, .chip.picked:hover:not(:disabled) { background: var(--brand); border-color: var(--brand); color: #fff; }
 .guide { white-space: pre-wrap; font-size: 14px; }
 .chip { text-align: left; }
+.multi-hint { width: 100%; }
+.route.pending-route { border: 1px dashed var(--line); background: transparent; }
+.route.pending-route p { color: var(--muted); }

@@ -26,7 +26,7 @@ function briefToText({ category, brief, styleTranslation, price, routing }) {
     for (const s of styleTranslation) lines.push(`「${s.term}」→ ${s.spec}`);
   }
   if (price) lines.push("", `【报价参考】${price.summary}`);
-  if (routing) lines.push(`【建议执行方式】${ROUTE_LABEL[routing.type] ?? routing.type}：${routing.reason}`);
+  if (routing) lines.push(`【AI 分单建议】${ROUTE_LABEL[routing.type] ?? routing.type}：${routing.reason}`);
   return lines.join("\n");
 }
 
@@ -35,6 +35,8 @@ export default function Home() {
   const [messages, setMessages] = useState([]);
   const [options, setOptions] = useState([]);
   const [quickForm, setQuickForm] = useState([]);
+  const [optionsMulti, setOptionsMulti] = useState(false);
+  const [mainPicks, setMainPicks] = useState([]);
   const [picks, setPicks] = useState({});
   const [state, setState] = useState(null); // { category, brief, style_translation, price_inputs }
   const [view, setView] = useState(null); // 最近一次返回，用于展示
@@ -88,6 +90,8 @@ export default function Home() {
       setOptions(data.options);
       setQuickForm(data.quickForm || []);
       setPicks({});
+      setOptionsMulti(!!data.optionsMulti);
+      setMainPicks([]);
       if (data.action === "finish") setDone(true);
       setTrace((t) => [...t, { at: new Date().toISOString(), input: content || "(用户点击：直接生成)", forceFinish, output: data }]);
     } catch (e) {
@@ -110,10 +114,11 @@ export default function Home() {
 
   // 把快速选择的结果和输入框文字合成一条回答
   function composeAnswer(choice) {
+    const main = choice ?? [mainPicks.join("、"), input.trim()].filter(Boolean).join("；");
     const picked = quickForm
       .filter((q) => picks[q.field]?.length)
       .map((q) => `${q.question.replace(/[？?]$/, "")}：${picks[q.field].join("、")}`);
-    return [choice ?? input.trim(), picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
+    return [main, picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
   }
 
   async function makeGuide() {
@@ -138,6 +143,7 @@ export default function Home() {
 
   function reset() {
     setGuide(null);
+    setOptionsMulti(false); setMainPicks([]);
     setMessages([]); setOptions([]); setQuickForm([]); setPicks({}); setState(null); setView(null);
     setDone(false); setError(""); setInput(""); setTrace([]); setFreshKeys([]);
   }
@@ -236,8 +242,18 @@ export default function Home() {
             )}
             {options.length > 0 && (
               <div className="chips">
+                {optionsMulti && <div className="sub multi-hint">可多选，选好后点「发送」</div>}
                 {options.map((o) => (
-                  <button key={o} className="chip" onClick={() => send(composeAnswer(o))} disabled={loading}>{o}</button>
+                  <button
+                    key={o}
+                    className={`chip ${mainPicks.includes(o) ? "picked" : ""}`}
+                    onClick={() =>
+                      optionsMulti
+                        ? setMainPicks((p) => (p.includes(o) ? p.filter((x) => x !== o) : [...p, o]))
+                        : send(composeAnswer(o))
+                    }
+                    disabled={loading}
+                  >{o}</button>
                 ))}
               </div>
             )}
@@ -254,7 +270,7 @@ export default function Home() {
                   }
                 }}
               />
-              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !Object.values(picks).some((v) => v?.length))}>发送</button>
+              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !mainPicks.length && !Object.values(picks).some((v) => v?.length))}>发送</button>
             </div>
             <div className="hint">
               <span>{messages.length ? `第 ${userTurns} / ${MAX_TURNS} 轮` : "Enter 发送，Shift+Enter 换行"}</span>
@@ -315,10 +331,15 @@ export default function Home() {
                   </div>
                 )}
 
-                {view.routing && (
+                {view.routing ? (
                   <div className={`route ${view.routing.type}`}>
-                    <div className="route-type">建议执行方式：{ROUTE_LABEL[view.routing.type] ?? view.routing.type}</div>
+                    <div className="route-type">🧭 AI 分单：{ROUTE_LABEL[view.routing.type] ?? view.routing.type}</div>
                     <p>{view.routing.reason}</p>
+                  </div>
+                ) : (
+                  <div className="route pending-route">
+                    <div className="route-type">🧭 AI 分单</div>
+                    <p>问清需求后，会判断这单适合：🤖 AI 工具自助 / 🤝 AI 处理 + 真人精修 / 🧑‍🎨 交给真人，并给出理由。</p>
                   </div>
                 )}
 

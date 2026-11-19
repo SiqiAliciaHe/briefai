@@ -81,7 +81,10 @@ export async function POST(req) {
       action,
       category,
       reply: parsed.reply || "",
-      options: action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 4) : [],
+      options: action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 5) : [],
+      // 主问题选项是否可多选：模型判断，或者问的是天然可多选的字段
+      optionsMulti:
+        parsed.options_multi === true || ["must_fix", "keep", "acceptance", "music_text"].includes(parsed.options_field),
       quickForm,
       // 写入对话历史的助手发言：主问题 + 快速选择题，保证下一轮模型（和评测里的模拟用户）都能看到
       transcript: quickForm.length
