@@ -44,7 +44,10 @@ export default function CasePage() {
     <div className="case">
       <header className="case-hero">
         <div className="case-wrap">
-          <div className="logo">Brief<span>AI</span> 需求助手 · 项目介绍</div>
+          <div className="case-top">
+            <div className="logo">Brief<span>AI</span> 需求助手 · 项目介绍</div>
+            <Link className="header-link" href="/en/case">English</Link>
+          </div>
           <h1>把「修得好看点」「剪得有氛围感」，变成服务方能照着做、能照着验收的需求单</h1>
           <p className="case-lead">
             面向人像修图、视频剪辑的 AI 需求澄清产品：多轮追问 → 结构化需求单 → 审美词翻译 → 规则报价 → AI 分单（AI 工具自助 / AI + 真人 / 交给真人）。
@@ -106,6 +109,15 @@ export default function CasePage() {
               <figcaption>服务边界：拒绝 AI 换脸、造谣、学术代写；考核剪辑能力的课程作业改为提供学习帮助</figcaption>
             </figure>
           </div>
+        </section>
+
+        <section>
+          <h2>出海延伸：数据里的早期信号</h2>
+          <ul>
+            <li>15 条剪辑需求中有 3 条和海外有关：海外博主招英文访谈剪辑、Instagram 英文视频<b>一条 200–300 元</b>（约为国内学生接单价的 10 倍）、TikTok 口播剪辑。</li>
+            <li>跨境订单里，双方之间不只是「说不清」，还隔着<b>语言和审美文化</b>：「clean girl aesthetic」「cinematic」国内剪辑师未必理解。产品已支持英文界面和<b>中英双语需求单</b>：海外客户用英文说清需求，国内服务方拿到中文版，附审美词解释和跨文化提示。</li>
+            <li><b>尚未验证</b>：下一步收集 Reddit（r/PhotoshopRequest、r/forhire）上的英文真实需求，用同一套评测验证海外用户是否有同样的规律。</li>
+          </ul>
         </section>
 
         <section>

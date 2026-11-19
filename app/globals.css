@@ -165,3 +165,11 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .lesson-d { font-size: 14px; color: var(--muted); }
 .case-footer { color: var(--muted); font-size: 13px; padding: 28px 0 40px; border-top: 1px solid var(--line); margin-top: 28px; }
 .header-link { color: var(--violet); text-decoration: none; font-size: 14px; margin-right: 14px; }
+.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.lang-switch button { border: none; background: var(--panel); color: var(--muted); padding: 4px 10px; font-size: 13px; }
+.lang-switch button.on { background: var(--violet); color: #fff; }
+.card.bilingual { border-color: var(--violet); }
+.small-title { font-size: 14px; margin-top: 8px; }
+.card .actions { margin-top: 8px; }
+.case-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }

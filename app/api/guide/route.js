@@ -6,13 +6,15 @@ import { CATEGORIES } from "@/lib/categories";
 
 // AI 自助操作指引：把需求单翻译成在常见 App 里自己动手的步骤
 const TOOLS = {
-  retouch: "醒图或美图秀秀",
-  video: "剪映",
+  zh: { retouch: "醒图或美图秀秀", video: "剪映" },
+  en: { retouch: "Facetune or Lightroom Mobile", video: "CapCut" },
 };
 
 export async function POST(req) {
   try {
-    const { category, brief, styleTranslation = [], model: reqModel } = await req.json();
+    const { category, brief, styleTranslation = [], model: reqModel, lang: reqLang = "zh" } = await req.json();
+    const lang = reqLang === "en" ? "en" : "zh";
+    const tool = TOOLS[lang][category];
     const cat = CATEGORIES[category];
     if (!cat) return Response.json({ error: "未知品类" }, { status: 400 });
     const model = ALLOWED_MODELS.includes(reqModel) ? reqModel : process.env.MODEL || "qwen-plus";
@@ -23,7 +25,7 @@ export async function POST(req) {
       messages: [
         {
           role: "system",
-          content: `你是耐心的${cat.name}老师。用户的需求比较简单，可以用${TOOLS[category]}自己完成。请根据需求单，写一份新手也能照着做的操作指引。
+          content: `你是耐心的${cat.name}老师。用户的需求比较简单，可以用${tool}自己完成。请根据需求单，写一份新手也能照着做的操作指引。${lang === "en" ? "\n**全部用英文书写**（包括步骤和自查项），把「做完后自查：」写成「Self-check:」。" : ""}
 要求：
 - 5–8 步，每步一行，格式「步骤序号. 做什么 → 调整方向和程度」。
 - 重点写「调到什么程度」，并与需求单里的风格要求、不能改动的地方保持一致（例如「磨皮保持轻度，保留皮肤纹理」「不要使用瘦脸/液化」）。
@@ -37,7 +39,7 @@ export async function POST(req) {
         },
       ],
     });
-    return Response.json({ tool: TOOLS[category], guide: result.content.trim(), meta: { model, latencyMs: result.latencyMs } });
+    return Response.json({ tool, guide: result.content.trim(), meta: { model, latencyMs: result.latencyMs } });
   } catch (e) {
     return Response.json({ error: e.message || "服务出错了" }, { status: 500 });
   }

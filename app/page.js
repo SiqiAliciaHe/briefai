@@ -3,34 +3,41 @@
 import { useEffect, useRef, useState } from "react";
 import { MAX_TURNS } from "@/lib/prompts";
 import { CATEGORIES, fieldsOf } from "@/lib/categories";
+import { T, UNSURE, PENDING_RE } from "@/lib/i18n";
 
-const EXAMPLES = [
-  "帮我修一下毕业照，要清透感，但别修得不像我",
-  "旅游拍了一堆素材，想剪个氛围感 vlog 发小红书",
-  "求帮忙把照片里的路人 P 掉",
-  "思政作业要剪个微电影，8 分钟，便宜点",
-];
+const labelOf = (f, lang) => (lang === "en" ? f.labelEn : f.label);
 
-const ROUTE_LABEL = {
-  ai: "🤖 AI 工具自助即可",
-  hybrid: "🤝 AI 处理 + 真人精修",
-  human: "🧑‍🎨 交给真人服务方",
-};
-
-function briefToText({ category, brief, styleTranslation, price, routing }) {
+function briefToText({ category, brief, styleTranslation, price, routing }, lang, t) {
   const c = CATEGORIES[category];
-  const lines = [`【${c?.name ?? ""}需求单】`];
-  for (const f of fieldsOf(category)) lines.push(`${f.label}：${brief[f.key] ?? "待确认"}`);
+  const lines = [t.briefHeading(lang === "en" ? c?.nameEn : c?.name)];
+  for (const f of fieldsOf(category)) lines.push(`${labelOf(f, lang)}${t.sep}${brief[f.key] ?? t.pendingValue}`);
   if (styleTranslation?.length) {
-    lines.push("", "【风格要求说明】");
+    lines.push("", t.styleHeading);
     for (const s of styleTranslation) lines.push(`「${s.term}」→ ${s.spec}`);
   }
-  if (price) lines.push("", `【报价参考】${price.summary}`);
-  if (routing) lines.push(`【AI 分单建议】${ROUTE_LABEL[routing.type] ?? routing.type}：${routing.reason}`);
+  if (price) lines.push("", `${t.priceHeading}${price.summary}`);
+  if (routing) lines.push(`${t.routeHeading}${t.routeLabel[routing.type] ?? routing.type}${t.sep}${routing.reason}`);
+  return lines.join("\n");
+}
+
+function bilingualToText(view, bi, t) {
+  const zh = T.zh;
+  const lines = [briefToText(view, "en", t), "", "—— 中文版（给国内服务方）——", zh.briefHeading(CATEGORIES[view.category].name)];
+  for (const f of fieldsOf(view.category)) lines.push(`${f.label}：${bi.briefZh[f.key] ?? "待确认"}`);
+  if (bi.styleNotes.length) {
+    lines.push("", "【风格 / 审美词说明】");
+    for (const s of bi.styleNotes) lines.push(`「${s.term}」：${s.meaning}（国内近似说法：${s.cn_equivalent}）`);
+  }
+  if (bi.cultureTips.length) {
+    lines.push("", "【跨文化沟通提示】");
+    for (const tip of bi.cultureTips) lines.push(`· ${tip}`);
+  }
   return lines.join("\n");
 }
 
 export default function Home() {
+  const [lang, setLang] = useState("zh");
+  const t = T[lang];
   const [model, setModel] = useState("qwen-plus");
   const [messages, setMessages] = useState([]);
   const [options, setOptions] = useState([]);
@@ -50,14 +57,34 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [guide, setGuide] = useState(null);
   const [guiding, setGuiding] = useState(false);
+  const [bilingual, setBilingual] = useState(null);
+  const [translating, setTranslating] = useState(false);
+  const [biCopied, setBiCopied] = useState(false);
   const endRef = useRef(null);
   const inputRef = useRef(null);
+
+  // 语言偏好：浏览器存储不可用时（隐私模式等）静默忽略
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("briefai-lang");
+      if (saved === "en" || saved === "zh") setLang(saved);
+      else if (typeof navigator !== "undefined" && !navigator.language?.startsWith("zh")) setLang("en");
+    } catch {}
+  }, []);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
   const userTurns = messages.filter((m) => m.role === "user").length;
+  const unsure = UNSURE[lang];
+
+  function switchLang(next) {
+    if (next === lang) return;
+    setLang(next);
+    try { localStorage.setItem("briefai-lang", next); } catch {}
+    reset(); // 换语言后重新开始，避免一段对话里混用两种语言
+  }
 
   async function send(text, forceFinish = false) {
     const content = (text ?? "").trim();
@@ -73,7 +100,7 @@ export default function Home() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next.map(({ role, content }) => ({ role, content })), forceFinish, model, state }),
+        body: JSON.stringify({ messages: next.map(({ role, content }) => ({ role, content })), forceFinish, model, state, lang }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -96,9 +123,9 @@ export default function Home() {
       setOptionsField(data.optionsField || null);
       setMainPicks([]);
       if (data.action === "finish") setDone(true);
-      setTrace((t) => [...t, { at: new Date().toISOString(), input: content || "(用户点击：直接生成)", forceFinish, output: data }]);
+      setTrace((tr) => [...tr, { at: new Date().toISOString(), input: content || "(finish now)", forceFinish, output: data }]);
     } catch (e) {
-      setError(e.message || "出错了，请重试");
+      setError(e.message || t.errorRetry);
       setMessages(messages);
       setInput(content);
     } finally {
@@ -106,66 +133,81 @@ export default function Home() {
     }
   }
 
-  // 快速选择：多选题可以选多个，单选题再点一次取消或换成另一个
+  // 快速选择：多选题可以选多个，单选题再点一次取消或换成另一个；「不确定」和其他选项互斥
   function togglePick(q, o) {
     setPicks((p) => {
       const cur = p[q.field] || [];
-      // 「不确定」和其他选项互斥
-      const base = o === "不确定" ? [] : cur.filter((x) => x !== "不确定");
-      const next = cur.includes(o) ? cur.filter((x) => x !== o) : q.multi && o !== "不确定" ? [...base, o] : [o];
+      const base = o === unsure ? [] : cur.filter((x) => x !== unsure);
+      const next = cur.includes(o) ? cur.filter((x) => x !== o) : q.multi && o !== unsure ? [...base, o] : [o];
       return { ...p, [q.field]: next };
     });
   }
 
-  // 把快速选择的结果和输入框文字合成一条回答
+  // 把主问题选项、快速选择和输入框文字合成一条回答
   function composeAnswer(choice) {
-    const main = choice ?? [mainPicks.join("、"), input.trim()].filter(Boolean).join("；");
+    const joiner = lang === "en" ? ", " : "、";
+    const main = choice ?? [mainPicks.join(joiner), input.trim()].filter(Boolean).join(lang === "en" ? "; " : "；");
     const picked = quickForm
       .filter((q) => picks[q.field]?.length)
-      .map((q) => `${q.question.replace(/[？?]$/, "")}：${picks[q.field].join("、")}`);
-    return [main, picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
+      .map((q) => `${q.question.replace(/[？?]$/, "")}${t.sep}${picks[q.field].join(joiner)}`);
+    return [main, picked.length ? picked.join(lang === "en" ? "; " : "；") : ""].filter(Boolean).join("\n");
+  }
+
+  async function postJson(url, body) {
+    const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    return data;
   }
 
   async function makeGuide() {
     setGuiding(true);
     setError("");
     try {
-      const res = await fetch("/api/guide", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: view.category, brief: view.brief, styleTranslation: view.styleTranslation, model }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const data = await postJson("/api/guide", { category: view.category, brief: view.brief, styleTranslation: view.styleTranslation, model, lang });
       setGuide(data);
-      setTrace((t) => [...t, { at: new Date().toISOString(), input: "(生成自助操作指引)", output: data }]);
+      setTrace((tr) => [...tr, { at: new Date().toISOString(), input: "(self-serve guide)", output: data }]);
     } catch (e) {
-      setError(e.message || "生成失败，请重试");
+      setError(e.message || t.errorRetry);
     } finally {
       setGuiding(false);
     }
   }
 
+  async function makeBilingual() {
+    setTranslating(true);
+    setError("");
+    try {
+      const data = await postJson("/api/bilingual", { category: view.category, brief: view.brief, styleTranslation: view.styleTranslation, routing: view.routing, model });
+      setBilingual(data);
+      setTrace((tr) => [...tr, { at: new Date().toISOString(), input: "(bilingual brief)", output: data }]);
+    } catch (e) {
+      setError(e.message || t.errorRetry);
+    } finally {
+      setTranslating(false);
+    }
+  }
+
   function reset() {
-    setGuide(null);
-    setOptionsMulti(false); setMainPicks([]);
+    setGuide(null); setBilingual(null);
+    setOptionsMulti(false); setMainPicks([]); setOptionsField(null);
     setMessages([]); setOptions([]); setQuickForm([]); setPicks({}); setState(null); setView(null);
     setDone(false); setError(""); setInput(""); setTrace([]); setFreshKeys([]);
   }
 
-  async function copyBrief() {
+  async function copyText(text, setFlag) {
     try {
-      await navigator.clipboard.writeText(briefToText(view));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      await navigator.clipboard.writeText(text);
+      setFlag(true);
+      setTimeout(() => setFlag(false), 1500);
     } catch {
-      setError("复制失败，请手动选择文字复制");
+      setError(t.copyFail);
     }
   }
 
   function exportTrace() {
     const blob = new Blob(
-      [JSON.stringify({ model, exportedAt: new Date().toISOString(), messages, final: view, trace }, null, 2)],
+      [JSON.stringify({ model, lang, exportedAt: new Date().toISOString(), messages, final: view, bilingual, trace }, null, 2)],
       { type: "application/json" }
     );
     const a = document.createElement("a");
@@ -186,34 +228,38 @@ export default function Home() {
     <>
       <header className="header">
         <div>
-          <div className="logo">Brief<span>AI</span> 需求助手</div>
-          <div className="sub">把「修得好看点」「剪得有氛围感」，变成修图师、剪辑师能照着做、能照着验收的需求单</div>
+          <div className="logo">Brief<span>AI</span> {t.title}</div>
+          <div className="sub">{t.tagline}</div>
         </div>
-        <div>
-        <a className="header-link" href="/case">项目介绍 →</a>
-        <label className="sub">
-          模型{" "}
-          <select value={model} onChange={(e) => setModel(e.target.value)} disabled={messages.length > 0}>
-            <option value="qwen-plus">通义千问 Plus</option>
-            <option value="qwen-max">通义千问 Max</option>
-          </select>
-        </label>
+        <div className="header-right">
+          <div className="lang-switch" role="group" aria-label="Language">
+            <button className={lang === "zh" ? "on" : ""} onClick={() => switchLang("zh")}>中文</button>
+            <button className={lang === "en" ? "on" : ""} onClick={() => switchLang("en")}>EN</button>
+          </div>
+          <a className="header-link" href={t.caseHref}>{t.caseLink}</a>
+          <label className="sub">
+            {t.model}{" "}
+            <select value={model} onChange={(e) => setModel(e.target.value)} disabled={messages.length > 0}>
+              <option value="qwen-plus">Qwen Plus</option>
+              <option value="qwen-max">Qwen Max</option>
+            </select>
+          </label>
         </div>
       </header>
 
       <main className="main">
         <section className="panel chat">
           <div className="panel-title">
-            <span>对话</span>
-            {messages.length > 0 && <button className="btn ghost small" onClick={reset}>重新开始</button>}
+            <span>{t.chat}</span>
+            {messages.length > 0 && <button className="btn ghost small" onClick={reset}>{t.restart}</button>}
           </div>
           <div className="messages">
             {messages.length === 0 && (
               <div className="welcome">
-                <h2>想修图，还是想剪视频？</h2>
-                随便说一句就行，我会帮你把要求问清楚，避免「修成这样你收我钱？」的尴尬。目前支持<b>人像修图</b>和<b>视频剪辑</b>。
+                <h2>{t.welcomeTitle}</h2>
+                {t.welcomeBody}
                 <div className="chips">
-                  {EXAMPLES.map((ex) => (
+                  {t.examples.map((ex) => (
                     <button key={ex} className="chip" onClick={() => send(ex)}>{ex}</button>
                   ))}
                 </div>
@@ -222,7 +268,7 @@ export default function Home() {
             {messages.map((m, i) => (
               <div key={i} className={`msg ${m.role}`}>{m.display ?? m.content}</div>
             ))}
-            {loading && <div className="typing">需求助手正在思考…</div>}
+            {loading && <div className="typing">{t.thinking}</div>}
             {error && <div className="msg error">⚠️ {error}</div>}
             <div ref={endRef} />
           </div>
@@ -230,12 +276,12 @@ export default function Home() {
           <div className="composer">
             {quickForm.length > 0 && (
               <div className="quickform">
-                <div className="sub">顺便快速选一下（可跳过）：</div>
+                <div className="sub">{t.quickFormHint}</div>
                 {quickForm.map((q) => (
                   <div key={q.field} className="qf-row">
-                    <span className="qf-q">{q.question}{q.multi && <span className="sub">（可多选）</span>}</span>
+                    <span className="qf-q">{q.question}{q.multi && <span className="sub">{t.multi}</span>}</span>
                     <div className="chips">
-                      {[...q.options, "不确定"].map((o) => (
+                      {[...q.options, unsure].map((o) => (
                         <button
                           key={o}
                           className={`chip ${(picks[q.field] || []).includes(o) ? "picked" : ""}`}
@@ -250,7 +296,7 @@ export default function Home() {
             )}
             {options.length > 0 && (
               <div className="chips">
-                {optionsMulti && <div className="sub multi-hint">可多选，选好后点「发送」</div>}
+                {optionsMulti && <div className="sub multi-hint">{t.multiHint}</div>}
                 {options.map((o) => (
                   <button
                     key={o}
@@ -267,12 +313,12 @@ export default function Home() {
                 {optionsField === "style" && (
                   <button
                     className="chip escape"
-                    onClick={() => { setInput((v) => v || "我有参考："); inputRef.current?.focus(); }}
+                    onClick={() => { setInput((v) => v || t.haveRefPrefill); inputRef.current?.focus(); }}
                     disabled={loading}
-                  >📎 我有参考（博主 / 视频 / 照片链接）</button>
+                  >{t.haveRef}</button>
                 )}
-                <button className="chip escape" onClick={() => inputRef.current?.focus()} disabled={loading}>都不是，我自己说</button>
-                <button className="chip escape" onClick={() => send(composeAnswer("不确定，你帮我建议"))} disabled={loading}>不确定，你帮我建议</button>
+                <button className="chip escape" onClick={() => inputRef.current?.focus()} disabled={loading}>{t.notThese}</button>
+                <button className="chip escape" onClick={() => send(composeAnswer(t.suggest))} disabled={loading}>{t.suggest}</button>
               </div>
             )}
             <div className="composer-row">
@@ -280,7 +326,7 @@ export default function Home() {
                 ref={inputRef}
                 rows={1}
                 value={input}
-                placeholder={done ? "需求单已生成，可以补充修改，或点「重新开始」" : "输入你的需求或回答…"}
+                placeholder={done ? t.placeholderDone : t.placeholder}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -289,14 +335,12 @@ export default function Home() {
                   }
                 }}
               />
-              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !mainPicks.length && !Object.values(picks).some((v) => v?.length))}>发送</button>
+              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !mainPicks.length && !Object.values(picks).some((v) => v?.length))}>{t.send}</button>
             </div>
             <div className="hint">
-              <span>{messages.length ? `第 ${userTurns} / ${MAX_TURNS} 轮` : "Enter 发送，Shift+Enter 换行"}</span>
+              <span>{messages.length ? t.turn(userTurns, MAX_TURNS) : t.enterHint}</span>
               {cat && !done && !refused && (
-                <button className="btn ghost small" onClick={() => send("", true)} disabled={loading}>
-                  不想答了，直接生成需求单 →
-                </button>
+                <button className="btn ghost small" onClick={() => send("", true)} disabled={loading}>{t.finishNow}</button>
               )}
             </div>
           </div>
@@ -304,35 +348,35 @@ export default function Home() {
 
         <section className="panel">
           <div className="panel-title">
-            <span>{cat ? `${cat.emoji} ${cat.name}需求单` : "需求单（实时生成）"}</span>
-            {cat && !refused && <span className="sub">关键信息 {filledCore}/{coreKeys.length}</span>}
+            <span>{t.briefTitle(cat)}</span>
+            {cat && !refused && <span className="sub">{t.keyInfo(filledCore, coreKeys.length)}</span>}
           </div>
           <div className="brief">
             {refused ? (
               <div className="route refuse">
-                <div className="route-type">🚫 这个需求我们不能接</div>
+                <div className="route-type">{t.refused}</div>
                 <p>{view.reply}</p>
               </div>
             ) : unsupported ? (
               <div className="route hybrid">
-                <div className="route-type">🚧 暂不支持这个品类</div>
+                <div className="route-type">{t.unsupported}</div>
                 <p>{view.reply}</p>
               </div>
             ) : !cat ? (
-              <div className="empty-state">开始对话后，这里会实时整理出结构化的需求单。</div>
+              <div className="empty-state">{t.empty}</div>
             ) : (
               <>
                 <div className="progress"><div style={{ width: `${pct}%` }} /></div>
                 <dl className="fields">
                   {fields.map((f) => (
-                    <FieldRow key={f.key} label={f.label} value={view.brief[f.key]} fresh={freshKeys.includes(f.key)} />
+                    <FieldRow key={f.key} label={labelOf(f, lang)} value={view.brief[f.key]} fresh={freshKeys.includes(f.key)} empty={t.pendingValue} />
                   ))}
                 </dl>
 
                 {view.styleTranslation?.length > 0 && (
                   <div className="card">
-                    <div className="card-title">🎨 风格要求说明</div>
-                    <div className="sub">把审美词翻译成服务方能照着做的要求</div>
+                    <div className="card-title">{t.styleCard}</div>
+                    <div className="sub">{t.styleCardSub}</div>
                     {view.styleTranslation.map((s, i) => (
                       <div key={i} className="translate">
                         <span className="term">「{s.term}」</span>
@@ -344,40 +388,79 @@ export default function Home() {
 
                 {view.price && (
                   <div className="card">
-                    <div className="card-title">💰 报价参考：{view.price.summary}</div>
+                    <div className="card-title">{t.price}{view.price.summary}</div>
                     {view.price.detail.map((d, i) => <div key={i} className="sub">· {d}</div>)}
-                    <div className="meta">来源：{view.price.source}</div>
+                    <div className="meta">{t.source}{view.price.source}</div>
                   </div>
                 )}
 
                 {view.routing ? (
                   <div className={`route ${view.routing.type}`}>
-                    <div className="route-type">🧭 AI 分单：{ROUTE_LABEL[view.routing.type] ?? view.routing.type}</div>
+                    <div className="route-type">{t.routing}{t.sep}{t.routeLabel[view.routing.type] ?? view.routing.type}</div>
                     <p>{view.routing.reason}</p>
                   </div>
                 ) : (
                   <div className="route pending-route">
-                    <div className="route-type">🧭 AI 分单</div>
-                    <p>问清需求后，会判断这单适合：🤖 AI 工具自助 / 🤝 AI 处理 + 真人精修 / 🧑‍🎨 交给真人，并给出理由。</p>
+                    <div className="route-type">{t.routing}</div>
+                    <p>{t.routingPending}</p>
                   </div>
                 )}
 
                 {done && (
                   <div className="actions">
-                    <button className="btn" onClick={copyBrief}>{copied ? "已复制 ✓" : "复制需求单，发给服务方"}</button>
-                    {view.routing?.type !== "human" && (
-                      <button className="btn ghost" onClick={makeGuide} disabled={guiding}>
-                        {guiding ? "生成中…" : "🛠️ 教我用 AI 工具自己做"}
+                    <button className="btn" onClick={() => copyText(briefToText(view, lang, t), setCopied)}>{copied ? t.copied : t.copy}</button>
+                    {lang === "en" && view.routing?.type !== "ai" && (
+                      <button className="btn ghost" onClick={makeBilingual} disabled={translating}>
+                        {translating ? t.generating : t.bilingualBtn}
                       </button>
                     )}
-                    <button className="btn ghost" onClick={exportTrace}>导出对话记录</button>
+                    {view.routing?.type !== "human" && (
+                      <button className="btn ghost" onClick={makeGuide} disabled={guiding}>
+                        {guiding ? t.generating : t.guideBtn}
+                      </button>
+                    )}
+                    <button className="btn ghost" onClick={exportTrace}>{t.export}</button>
                   </div>
                 )}
+
+                {bilingual && (
+                  <div className="card bilingual">
+                    <div className="card-title">{T.en.bilingualTitle}</div>
+                    <dl className="fields">
+                      {fields.map((f) => (
+                        <FieldRow key={f.key} label={f.label} value={bilingual.briefZh[f.key]} empty="待确认" />
+                      ))}
+                    </dl>
+                    {bilingual.styleNotes.length > 0 && (
+                      <>
+                        <div className="card-title small-title">风格 / 审美词说明</div>
+                        {bilingual.styleNotes.map((s, i) => (
+                          <div key={i} className="translate">
+                            <span className="term">「{s.term}」</span>
+                            <span>{s.meaning}（国内近似说法：{s.cn_equivalent}）</span>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {bilingual.cultureTips.length > 0 && (
+                      <>
+                        <div className="card-title small-title">{T.en.bilingualNotes}</div>
+                        {bilingual.cultureTips.map((tip, i) => <div key={i} className="sub">· {tip}</div>)}
+                      </>
+                    )}
+                    <div className="actions">
+                      <button className="btn" onClick={() => copyText(bilingualToText(view, bilingual, t), setBiCopied)}>
+                        {biCopied ? t.copied : T.en.bilingualCopy}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {guide && (
                   <div className="card">
-                    <div className="card-title">🛠️ 用{guide.tool}自己做</div>
+                    <div className="card-title">{t.guideTitle(guide.tool)}</div>
                     <div className="guide">{guide.guide}</div>
-                    <div className="meta">步骤由 AI 生成，App 的具体菜单名称以实际版本为准。</div>
+                    <div className="meta">{t.guideNote}</div>
                   </div>
                 )}
               </>
@@ -389,11 +472,11 @@ export default function Home() {
   );
 }
 
-function FieldRow({ label, value, fresh }) {
+function FieldRow({ label, value, fresh, empty }) {
   return (
     <>
       <dt>{label}</dt>
-      <dd className={!value ? "empty" : /待确认/.test(value) ? "pending" : fresh ? "fresh" : ""}>{value || "待确认"}</dd>
+      <dd className={!value ? "empty" : PENDING_RE.test(value) ? "pending" : fresh ? "fresh" : ""}>{value || empty}</dd>
     </>
   );
 }

@@ -5,19 +5,22 @@ import { chat, parseJson, ALLOWED_MODELS } from "@/lib/llm";
 import { clarifySystemPrompt, MAX_TURNS } from "@/lib/prompts";
 import { CATEGORIES, fieldsOf } from "@/lib/categories";
 import { estimatePrice } from "@/lib/pricing";
+import { PENDING, PENDING_RE } from "@/lib/i18n";
 
 // 请求：{ messages: [{role, content}], forceFinish, model, state }
 // state 是上一轮返回的 { category, brief, style_translation, price_inputs }
 export async function POST(req) {
   try {
-    const { messages = [], forceFinish = false, model: reqModel, state = null } = await req.json();
+    const { messages = [], forceFinish = false, model: reqModel, state = null, lang: reqLang = "zh" } = await req.json();
+    const lang = reqLang === "en" ? "en" : "zh";
+    const MARK = PENDING[lang];
     const model = ALLOWED_MODELS.includes(reqModel) ? reqModel : process.env.MODEL || "qwen-plus";
     const turn = messages.filter((m) => m.role === "user").length;
 
     const llmMessages = [
-      { role: "system", content: clarifySystemPrompt({ turn, forceFinish, state }) },
+      { role: "system", content: clarifySystemPrompt({ turn, forceFinish, state, lang }) },
       ...messages,
-      ...(forceFinish ? [{ role: "user", content: "先这样吧，直接帮我生成需求单。" }] : []),
+      ...(forceFinish ? [{ role: "user", content: lang === "en" ? "That's enough, please generate the brief now." : "先这样吧，直接帮我生成需求单。" }] : []),
     ];
 
     let result, parsed, lastErr;
@@ -49,31 +52,33 @@ export async function POST(req) {
     // 代码校验：内容在用户原话里能找到的，说明是用户自己说的，不标「待确认」（模型自标常把用户原话误标）
     const userText = messages.filter((m) => m.role === "user").map((m) => m.content).join("\n");
     const saidByUser = (v) => {
-      const core = String(v).replace(/（[^）]*）|\([^)]*\)/g, "").trim();
-      return core.length > 0 && userText.includes(core);
+      const core = String(v).replace(/（[^）]*）|\([^)]*\)/g, "").trim().toLowerCase();
+      return core.length > 0 && userText.toLowerCase().includes(core);
     };
     for (const k of unconfirmed) {
-      if (brief[k] && !/待确认/.test(brief[k]) && !saidByUser(brief[k])) brief[k] = `${brief[k]}（待确认）`;
+      if (brief[k] && !PENDING_RE.test(brief[k]) && !saidByUser(brief[k])) brief[k] = `${brief[k]}${MARK}`;
     }
     // 代码校验 2：识别「AI 自己提议、又顺手写进需求单」的字段（模型自标经常漏掉）
     // 本轮新填的字段，如果内容更像助手这一轮说的话、不像用户刚说的话，就标「待确认」；
     // 用户点「直接生成」时，这一轮用户什么都没说，新填的字段一律标「待确认」。
     const prevBrief = state?.brief || {};
     const lastUser = forceFinish ? "" : [...messages].reverse().find((m) => m.role === "user")?.content || "";
-    const bigrams = (t) => { const x = String(t).replace(/\s/g, ""); const out = new Set(); for (let i = 0; i < x.length - 1; i++) out.add(x.slice(i, i + 2)); return out; };
+    const bigrams = lang === "en"
+      ? (t) => new Set(String(t).toLowerCase().match(/[a-z0-9']+/g) || [])
+      : (t) => { const x = String(t).replace(/\s/g, ""); const out = new Set(); for (let i = 0; i < x.length - 1; i++) out.add(x.slice(i, i + 2)); return out; };
     const overlap = (v, t) => { const a = bigrams(v), b = bigrams(t); if (!a.size) return 0; let n = 0; for (const g of a) if (b.has(g)) n++; return n / a.size; };
     for (const f of fieldsOf(category)) {
       const k = f.key, v = brief[k];
-      const prevCore = String(prevBrief[k] || "").replace(/（待确认）/g, "");
+      const prevCore = String(prevBrief[k] || "").replace(/（待确认）| \(to confirm\)/gi, "");
       // 上一轮已有相同内容（含用户确认后去掉标记的情况），不再判断
-      if (!v || /待确认|建议/.test(v) || prevCore === v || saidByUser(v)) continue;
+      if (!v || PENDING_RE.test(v) || /建议|suggested/i.test(v) || prevCore === v || saidByUser(v)) continue;
       // 用户对上一轮提议表示同意（「可以」「就这样」），且内容来自上一轮的提议 → 视为已确认
       const prevAssistant = [...messages].reverse().find((m) => m.role === "assistant")?.content || "";
-      const affirmed = /^(可以|行|好的?|没问题|就这样|对|是的|嗯|同意|ok|OK|都可以|按你说的)/.test(lastUser.trim());
+      const affirmed = /^(可以|行|好的?|没问题|就这样|对|是的|嗯|同意|都可以|按你说的|ok|okay|yes|yep|sure|sounds good|that works|fine|looks good|perfect)/i.test(lastUser.trim());
       if (affirmed && overlap(v, prevAssistant) >= 0.5) continue;
       const fromUser = overlap(v, lastUser);
       const fromAssistant = overlap(v, parsed.reply || "");
-      if (forceFinish || (fromUser < 0.3 && fromAssistant > fromUser)) brief[k] = `${v}（待确认）`;
+      if (forceFinish || (fromUser < 0.3 && fromAssistant > fromUser)) brief[k] = `${v}${MARK}`;
     }
 
     // 快速选择题：只允许事实型字段，最多 3 个
@@ -110,7 +115,7 @@ export async function POST(req) {
     }
     const optionsField = typeof parsed.options_field === "string" ? parsed.options_field : null;
     const priceInputs = parsed.price_inputs ?? null;
-    const price = category ? estimatePrice(category, priceInputs) : null;
+    const price = category ? estimatePrice(category, priceInputs, lang) : null;
 
     return Response.json({
       action,
