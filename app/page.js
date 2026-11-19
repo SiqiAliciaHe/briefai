@@ -34,6 +34,8 @@ export default function Home() {
   const [model, setModel] = useState("qwen-plus");
   const [messages, setMessages] = useState([]);
   const [options, setOptions] = useState([]);
+  const [quickForm, setQuickForm] = useState([]);
+  const [picks, setPicks] = useState({});
   const [state, setState] = useState(null); // { category, brief, style_translation, price_inputs }
   const [view, setView] = useState(null); // 最近一次返回，用于展示
   const [freshKeys, setFreshKeys] = useState([]);
@@ -58,13 +60,14 @@ export default function Home() {
     setMessages(next);
     setInput("");
     setOptions([]);
+    setQuickForm([]);
     setError("");
     setLoading(true);
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next, forceFinish, model, state }),
+        body: JSON.stringify({ messages: next.map(({ role, content }) => ({ role, content })), forceFinish, model, state }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -78,8 +81,11 @@ export default function Home() {
         style_translation: data.styleTranslation,
         price_inputs: data.priceInputs,
       });
-      setMessages([...next, { role: "assistant", content: data.reply }]);
+      // content 进入对话历史（含快速选择题），display 只显示主问题（选择题在下方单独展示）
+      setMessages([...next, { role: "assistant", content: data.transcript || data.reply, display: data.reply }]);
       setOptions(data.options);
+      setQuickForm(data.quickForm || []);
+      setPicks({});
       if (data.action === "finish") setDone(true);
       setTrace((t) => [...t, { at: new Date().toISOString(), input: content || "(用户点击：直接生成)", forceFinish, output: data }]);
     } catch (e) {
@@ -91,8 +97,14 @@ export default function Home() {
     }
   }
 
+  // 把快速选择的结果和输入框文字合成一条回答
+  function composeAnswer(choice) {
+    const picked = quickForm.filter((q) => picks[q.field]).map((q) => `${q.question.replace(/[？?]$/, "")}：${picks[q.field]}`);
+    return [choice ?? input.trim(), picked.length ? picked.join("；") : ""].filter(Boolean).join("\n");
+  }
+
   function reset() {
-    setMessages([]); setOptions([]); setState(null); setView(null);
+    setMessages([]); setOptions([]); setQuickForm([]); setPicks({}); setState(null); setView(null);
     setDone(false); setError(""); setInput(""); setTrace([]); setFreshKeys([]);
   }
 
@@ -160,7 +172,7 @@ export default function Home() {
               </div>
             )}
             {messages.map((m, i) => (
-              <div key={i} className={`msg ${m.role}`}>{m.content}</div>
+              <div key={i} className={`msg ${m.role}`}>{m.display ?? m.content}</div>
             ))}
             {loading && <div className="typing">需求助手正在思考…</div>}
             {error && <div className="msg error">⚠️ {error}</div>}
@@ -168,10 +180,30 @@ export default function Home() {
           </div>
 
           <div className="composer">
+            {quickForm.length > 0 && (
+              <div className="quickform">
+                <div className="sub">顺便快速选一下（可跳过）：</div>
+                {quickForm.map((q) => (
+                  <div key={q.field} className="qf-row">
+                    <span className="qf-q">{q.question}</span>
+                    <div className="chips">
+                      {q.options.map((o) => (
+                        <button
+                          key={o}
+                          className={`chip ${picks[q.field] === o ? "picked" : ""}`}
+                          onClick={() => setPicks((p) => ({ ...p, [q.field]: p[q.field] === o ? undefined : o }))}
+                          disabled={loading}
+                        >{o}</button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
             {options.length > 0 && (
               <div className="chips">
                 {options.map((o) => (
-                  <button key={o} className="chip" onClick={() => send(o)} disabled={loading}>{o}</button>
+                  <button key={o} className="chip" onClick={() => send(composeAnswer(o))} disabled={loading}>{o}</button>
                 ))}
               </div>
             )}
@@ -184,11 +216,11 @@ export default function Home() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
                     e.preventDefault();
-                    send(input);
+                    send(composeAnswer());
                   }
                 }}
               />
-              <button className="btn" onClick={() => send(input)} disabled={loading || !input.trim()}>发送</button>
+              <button className="btn" onClick={() => send(composeAnswer())} disabled={loading || (!input.trim() && !Object.values(picks).some(Boolean))}>发送</button>
             </div>
             <div className="hint">
               <span>{messages.length ? `第 ${userTurns} / ${MAX_TURNS} 轮` : "Enter 发送，Shift+Enter 换行"}</span>

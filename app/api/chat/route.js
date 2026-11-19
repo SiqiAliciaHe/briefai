@@ -47,6 +47,15 @@ export async function POST(req) {
       if (brief[k] && !/待确认/.test(brief[k])) brief[k] = `${brief[k]}（待确认）`;
     }
 
+    // 快速选择题：只允许事实型字段，最多 3 个
+    const FORM_BLOCKED = ["style", "acceptance", "keep", "story"];
+    const quickForm =
+      action === "ask" && Array.isArray(parsed.quick_form)
+        ? parsed.quick_form
+            .filter((q) => q?.field && q?.question && Array.isArray(q.options) && q.options.length && !FORM_BLOCKED.includes(q.field) && !brief[q.field])
+            .slice(0, 3)
+            .map((q) => ({ field: q.field, question: q.question, options: q.options.slice(0, 4) }))
+        : [];
     const styleTranslation = Array.isArray(parsed.style_translation)
       ? parsed.style_translation.filter((s) => s?.term && s?.spec)
       : [];
@@ -58,6 +67,11 @@ export async function POST(req) {
       category,
       reply: parsed.reply || "",
       options: action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 4) : [],
+      quickForm,
+      // 写入对话历史的助手发言：主问题 + 快速选择题，保证下一轮模型（和评测里的模拟用户）都能看到
+      transcript: quickForm.length
+        ? `${parsed.reply}\n（顺便快速选一下：${quickForm.map((q) => `${q.question}【${q.options.join(" / ")}】`).join("；")}）`
+        : parsed.reply || "",
       brief,
       styleTranslation,
       priceInputs,

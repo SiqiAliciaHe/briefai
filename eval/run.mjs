@@ -121,7 +121,7 @@ async function runConversation(request, profile, behavior) {
     last = await res.json();
     if (last.error) throw new Error(last.error);
     turns.push({ latencyMs: last.meta.latencyMs, tokens: last.meta.usage?.total_tokens ?? 0 });
-    messages.push({ role: "assistant", content: last.reply });
+    messages.push({ role: "assistant", content: last.transcript || last.reply });
     state = { category: last.category, brief: last.brief, style_translation: last.styleTranslation, price_inputs: last.priceInputs };
     if (last.action !== "ask") break;
     messages.push({ role: "user", content: await simulateUserReply(request, profile, messages, behavior) });

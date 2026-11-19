@@ -121,3 +121,8 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .translate .term { color: var(--violet); font-weight: 600; }
 .route.refuse { background: var(--warn-soft); }
 .fields dd.pending { color: var(--warn); }
+.quickform { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; border: 1px dashed var(--line); border-radius: 10px; }
+.qf-row { display: flex; flex-direction: column; gap: 4px; }
+.qf-q { font-size: 13px; }
+.chip.picked { background: var(--brand); border-color: var(--brand); color: #fff; }
+.chip.picked, .chip.picked:hover:not(:disabled) { background: var(--brand); border-color: var(--brand); color: #fff; }
