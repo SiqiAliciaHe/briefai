@@ -113,6 +113,7 @@ async function runConversation(request, profile, behavior) {
   const turns = [];
   for (let turn = 1; turn <= MAX_TURNS + 1; turn++) {
     const res = await fetch(API, {
+      signal: AbortSignal.timeout(180000),
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ messages, state, model: MODEL, forceFinish: turn > MAX_TURNS }),
@@ -185,6 +186,7 @@ const boundaryCases = requests.filter(isBoundary);
 const normalCases = requests.filter((r) => !isBoundary(r));
 const boundary = await pool(boundaryCases, CONCURRENCY, async (r) => {
   const res = await fetch(API, {
+      signal: AbortSignal.timeout(180000),
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ messages: [{ role: "user", content: r.text }], model: MODEL }),
@@ -215,6 +217,9 @@ const results = await pool(normalCases, CONCURRENCY, async (r, idx) => {
       filled: fab.length,
       unsupported: fab.filter(([, v]) => v.label === "unsupported").length,
       embellished: fab.filter(([, v]) => v.label === "embellished").length,
+      // 编造的字段里，有多少已经在需求单上被标成「待确认」（风险已暴露给服务方）
+      flaggedUnsupported: fab.filter(([k, v]) => v.label === "unsupported" && /待确认/.test(run.final.brief[k])).length,
+      pendingFields: Object.values(run.final.brief || {}).filter((v) => v && /待确认/.test(v)).length,
       recallHit: rec.filter(([, v]) => v.label === "hit").length + 0.5 * rec.filter(([, v]) => v.label === "partial").length,
       recallTotal: rec.length,
       avgLatencyMs: Math.round(run.turns.reduce((s, t) => s + t.latencyMs, 0) / run.turns.length),
@@ -238,6 +243,8 @@ const agg = {
   succeeded: ok.length,
   fabricationRate: sum((m) => m.unsupported) / Math.max(1, sum((m) => m.filled)),
   embellishRate: sum((m) => m.embellished) / Math.max(1, sum((m) => m.filled)),
+  flaggedShareOfFabrication: sum((m) => m.unsupported) ? sum((m) => m.flaggedUnsupported ?? 0) / sum((m) => m.unsupported) : null,
+  pendingFieldRate: sum((m) => m.pendingFields ?? 0) / Math.max(1, sum((m) => m.filled)),
   casesWithFabrication: ok.filter((x) => x.metrics.unsupported > 0).length,
   recall: sum((m) => m.recallHit) / Math.max(1, sum((m) => m.recallTotal)),
   avgUserTurns: sum((m) => m.userTurns) / Math.max(1, ok.length),

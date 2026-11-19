@@ -275,7 +275,7 @@ function FieldRow({ label, value, fresh }) {
   return (
     <>
       <dt>{label}</dt>
-      <dd className={!value ? "empty" : fresh ? "fresh" : ""}>{value || "待确认"}</dd>
+      <dd className={!value ? "empty" : /待确认/.test(value) ? "pending" : fresh ? "fresh" : ""}>{value || "待确认"}</dd>
     </>
   );
 }

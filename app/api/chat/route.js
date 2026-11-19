@@ -41,6 +41,11 @@ export async function POST(req) {
       // 模型偶尔会输出数组，统一成字符串
       brief[f.key] = Array.isArray(v) ? v.join("、") : v ?? null;
     }
+    // 来源标注：AI 提议、用户未确认的内容，在需求单上明确标出「待确认」
+    const unconfirmed = Array.isArray(parsed.unconfirmed) ? parsed.unconfirmed : [];
+    for (const k of unconfirmed) {
+      if (brief[k] && !/待确认/.test(brief[k])) brief[k] = `${brief[k]}（待确认）`;
+    }
 
     const styleTranslation = Array.isArray(parsed.style_translation)
       ? parsed.style_translation.filter((s) => s?.term && s?.spec)

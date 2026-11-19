@@ -120,3 +120,4 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .translate { font-size: 14px; display: flex; gap: 6px; flex-wrap: wrap; }
 .translate .term { color: var(--violet); font-weight: 600; }
 .route.refuse { background: var(--warn-soft); }
+.fields dd.pending { color: var(--warn); }
