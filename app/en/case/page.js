@@ -18,7 +18,7 @@ const INSIGHTS = [
   [`7/15`, `retouching requests phrased as negatives`, `"not too influencer-style`, `not over-edited": people know what they don't want better than what they want`],
   [`5/15`, `had already tried editing it themselves and gave up`, `Tools are everywhere; the bottleneck is expressing taste clearly`],
   [`8 vs 7`, `video: individuals vs. creators / businesses`, `Individuals can't articulate needs; businesses write detailed briefs and struggle to hire`],
-  [`Pay if satisfied`, `the main way sellers compete on Xianyu`, `Sellers currently absorb the risk of mismatched expectations; a brief reduces exactly that`],
+  [`Pay if satisfied`, `the main way sellers compete on Goofish`, `Sellers currently absorb the risk of mismatched expectations; a brief reduces exactly that`],
 ];
 
 const RESULTS = [
@@ -63,13 +63,14 @@ export default function CasePageEn() {
         <section>
           <h2>1. Background: an outdated business plan</h2>
           <p>
-            In 2022 I co-founded a campus skills marketplace, "Jiaowohuo", and led operations. The biggest source of friction was that buyers couldn't say what they wanted, which led to endless back-and-forth, rework and disputes.
+            In 2022 I co-founded Job Me (交我活), a campus skills marketplace, and led operations. The biggest source of friction was that buyers couldn't say what they wanted, which led to endless back-and-forth, rework and disputes.
             Looking back in 2026, AI has absorbed the cheap, simple jobs that platform targeted. So I asked again: <b>in the AI era, where in this transaction should AI step in?</b>
           </p>
         </section>
 
         <section>
-          <h2>2. Market validation: 7 categories, researched by hand on Xiaohongshu and Xianyu</h2>
+          <h2>2. Market validation: 7 categories, researched by hand on RedNote and Goofish</h2>
+          <p className="note">RedNote (Xiaohongshu) is a lifestyle community app where people post requests; Goofish (Xianyu) is Alibaba's second-hand marketplace, where freelancers list services.</p>
           <div className="table-wrap">
             <table>
               <thead><tr><th>Category</th><th>What I saw</th><th>Decision</th></tr></thead>
@@ -158,7 +159,7 @@ export default function CasePageEn() {
           <h2>9. Next steps</h2>
           <ul>
             <li><b>Reference images first</b>: upload reference photos / video links and pick from a style gallery, instead of reading descriptions.</li>
-            <li><b>Real-transaction test</b>: on Xianyu, send the same request once as a one-liner and once as a brief, and compare rounds of back-and-forth, rework and first-draft satisfaction.</li>
+            <li><b>Real-transaction test</b>: on Goofish, send the same request once as a one-liner and once as a brief, and compare rounds of back-and-forth, rework and first-draft satisfaction.</li>
             <li><b>English validation</b>: real Reddit requests through the same evaluation pipeline.</li>
             <li><b>B2B opportunity</b>: many seller accounts are run by customer-service staff relaying requests to freelancers, so information is lost at every hand-off; the brief could become their standard intake tool.</li>
             <li><b>Latency and cost</b>: generate quick picks without the model; try faster models.</li>
