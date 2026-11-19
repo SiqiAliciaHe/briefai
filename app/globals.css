@@ -131,3 +131,4 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .multi-hint { width: 100%; }
 .route.pending-route { border: 1px dashed var(--line); background: transparent; }
 .route.pending-route p { color: var(--muted); }
+.chip.escape { border-style: dashed; color: var(--muted); }

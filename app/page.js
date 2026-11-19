@@ -36,6 +36,7 @@ export default function Home() {
   const [options, setOptions] = useState([]);
   const [quickForm, setQuickForm] = useState([]);
   const [optionsMulti, setOptionsMulti] = useState(false);
+  const [optionsField, setOptionsField] = useState(null);
   const [mainPicks, setMainPicks] = useState([]);
   const [picks, setPicks] = useState({});
   const [state, setState] = useState(null); // { category, brief, style_translation, price_inputs }
@@ -50,6 +51,7 @@ export default function Home() {
   const [guide, setGuide] = useState(null);
   const [guiding, setGuiding] = useState(false);
   const endRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -91,6 +93,7 @@ export default function Home() {
       setQuickForm(data.quickForm || []);
       setPicks({});
       setOptionsMulti(!!data.optionsMulti);
+      setOptionsField(data.optionsField || null);
       setMainPicks([]);
       if (data.action === "finish") setDone(true);
       setTrace((t) => [...t, { at: new Date().toISOString(), input: content || "(用户点击：直接生成)", forceFinish, output: data }]);
@@ -107,7 +110,9 @@ export default function Home() {
   function togglePick(q, o) {
     setPicks((p) => {
       const cur = p[q.field] || [];
-      const next = cur.includes(o) ? cur.filter((x) => x !== o) : q.multi ? [...cur, o] : [o];
+      // 「不确定」和其他选项互斥
+      const base = o === "不确定" ? [] : cur.filter((x) => x !== "不确定");
+      const next = cur.includes(o) ? cur.filter((x) => x !== o) : q.multi && o !== "不确定" ? [...base, o] : [o];
       return { ...p, [q.field]: next };
     });
   }
@@ -227,7 +232,7 @@ export default function Home() {
                   <div key={q.field} className="qf-row">
                     <span className="qf-q">{q.question}{q.multi && <span className="sub">（可多选）</span>}</span>
                     <div className="chips">
-                      {q.options.map((o) => (
+                      {[...q.options, "不确定"].map((o) => (
                         <button
                           key={o}
                           className={`chip ${(picks[q.field] || []).includes(o) ? "picked" : ""}`}
@@ -255,10 +260,21 @@ export default function Home() {
                     disabled={loading}
                   >{o}</button>
                 ))}
+                {/* 兜底选项：选项都不合适时 */}
+                {optionsField === "style" && (
+                  <button
+                    className="chip escape"
+                    onClick={() => { setInput((v) => v || "我有参考："); inputRef.current?.focus(); }}
+                    disabled={loading}
+                  >📎 我有参考（博主 / 视频 / 照片链接）</button>
+                )}
+                <button className="chip escape" onClick={() => inputRef.current?.focus()} disabled={loading}>都不是，我自己说</button>
+                <button className="chip escape" onClick={() => send(composeAnswer("不确定，你帮我建议"))} disabled={loading}>不确定，你帮我建议</button>
               </div>
             )}
             <div className="composer-row">
               <textarea
+                ref={inputRef}
                 rows={1}
                 value={input}
                 placeholder={done ? "需求单已生成，可以补充修改，或点「重新开始」" : "输入你的需求或回答…"}

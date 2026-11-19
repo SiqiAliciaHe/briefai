@@ -82,6 +82,7 @@ export async function POST(req) {
       category,
       reply: parsed.reply || "",
       options: action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 5) : [],
+      optionsField: typeof parsed.options_field === "string" ? parsed.options_field : null,
       // 主问题选项是否可多选：模型判断，或者问的是天然可多选的字段
       optionsMulti:
         parsed.options_multi === true || ["must_fix", "keep", "acceptance", "music_text"].includes(parsed.options_field),
