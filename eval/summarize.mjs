@@ -18,7 +18,7 @@ let files;
 if (args.files) files = args.files.split(",").map((f) => path.join(dir, path.basename(f)));
 else {
   // 修图早期的结果文件名里没有品类
-  const match = (f) => f.endsWith(".json") && (f.includes(`-${CATEGORY}-`) || (CATEGORY === "retouch" && !/-(retouch|video)-/.test(f)));
+  const match = (f) => f.endsWith(".json") && /^\d{4}-/.test(f) && (f.includes(`-${CATEGORY}-`) || (CATEGORY === "retouch" && !/-(retouch|video)-/.test(f)));
   files = fs.readdirSync(dir).filter(match).sort().slice(-(Number(args.last) || 3)).map((f) => path.join(dir, f));
 }
 
