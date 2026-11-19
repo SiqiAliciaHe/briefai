@@ -36,7 +36,11 @@ export async function POST(req) {
 
     // 只保留当前品类定义过的字段
     const brief = {};
-    for (const f of fieldsOf(category)) brief[f.key] = parsed.brief?.[f.key] ?? null;
+    for (const f of fieldsOf(category)) {
+      const v = parsed.brief?.[f.key];
+      // 模型偶尔会输出数组，统一成字符串
+      brief[f.key] = Array.isArray(v) ? v.join("、") : v ?? null;
+    }
 
     const styleTranslation = Array.isArray(parsed.style_translation)
       ? parsed.style_translation.filter((s) => s?.term && s?.spec)

@@ -1,0 +1,752 @@
+{
+  "agg": {
+    "model": "qwen-plus",
+    "cases": 3,
+    "succeeded": 3,
+    "fabricationRate": 0.3939393939393939,
+    "casesWithFabrication": 3,
+    "recall": 0.8095238095238095,
+    "avgUserTurns": 6,
+    "avgLatencyMs": 9694,
+    "avgTokensPerCase": 14621,
+    "categoryCorrect": 3
+  },
+  "results": [
+    {
+      "request": {
+        "id": "R01",
+        "source": "小红书",
+        "text": "找p图 修图师！求帮p图了 这些是苹果原图 朋友说我自己p图没质感 而且我也觉得p图太累了 想找一下能帮忙p图的 我不喜欢磨皮过重像ai画质的那种"
+      },
+      "profile": {
+        "photo_info": "几张苹果手机拍的原图",
+        "purpose": "发朋友圈和小红书",
+        "must_fix": "肤色不均、痘痘、黑眼圈",
+        "intensity": "自然，不要过度磨皮",
+        "style": "清新自然，色调稍微明亮一点",
+        "keep": "脸型和五官特征不能变太多",
+        "reference": null,
+        "deadline": "最好一周内完成",
+        "budget": null,
+        "revisions": "1-2次修改机会",
+        "acceptance": "看起来自然，没有明显的修图痕迹"
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "找p图 修图师！求帮p图了 这些是苹果原图 朋友说我自己p图没质感 而且我也觉得p图太累了 想找一下能帮忙p图的 我不喜欢磨皮过重像ai画质的那种"
+          },
+          {
+            "role": "assistant",
+            "content": "明白啦～你想要真人修图师帮你精修苹果原图，重点是：有质感、不假面、拒绝AI式过度磨皮。为了匹配最合适的修图师，请告诉我：\n\n✅ 这次一共要修几张照片？\n✅ 主要用途是什么？（比如发朋友圈/小红书/求职简历/打印留念）"
+          },
+          {
+            "role": "user",
+            "content": "大概有五六张照片吧，主要是发朋友圈和小红书用的。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白了：5–6张苹果原图，用于朋友圈和小红书发布。接下来确认最关键的修图程度——你希望修到什么效果？"
+          },
+          {
+            "role": "user",
+            "content": "自然点就好，不要磨皮太重，看着舒服就行。"
+          },
+          {
+            "role": "assistant",
+            "content": "清楚了：5–6张、发朋友圈/小红书、追求自然感、拒绝AI塑料感。接下来确认风格方向——你更倾向哪种整体观感？"
+          },
+          {
+            "role": "user",
+            "content": "我喜欢清新自然的感觉，色调可以稍微明亮一点。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白了：清新自然 + 明亮色调 + 保留皮肤纹理（不磨皮过重）。为确保修图师精准执行，请确认——哪些部位你特别在意、必须修好？比如：痘痘/黑眼圈/法令纹/发际线/脸型轮廓/背景杂物等。"
+          },
+          {
+            "role": "user",
+            "content": "我特别在意肤色不均、痘痘和黑眼圈，这些一定要修好。"
+          },
+          {
+            "role": "assistant",
+            "content": "已明确：5–6张苹果原图、发朋友圈/小红书、自然微调、清新明亮色调、必须修好肤色不均/痘痘/黑眼圈、皮肤必须保留纹理。最后确认：有没有任何部位或特征你要求「绝对不能动」？比如：脸型、痣、疤痕、发型、法令纹（哪怕明显也保留）等。"
+          },
+          {
+            "role": "user",
+            "content": "脸型和五官特征不能变太多，其他的你看着来。"
+          },
+          {
+            "role": "assistant",
+            "content": "需求已明确：5–6张苹果原图，用于朋友圈/小红书，自然微调级精修，重点修复肤色不均、痘痘、黑眼圈，保留皮肤纹理与本人五官/脸型特征，风格清新明亮。"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "retouch",
+          "reply": "需求已明确：5–6张苹果原图，用于朋友圈/小红书，自然微调级精修，重点修复肤色不均、痘痘、黑眼圈，保留皮肤纹理与本人五官/脸型特征，风格清新明亮。",
+          "options": [],
+          "brief": {
+            "photo_info": "5–6张，苹果原图（无滤镜、未压缩）",
+            "purpose": "朋友圈、小红书发布（竖屏为主，需适配手机浏览）",
+            "must_fix": "肤色不均、痘痘、黑眼圈",
+            "intensity": "自然点就好，不要磨皮太重，看着舒服就行",
+            "style": "清新自然，色调稍微明亮一点",
+            "keep": "皮肤保留纹理，不能磨成塑料感/AI画质；脸型和五官特征不能变太多",
+            "reference": null,
+            "deadline": null,
+            "budget": null,
+            "revisions": null,
+            "acceptance": null
+          },
+          "styleTranslation": [
+            {
+              "term": "没质感",
+              "spec": "需保留皮肤真实纹理、毛孔细节与自然光影过渡，禁用强磨皮、高斯模糊、一键美颜类算法"
+            },
+            {
+              "term": "磨皮过重像ai画质",
+              "spec": "禁止平滑肤色至失真程度；颧骨、鼻梁、下颌线等区域需保留微结构与立体感；避免蜡像感、陶瓷感、塑料反光"
+            },
+            {
+              "term": "清新自然",
+              "spec": "低饱和度冷调倾向（如青灰底色），提高阴影亮度但保留明暗层次；肤色校正至健康暖中性（不偏黄/不惨白）；整体对比度适中，突出通透感而非锐化感"
+            },
+            {
+              "term": "色调稍微明亮一点",
+              "spec": "提升整体曝光+0.15～+0.3档，优先提亮阴影与中间调，高光不溢出；白平衡微调至D65标准光源附近，避免暖黄或冷青偏色"
+            }
+          ],
+          "priceInputs": {
+            "level": "natural",
+            "count": 6
+          },
+          "price": {
+            "summary": "6 张约 60–120 元",
+            "detail": [
+              "自然微调：10–20 元/张",
+              "数量：6 张"
+            ],
+            "source": "参考小红书真实帖子：「10 元精修」纠纷帖、「一张收费 50」找修图师帖、「别人收 50+，我只收 20+」"
+          },
+          "routing": {
+            "type": "hybrid",
+            "reason": "5–6张苹果原图，要求自然微调、保留本人特征与皮肤纹理，需AI预处理+人工精修质感与细节，符合hybrid分单标准"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 13481,
+            "usage": {
+              "total_tokens": 3037,
+              "completion_tokens": 581,
+              "prompt_tokens": 2456,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 9126,
+            "tokens": 2052
+          },
+          {
+            "latencyMs": 9893,
+            "tokens": 2368
+          },
+          {
+            "latencyMs": 10539,
+            "tokens": 2482
+          },
+          {
+            "latencyMs": 13165,
+            "tokens": 2677
+          },
+          {
+            "latencyMs": 13743,
+            "tokens": 2926
+          },
+          {
+            "latencyMs": 13481,
+            "tokens": 3037
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "photo_info": {
+            "label": "supported",
+            "why": "用户明确提到是苹果原图，且数量为五六张"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确表示照片用于发朋友圈和小红书"
+          },
+          "must_fix": {
+            "label": "supported",
+            "why": "用户特别强调要修好肤色不均、痘痘和黑眼圈"
+          },
+          "intensity": {
+            "label": "supported",
+            "why": "用户明确表示不要磨皮太重，追求自然感"
+          },
+          "style": {
+            "label": "supported",
+            "why": "用户喜欢清新自然的感觉，色调可以稍微明亮一点"
+          },
+          "keep": {
+            "label": "supported",
+            "why": "用户要求保留皮肤纹理，脸型和五官特征不能变太多"
+          },
+          "reference": {
+            "label": "unsupported",
+            "why": "用户没有提及任何参考图片"
+          },
+          "deadline": {
+            "label": "unsupported",
+            "why": "用户没有提及完成时间"
+          },
+          "budget": {
+            "label": "unsupported",
+            "why": "用户没有提及预算"
+          },
+          "revisions": {
+            "label": "unsupported",
+            "why": "用户没有提及修改次数"
+          },
+          "acceptance": {
+            "label": "unsupported",
+            "why": "用户没有具体描述验收标准"
+          }
+        },
+        "recall": {
+          "photo_info": {
+            "label": "hit",
+            "why": "需求单中准确捕捉了苹果手机拍的原图以及数量"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单中准确反映了用途为发朋友圈和小红书"
+          },
+          "must_fix": {
+            "label": "hit",
+            "why": "需求单中准确列出了用户特别在意的部位：肤色不均、痘痘、黑眼圈"
+          },
+          "intensity": {
+            "label": "hit",
+            "why": "需求单中准确反映了用户对修图强度的要求：自然，不要过度磨皮"
+          },
+          "style": {
+            "label": "hit",
+            "why": "需求单中准确反映了用户的风格偏好：清新自然，色调稍微明亮一点"
+          },
+          "keep": {
+            "label": "hit",
+            "why": "需求单中准确反映了用户希望保留的脸型和五官特征不变太多的要求"
+          },
+          "acceptance": {
+            "label": "miss",
+            "why": "隐藏画像中提到的看起来自然，没有明显的修图痕迹未被需求单捕获"
+          }
+        }
+      },
+      "metrics": {
+        "id": "R01",
+        "action": "finish",
+        "category": "retouch",
+        "userTurns": 6,
+        "filled": 11,
+        "unsupported": 5,
+        "recallHit": 6,
+        "recallTotal": 7,
+        "avgLatencyMs": 11658,
+        "tokens": 15542,
+        "styleTerms": 4
+      }
+    },
+    {
+      "request": {
+        "id": "R02",
+        "source": "小红书",
+        "text": "找长期p图，求帮忙p图 带着图评论或者私我都可以，不要太网红p 不要ai 找合眼缘合审美的宝宝 长期p图 10r以下都可以"
+      },
+      "profile": {
+        "photo_info": "单人照，生活照为主",
+        "purpose": "发朋友圈和小红书",
+        "must_fix": "皮肤瑕疵、体型微调",
+        "intensity": "自然，不要过度修图",
+        "style": "清新自然风格，色调明亮",
+        "keep": "五官特征，个人特色不能丢失",
+        "reference": null,
+        "deadline": "不急，一周内都可以",
+        "budget": "10元以下",
+        "revisions": null,
+        "acceptance": "满意为止"
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "找长期p图，求帮忙p图 带着图评论或者私我都可以，不要太网红p 不要ai 找合眼缘合审美的宝宝 长期p图 10r以下都可以"
+          },
+          {
+            "role": "assistant",
+            "content": "你好！看到你想找长期修图伙伴，还特别强调「不要太网红、不要AI」，很重视真实感和审美契合～为了帮你精准匹配合适修图师，先确认第一个关键信息：你希望修的是哪类照片？"
+          },
+          {
+            "role": "user",
+            "content": "主要是单人照，生活照为主。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白了，主要是单人生活照。那请问这些照片的用途是？比如：发朋友圈/小红书、存档留念、求职简历、还是其他场景？不同用途对修图自然度和细节要求差别挺大的。"
+          },
+          {
+            "role": "user",
+            "content": "发朋友圈和小红书用的。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白啦～朋友圈和小红书对质感和真实感要求高。那请问你最希望优先修哪些地方？（比如：肤色不均、痘痘/黑眼圈、脸型微调、背景杂乱、光线太暗等）"
+          },
+          {
+            "role": "user",
+            "content": "皮肤瑕疵和体型微调最需要修。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，皮肤瑕疵（如痘印、泛红、黑眼圈）和体型微调（如肩腰比例、手臂/腿部线条）是重点。那修图程度你倾向哪一种？"
+          },
+          {
+            "role": "user",
+            "content": "自然点就好，不要太夸张。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白了，要自然微调。那请问：哪些地方是「绝对不能动」的？比如脸型轮廓、痣、发型、法令纹、下颌线、或者必须保留本人辨识度？（这直接决定是否能避免‘修得不像本人’的纠纷）"
+          },
+          {
+            "role": "user",
+            "content": "五官特征和个人特色不能丢，得保持我的辨识度。"
+          },
+          {
+            "role": "assistant",
+            "content": "需求已明确：单人生活照，用于朋友圈/小红书，重点修皮肤瑕疵+体型微调，自然程度、严守本人辨识度（五官/特色不改）。"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "retouch",
+          "reply": "需求已明确：单人生活照，用于朋友圈/小红书，重点修皮肤瑕疵+体型微调，自然程度、严守本人辨识度（五官/特色不改）。",
+          "options": [],
+          "brief": {
+            "photo_info": "单人生活照（数量未定）",
+            "purpose": "发朋友圈和小红书",
+            "must_fix": "皮肤瑕疵（痘印/泛红/黑眼圈）、体型微调（肩腰/手臂/腿部线条）",
+            "intensity": "自然微调",
+            "style": null,
+            "keep": "五官特征、个人特色、本人辨识度",
+            "reference": null,
+            "deadline": null,
+            "budget": "10元以下（明确）",
+            "revisions": null,
+            "acceptance": null
+          },
+          "styleTranslation": [],
+          "priceInputs": {
+            "level": "natural",
+            "count": null
+          },
+          "price": {
+            "summary": "10–20 元/张",
+            "detail": [
+              "自然微调：10–20 元/张",
+              "数量：待确认"
+            ],
+            "source": "参考小红书真实帖子：「10 元精修」纠纷帖、「一张收费 50」找修图师帖、「别人收 50+，我只收 20+」"
+          },
+          "routing": {
+            "type": "ai",
+            "reason": "预算明确低于10元、需求为单张/少量生活照的自然微调（祛痘、提亮、液化微调），符合AI工具（如醒图/美图秀秀）可自助完成的标准操作"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 7331,
+            "usage": {
+              "total_tokens": 2444,
+              "completion_tokens": 303,
+              "prompt_tokens": 2141,
+              "prompt_tokens_details": {
+                "cached_tokens": 1024
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 7025,
+            "tokens": 1911
+          },
+          {
+            "latencyMs": 5844,
+            "tokens": 2040
+          },
+          {
+            "latencyMs": 6157,
+            "tokens": 2133
+          },
+          {
+            "latencyMs": 6985,
+            "tokens": 2251
+          },
+          {
+            "latencyMs": 7079,
+            "tokens": 2333
+          },
+          {
+            "latencyMs": 7331,
+            "tokens": 2444
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "photo_info": {
+            "label": "supported",
+            "why": "用户明确提到主要是单人照，生活照为主"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确表示照片用于发朋友圈和小红书"
+          },
+          "must_fix": {
+            "label": "supported",
+            "why": "用户明确指出需要修皮肤瑕疵和体型微调"
+          },
+          "intensity": {
+            "label": "supported",
+            "why": "用户要求自然点就好，不要太夸张"
+          },
+          "style": {
+            "label": "unsupported",
+            "why": "用户没有提及具体的风格偏好"
+          },
+          "keep": {
+            "label": "supported",
+            "why": "用户强调五官特征和个人特色不能丢，得保持辨识度"
+          },
+          "reference": {
+            "label": "suggested",
+            "why": "需求单中未填写参考图，但用户未明确表示不需要"
+          },
+          "deadline": {
+            "label": "unsupported",
+            "why": "用户并未提及具体的时间要求"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确表示10r以下都可以"
+          },
+          "revisions": {
+            "label": "unsupported",
+            "why": "用户未提及修改次数"
+          },
+          "acceptance": {
+            "label": "unsupported",
+            "why": "用户未提及验收标准"
+          }
+        },
+        "recall": {
+          "photo_info": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像一致"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单中的用途与隐藏画像一致"
+          },
+          "must_fix": {
+            "label": "hit",
+            "why": "需求单中的修复重点与隐藏画像一致"
+          },
+          "intensity": {
+            "label": "hit",
+            "why": "需求单中的修图程度与隐藏画像一致"
+          },
+          "style": {
+            "label": "miss",
+            "why": "隐藏画像中提到清新自然风格，色调明亮，但需求单未捕捉到这一点"
+          },
+          "keep": {
+            "label": "hit",
+            "why": "需求单中的保留内容与隐藏画像一致"
+          },
+          "acceptance": {
+            "label": "miss",
+            "why": "隐藏画像中提到满意为止，但需求单未捕捉到这一点"
+          }
+        }
+      },
+      "metrics": {
+        "id": "R02",
+        "action": "finish",
+        "category": "retouch",
+        "userTurns": 6,
+        "filled": 11,
+        "unsupported": 4,
+        "recallHit": 5,
+        "recallTotal": 7,
+        "avgLatencyMs": 6737,
+        "tokens": 13112,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "R03",
+        "source": "小红书",
+        "text": "求超自然日常P图 就是那种日常随便拍，需要微调，可以认出本人的，不要厚涂浓妆，质量高，价格可加，求无排单 不钓鱼，带例图来"
+      },
+      "profile": {
+        "photo_info": "一张日常随便拍的照片",
+        "purpose": "发朋友圈和小红书",
+        "must_fix": "皮肤瑕疵、光线调整",
+        "intensity": "轻微修饰，保持自然感",
+        "style": "清新自然的风格，色调明亮但不夸张",
+        "keep": "脸部特征要保留，能认出是本人",
+        "reference": null,
+        "deadline": "尽快，最好一周内",
+        "budget": null,
+        "revisions": "1-2次",
+        "acceptance": "看起来自然舒服，没有明显的修图痕迹"
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "求超自然日常P图 就是那种日常随便拍，需要微调，可以认出本人的，不要厚涂浓妆，质量高，价格可加，求无排单 不钓鱼，带例图来"
+          },
+          {
+            "role": "assistant",
+            "content": "明白！您需要的是「超自然日常风」人像修图：真实感强、能一眼认出本人，拒绝浓妆厚涂，但质感要高。为精准匹配修图师并避免返工，请问您这次要修几张照片？以及照片类型是？（例如：手机自拍/朋友帮拍/单反原图；正面半身/全身/多人合照等）"
+          },
+          {
+            "role": "user",
+            "content": "就一张照片，是手机随便拍的半身照。"
+          },
+          {
+            "role": "assistant",
+            "content": "感谢确认！单张手机半身照，匹配「超自然日常风」很合适。接下来请说明这张照片的主要用途和发布场景（比如：微信头像、小红书日常分享、求职简历照、还是存档留念？不同用途对精修程度和细节要求差异很大）"
+          },
+          {
+            "role": "user",
+            "content": "主要是发朋友圈和小红书。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白！朋友圈+小红书双平台发布，需兼顾自然感与平台视觉表现力。请问：这张照片中，您最希望优先修正的1–2个具体问题是什么？（例如：脸泛油光、眼下暗沉、发际线杂毛、背景杂物、肤色不均、轻微痘痘等）"
+          },
+          {
+            "role": "user",
+            "content": "皮肤瑕疵和光线调整最需要修。"
+          },
+          {
+            "role": "assistant",
+            "content": "已明确：1张手机半身照，用于朋友圈+小红书，重点修皮肤瑕疵（如痘、泛红、油光）和光线（如暗沉、过曝）。为确保修后‘像本人但状态更好’，请问您希望修图程度是？"
+          },
+          {
+            "role": "user",
+            "content": "轻微修饰就好，保持自然感。"
+          },
+          {
+            "role": "assistant",
+            "content": "已确认：1张手机半身照，朋友圈+小红书发布，修皮肤瑕疵+光线问题，要求轻微修饰、保持自然感。为避免修后‘不像本人’，请明确指出：哪些部位或特征必须保留原样？（例如：左脸痣、自然卷发尾、特定雀斑、原生唇色、不改脸型/鼻型等）"
+          },
+          {
+            "role": "user",
+            "content": "脸部特征要保留，能认出是本人。"
+          },
+          {
+            "role": "assistant",
+            "content": "需求已清晰：1张手机半身照，用于朋友圈+小红书，需轻微修饰皮肤瑕疵（痘/泛红/油光）与光线（暗沉/过曝），严格保留脸部特征、确保本人可识别，风格为‘超自然日常风’——肤色均匀不假白、保留纹理毛孔、零液化瘦脸、妆容仅做素颜强化。"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "retouch",
+          "reply": "需求已清晰：1张手机半身照，用于朋友圈+小红书，需轻微修饰皮肤瑕疵（痘/泛红/油光）与光线（暗沉/过曝），严格保留脸部特征、确保本人可识别，风格为‘超自然日常风’——肤色均匀不假白、保留纹理毛孔、零液化瘦脸、妆容仅做素颜强化。",
+          "options": [],
+          "brief": {
+            "photo_info": "1张，手机拍摄，半身照",
+            "purpose": "朋友圈 + 小红书日常分享",
+            "must_fix": "皮肤瑕疵（痘/泛红/油光）、光线问题（暗沉/过曝）",
+            "intensity": "轻微修饰，保持自然感",
+            "style": "超自然日常风（真实感强、可认出本人、无浓妆厚涂、质感高）",
+            "keep": "脸部特征完整保留，确保本人可识别",
+            "reference": null,
+            "deadline": null,
+            "budget": null,
+            "revisions": null,
+            "acceptance": "家人朋友一眼认得出是我；皮肤有纹理不塑料；五官未变形；无浓妆感，像‘刚睡好+擦了润唇膏’的状态"
+          },
+          "styleTranslation": [
+            {
+              "term": "超自然日常P图",
+              "spec": "肤色自然均匀（不假白），保留皮肤纹理与毛孔细节；磨皮仅限局部祛痘/泛红/油光，不做全局平滑；五官微调（如轻微提亮眼神、柔和法令纹），禁止液化改脸型/瘦脸/大眼；妆容仅做‘仿佛素颜但状态很好’的强化（如润色唇色、统一黑眼圈明暗），不添加眼影/腮红/假睫毛等非本人原有妆效"
+            }
+          ],
+          "priceInputs": {
+            "level": "natural",
+            "count": 1
+          },
+          "price": {
+            "summary": "1 张约 10–20 元",
+            "detail": [
+              "自然微调：10–20 元/张",
+              "数量：1 张"
+            ],
+            "source": "参考小红书真实帖子：「10 元精修」纠纷帖、「一张收费 50」找修图师帖、「别人收 50+，我只收 20+」"
+          },
+          "routing": {
+            "type": "hybrid",
+            "reason": "单张手机人像、要求轻微修饰且高度强调‘像本人’与质感，需AI预处理基础瑕疵与曝光后由修图师人工校准肤色、纹理与神态细节"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 12115,
+            "usage": {
+              "total_tokens": 2901,
+              "completion_tokens": 518,
+              "prompt_tokens": 2383,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 11058,
+            "tokens": 2093
+          },
+          {
+            "latencyMs": 9406,
+            "tokens": 2375
+          },
+          {
+            "latencyMs": 9715,
+            "tokens": 2478
+          },
+          {
+            "latencyMs": 11040,
+            "tokens": 2637
+          },
+          {
+            "latencyMs": 10790,
+            "tokens": 2724
+          },
+          {
+            "latencyMs": 12115,
+            "tokens": 2901
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "photo_info": {
+            "label": "supported",
+            "why": "用户明确提到是一张手机随便拍的半身照"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确提到用于发朋友圈和小红书"
+          },
+          "must_fix": {
+            "label": "supported",
+            "why": "用户明确提到需要修皮肤瑕疵和光线调整"
+          },
+          "intensity": {
+            "label": "supported",
+            "why": "用户明确要求轻微修饰，保持自然感"
+          },
+          "style": {
+            "label": "suggested",
+            "why": "用户没有具体描述风格，助手建议为超自然日常风并得到用户确认"
+          },
+          "keep": {
+            "label": "supported",
+            "why": "用户明确要求脸部特征要保留，能认出是本人"
+          },
+          "reference": {
+            "label": "unsupported",
+            "why": "用户未提及提供参考图"
+          },
+          "deadline": {
+            "label": "unsupported",
+            "why": "用户未提及完成时间"
+          },
+          "budget": {
+            "label": "unsupported",
+            "why": "用户未提及预算"
+          },
+          "revisions": {
+            "label": "unsupported",
+            "why": "用户未提及修改次数"
+          },
+          "acceptance": {
+            "label": "suggested",
+            "why": "用户没有具体描述接受标准，助手给出建议"
+          }
+        },
+        "recall": {
+          "photo_info": {
+            "label": "hit",
+            "why": "需求单中准确描述了照片信息"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单中准确描述了用途"
+          },
+          "must_fix": {
+            "label": "hit",
+            "why": "需求单中准确描述了需要修正的问题"
+          },
+          "intensity": {
+            "label": "hit",
+            "why": "需求单中准确描述了修图程度"
+          },
+          "style": {
+            "label": "partial",
+            "why": "需求单中的风格描述与隐藏画像略有不同，但大体一致"
+          },
+          "keep": {
+            "label": "hit",
+            "why": "需求单中准确描述了保留特征的要求"
+          },
+          "acceptance": {
+            "label": "partial",
+            "why": "需求单中的接受标准与隐藏画像有差异，但大体一致"
+          }
+        }
+      },
+      "metrics": {
+        "id": "R03",
+        "action": "finish",
+        "category": "retouch",
+        "userTurns": 6,
+        "filled": 11,
+        "unsupported": 4,
+        "recallHit": 6,
+        "recallTotal": 7,
+        "avgLatencyMs": 10687,
+        "tokens": 15208,
+        "styleTerms": 1
+      }
+    }
+  ]
+}
