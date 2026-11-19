@@ -74,18 +74,33 @@ export async function POST(req) {
     const styleTranslation = Array.isArray(parsed.style_translation)
       ? parsed.style_translation.filter((s) => s?.term && s?.spec)
       : [];
+    // 主问题的选项。兜底：模型有时把选项写成回复里的列表（✅ / 1. / A.），而 options 为空，
+    // 用户就看不到可点的选项。这时从回复里提取列表作为选项，并从显示文字中去掉。
+    let reply = parsed.reply || "";
+    let extracted = false;
+    let options = action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 5) : [];
+    const LIST_ITEM = /^\s*(?:✅|☑️|✔️|•|·|-|\*|[0-9]{1,2}[.、)）]|[①-⑨]|[A-Da-d][.、)）])\s*(.+)$/;
+    if (action === "ask" && options.length === 0) {
+      const items = reply.split("\n").map((l) => l.match(LIST_ITEM)?.[1]?.trim()).filter((x) => x && x.length <= 60);
+      if (items.length >= 2) {
+        options = items.slice(0, 5);
+        extracted = true;
+        reply = reply.split("\n").filter((l) => !LIST_ITEM.test(l)).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+      }
+    }
+    const optionsField = typeof parsed.options_field === "string" ? parsed.options_field : null;
     const priceInputs = parsed.price_inputs ?? null;
     const price = category ? estimatePrice(category, priceInputs) : null;
 
     return Response.json({
       action,
       category,
-      reply: parsed.reply || "",
-      options: action === "ask" && Array.isArray(parsed.options) ? parsed.options.slice(0, 5) : [],
-      optionsField: typeof parsed.options_field === "string" ? parsed.options_field : null,
+      reply,
+      options,
+      optionsField,
       // 主问题选项是否可多选：模型判断，或者问的是天然可多选的字段
       optionsMulti:
-        parsed.options_multi === true || ["must_fix", "keep", "acceptance", "music_text"].includes(parsed.options_field),
+        parsed.options_multi === true || extracted || ["must_fix", "keep", "acceptance", "music_text"].includes(optionsField),
       quickForm,
       // 写入对话历史的助手发言：主问题 + 快速选择题，保证下一轮模型（和评测里的模拟用户）都能看到
       transcript: quickForm.length
