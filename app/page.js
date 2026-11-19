@@ -13,7 +13,7 @@ function briefToText({ category, brief, styleTranslation, price, routing }, lang
   for (const f of fieldsOf(category)) lines.push(`${labelOf(f, lang)}${t.sep}${brief[f.key] ?? t.pendingValue}`);
   if (styleTranslation?.length) {
     lines.push("", t.styleHeading);
-    for (const s of styleTranslation) lines.push(`「${s.term}」→ ${s.spec}`);
+    for (const s of styleTranslation) lines.push(lang === "en" ? `"${s.term}" → ${s.spec}` : `「${s.term}」→ ${s.spec}`);
   }
   if (price) lines.push("", `${t.priceHeading}${price.summary}`);
   if (routing) lines.push(`${t.routeHeading}${t.routeLabel[routing.type] ?? routing.type}${t.sep}${routing.reason}`);
@@ -225,7 +225,7 @@ export default function Home() {
   const unsupported = view?.action === "unsupported";
 
   return (
-    <>
+    <div className="app-root" lang={lang === "en" ? "en" : "zh-CN"}>
       <header className="header">
         <div>
           <div className="logo">Brief<span>AI</span> {t.title}</div>
@@ -379,7 +379,7 @@ export default function Home() {
                     <div className="sub">{t.styleCardSub}</div>
                     {view.styleTranslation.map((s, i) => (
                       <div key={i} className="translate">
-                        <span className="term">「{s.term}」</span>
+                        <span className="term">{lang === "en" ? `"${s.term}"` : `「${s.term}」`}</span>
                         <span>→ {s.spec}</span>
                       </div>
                     ))}
@@ -468,7 +468,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 }
 

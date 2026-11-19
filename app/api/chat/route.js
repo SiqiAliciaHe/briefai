@@ -5,7 +5,7 @@ import { chat, parseJson, ALLOWED_MODELS } from "@/lib/llm";
 import { clarifySystemPrompt, MAX_TURNS } from "@/lib/prompts";
 import { CATEGORIES, fieldsOf } from "@/lib/categories";
 import { estimatePrice } from "@/lib/pricing";
-import { PENDING, PENDING_RE } from "@/lib/i18n";
+import { PENDING, PENDING_RE, asciiPunct } from "@/lib/i18n";
 
 // 请求：{ messages: [{role, content}], forceFinish, model, state }
 // state 是上一轮返回的 { category, brief, style_translation, price_inputs }
@@ -117,6 +117,17 @@ export async function POST(req) {
     const priceInputs = parsed.price_inputs ?? null;
     const price = category ? estimatePrice(category, priceInputs, lang) : null;
 
+    // 英文模式：统一成英文标点（模型常混入弯引号和全角符号）
+    if (lang === "en") {
+      const P = asciiPunct;
+      reply = P(reply);
+      options = options.map(P);
+      for (const q of quickForm) { q.question = P(q.question); q.options = q.options.map(P); }
+      for (const k of Object.keys(brief)) brief[k] = P(brief[k]);
+      for (const st of styleTranslation) { st.term = P(st.term); st.spec = P(st.spec); }
+      if (parsed.routing?.reason) parsed.routing.reason = P(parsed.routing.reason);
+    }
+
     return Response.json({
       action,
       category,
@@ -129,8 +140,10 @@ export async function POST(req) {
       quickForm,
       // 写入对话历史的助手发言：主问题 + 快速选择题，保证下一轮模型（和评测里的模拟用户）都能看到
       transcript: quickForm.length
-        ? `${parsed.reply}\n（顺便快速选一下：${quickForm.map((q) => `${q.question}${q.multi ? "（可多选）" : ""}【${q.options.join(" / ")}】`).join("；")}）`
-        : parsed.reply || "",
+        ? lang === "en"
+          ? `${reply}\n(Quick picks: ${quickForm.map((q) => `${q.question}${q.multi ? " (pick any)" : ""} [${q.options.join(" / ")}]`).join("; ")})`
+          : `${reply}\n（顺便快速选一下：${quickForm.map((q) => `${q.question}${q.multi ? "（可多选）" : ""}【${q.options.join(" / ")}】`).join("；")}）`
+        : reply,
       brief,
       styleTranslation,
       priceInputs,

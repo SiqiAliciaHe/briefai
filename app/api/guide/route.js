@@ -3,6 +3,7 @@ export const maxDuration = 60;
 
 import { chat, ALLOWED_MODELS } from "@/lib/llm";
 import { CATEGORIES } from "@/lib/categories";
+import { asciiPunct } from "@/lib/i18n";
 
 // AI 自助操作指引：把需求单翻译成在常见 App 里自己动手的步骤
 const TOOLS = {
@@ -39,7 +40,7 @@ export async function POST(req) {
         },
       ],
     });
-    return Response.json({ tool, guide: result.content.trim(), meta: { model, latencyMs: result.latencyMs } });
+    return Response.json({ tool, guide: lang === "en" ? asciiPunct(result.content.trim()) : result.content.trim(), meta: { model, latencyMs: result.latencyMs } });
   } catch (e) {
     return Response.json({ error: e.message || "服务出错了" }, { status: 500 });
   }
