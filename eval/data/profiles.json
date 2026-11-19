@@ -183,19 +183,6 @@
   },
   "R15": {
     "photo_info": "1张自拍照",
-    "purpose": "发在小红书和朋友圈",
-    "must_fix": "脸型、五官、皮肤质感",
-    "intensity": "中等，自然但有明显改善",
-    "style": "欧美风，高级感",
-    "keep": "发型、服装不变",
-    "reference": null,
-    "deadline": "一周内",
-    "budget": "没想好",
-    "revisions": "2次以内",
-    "acceptance": null
-  },
-  "R16": {
-    "photo_info": "1张自拍照",
     "purpose": "个人收藏和发朋友圈",
     "must_fix": "脸部轮廓、皮肤质感、眼神光",
     "intensity": "中等，看起来自然但有明显美化",
