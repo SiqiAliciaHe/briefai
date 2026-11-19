@@ -1,0 +1,72 @@
+{
+  "EN01": {
+    "photo_info": "A couple of photos for a professional headshot",
+    "purpose": "Professional use, likely for a LinkedIn profile or similar professional networking site",
+    "must_fix": "Minor blemishes, lighting, and background if necessary",
+    "intensity": "Light, natural-looking edits only",
+    "style": "Natural, polished, and professional without heavy editing",
+    "keep": "Facial features, skin tone, and overall appearance as close to the original as possible",
+    "reference": "Attached a couple of photos for reference",
+    "deadline": "Not specified, but preferably within a week",
+    "budget": "$20",
+    "revisions": null,
+    "ai_policy": "No specific requirements, you can use AI tools if it helps achieve the natural look",
+    "acceptance": null
+  },
+  "EN02": {
+    "photo_info": "One professional headshot",
+    "purpose": "CV and job applications for healthcare worker, medical caregiver, or care assistant positions in the Netherlands",
+    "must_fix": "Facial expression (soft, genuine smile, kind eyes), lighting, and color to make skin look healthy and fresh, background to be clean and neutral",
+    "intensity": "Natural and subtle, maintaining a professional yet warm and approachable look",
+    "style": "Warm, trustworthy, and professional with a soft and natural tone",
+    "keep": "Natural facial features, no artificial look",
+    "reference": null,
+    "deadline": "Within one week",
+    "budget": null,
+    "revisions": "1-2 revisions if needed",
+    "ai_policy": "AI can be used for initial edits, but final touches should be done by a human to ensure a natural and professional look",
+    "acceptance": "The photo should look like a proper recruitment headshot, not a casual selfie, and convey a friendly, warm, and professional image"
+  },
+  "EN03": {
+    "photo_info": "A group photo with friends",
+    "purpose": "To share on social media, specifically Instagram and Facebook",
+    "must_fix": "Smile and flatten out our bellies to make us look more slim and sleek",
+    "intensity": "Natural but noticeable, we want to look good but not overdone",
+    "style": "Bright and vibrant, to match the fun and happy vibe of the photo",
+    "keep": "The background and other elements in the photo should remain unchanged",
+    "reference": null,
+    "deadline": "Within the next 3 days",
+    "budget": "5 dollars",
+    "revisions": null,
+    "ai_policy": "No restrictions, use whatever tools you think will give the best result",
+    "acceptance": "We should all look happy with natural smiles and slimmer tummies, while keeping the overall photo quality high"
+  },
+  "EN04": {
+    "photo_info": "5 childhood photos",
+    "purpose": "To share the edited photos on social media and with friends without them outing me as trans",
+    "must_fix": "Alter feminine clothes, haircuts, glasses, etc. to more masculine ones",
+    "intensity": "Moderate, make it look natural but clearly different from the original",
+    "style": "Natural, not too obvious that the photos have been edited, keep the overall feel of the photo the same",
+    "keep": "The background and other people in the photos should remain unchanged",
+    "reference": null,
+    "deadline": "Within 2 weeks",
+    "budget": "100 USD for now, may increase in the future",
+    "revisions": null,
+    "ai_policy": "AI can be used to assist, but final touch-ups must be done by a human to ensure quality",
+    "acceptance": null
+  },
+  "EN05": {
+    "photo_info": "3 pictures from a concert",
+    "purpose": "posting on Instagram",
+    "must_fix": "remove double chin",
+    "intensity": "natural, subtle changes",
+    "style": "vibrant and lively, to match the concert atmosphere",
+    "keep": "everything else, especially the background and other people in the photos",
+    "reference": null,
+    "deadline": "as soon as possible, within a week",
+    "budget": "5-10 dollars",
+    "revisions": null,
+    "ai_policy": "open to AI use as long as the result looks natural",
+    "acceptance": "I want to feel confident when I look at the photos, no obvious signs of editing"
+  }
+}

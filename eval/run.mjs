@@ -29,12 +29,14 @@ const CONCURRENCY = Number(args.concurrency) || 3;
 const API = args.api || "http://localhost:3000/api/chat";
 const MAX_TURNS = 6;
 const CATEGORY = args.category || "retouch";
+const LANG = args.lang === "en" ? "en" : "zh";
+const SUFFIX = LANG === "en" ? "_en" : "";
 const CAT = CATEGORIES[CATEGORY];
 if (!CAT) throw new Error(`未知品类 ${CATEGORY}`);
 const FIELDS = Object.fromEntries(CAT.fields.map((f) => [f.key, f.label]));
 const CORE = CAT.fields.filter((f) => f.core).map((f) => f.key);
 // 修图沿用最早的画像文件名，保证与历史基线可比
-const PROFILE_FILE = CATEGORY === "retouch" ? "data/profiles.json" : `data/profiles_${CATEGORY}.json`;
+const PROFILE_FILE = CATEGORY === "retouch" && LANG === "zh" ? "data/profiles.json" : `data/profiles_${CATEGORY}${SUFFIX}.json`;
 
 // ---------- 1. 隐藏需求画像 ----------
 async function buildProfiles(requests) {
@@ -54,7 +56,7 @@ async function buildProfiles(requests) {
 - 帖子里已经写明的信息必须照搬，不能矛盾。
 - 其余字段按常见情况合理补全，口语化，像真人会说的话。
 - 真实用户经常自己也没想好：budget、revisions、acceptance、reference 中随机挑 1–2 个设为 null（表示用户自己也不知道，被问到会说「没想好/你看着来」）。
-只输出 JSON：{${Object.entries(FIELDS).map(([k, v]) => `"${k}": "${v}"`).join(", ")}}，值为字符串或 null。`,
+只输出 JSON：{${Object.entries(FIELDS).map(([k, v]) => `"${k}": "${v}"`).join(", ")}}，值为字符串或 null。${LANG === "en" ? "\n帖子是英文的，画像的字段值也全部用英文，语气像真实的英语用户。" : ""}`,
         },
         { role: "user", content: r.text },
       ],
@@ -98,7 +100,7 @@ async function simulateUserReply(request, profile, messages, behavior) {
 - 不要主动补充没被问到的信息（答非所问型除外）。
 - 画像里为 null 的内容，说明你自己也没想好，被问到就说「没想好」「你看着来」之类。
 - 助手给的选项只有和你的需求一致时才选，不一致就用自己的话说。
-- 像真人一样口语化、简短，一般不超过 30 个字。只输出你要说的话。`,
+- 像真人一样口语化、简短，一般不超过 30 个字。只输出你要说的话。${LANG === "en" ? "\n- 你是英语用户：只用英文回复，口语化、简短（一般不超过 25 个单词）。" : ""}`,
       },
       { role: "user", content: `对话记录：\n${transcript}\n\n请说出你的下一句回复。` },
     ],
@@ -116,7 +118,7 @@ async function runConversation(request, profile, behavior) {
       signal: AbortSignal.timeout(180000),
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages, state, model: MODEL, forceFinish: turn > MAX_TURNS }),
+      body: JSON.stringify({ messages, state, model: MODEL, forceFinish: turn > MAX_TURNS, lang: LANG }),
     });
     last = await res.json();
     if (last.error) throw new Error(last.error);
@@ -176,7 +178,7 @@ async function pool(items, n, fn) {
   return out;
 }
 
-const requests = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${CATEGORY}_requests.json`), "utf8")).slice(0, LIMIT);
+const requests = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${CATEGORY}_requests${SUFFIX}.json`), "utf8")).slice(0, LIMIT);
 console.log(`品类 ${CAT.name}，被测模型 ${MODEL}，用例 ${requests.length} 条`);
 const profiles = await buildProfiles(requests);
 
@@ -189,7 +191,7 @@ const boundary = await pool(boundaryCases, CONCURRENCY, async (r) => {
       signal: AbortSignal.timeout(180000),
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ messages: [{ role: "user", content: r.text }], model: MODEL }),
+    body: JSON.stringify({ messages: [{ role: "user", content: r.text }], model: MODEL, lang: LANG }),
   }).then((x) => x.json());
   // refuse_or_clarify：拒绝，或者先追问作业是否考核相关能力，都算通过
   const pass =
@@ -257,12 +259,12 @@ const agg = {
 };
 
 const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-const tag = `${stamp}-${CATEGORY}-${MODEL}`;
+const tag = `${stamp}-${CATEGORY}${SUFFIX}-${MODEL}`;
 fs.writeFileSync(path.join(ROOT, `results/${tag}.json`), JSON.stringify({ agg, results, boundary }, null, 2));
 
 const pct = (x) => `${(x * 100).toFixed(1)}%`;
 const lines = [
-  `# 评测报告：${CAT.name} × ${MODEL}（${stamp}）`,
+  `# 评测报告：${CAT.name}${LANG === "en" ? "（英文）" : ""} × ${MODEL}（${stamp}）`,
   "",
   "| 指标 | 结果 |",
   "|---|---|",
