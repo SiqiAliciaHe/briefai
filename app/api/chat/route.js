@@ -55,6 +55,26 @@ export async function POST(req) {
     for (const k of unconfirmed) {
       if (brief[k] && !/待确认/.test(brief[k]) && !saidByUser(brief[k])) brief[k] = `${brief[k]}（待确认）`;
     }
+    // 代码校验 2：识别「AI 自己提议、又顺手写进需求单」的字段（模型自标经常漏掉）
+    // 本轮新填的字段，如果内容更像助手这一轮说的话、不像用户刚说的话，就标「待确认」；
+    // 用户点「直接生成」时，这一轮用户什么都没说，新填的字段一律标「待确认」。
+    const prevBrief = state?.brief || {};
+    const lastUser = forceFinish ? "" : [...messages].reverse().find((m) => m.role === "user")?.content || "";
+    const bigrams = (t) => { const x = String(t).replace(/\s/g, ""); const out = new Set(); for (let i = 0; i < x.length - 1; i++) out.add(x.slice(i, i + 2)); return out; };
+    const overlap = (v, t) => { const a = bigrams(v), b = bigrams(t); if (!a.size) return 0; let n = 0; for (const g of a) if (b.has(g)) n++; return n / a.size; };
+    for (const f of fieldsOf(category)) {
+      const k = f.key, v = brief[k];
+      const prevCore = String(prevBrief[k] || "").replace(/（待确认）/g, "");
+      // 上一轮已有相同内容（含用户确认后去掉标记的情况），不再判断
+      if (!v || /待确认|建议/.test(v) || prevCore === v || saidByUser(v)) continue;
+      // 用户对上一轮提议表示同意（「可以」「就这样」），且内容来自上一轮的提议 → 视为已确认
+      const prevAssistant = [...messages].reverse().find((m) => m.role === "assistant")?.content || "";
+      const affirmed = /^(可以|行|好的?|没问题|就这样|对|是的|嗯|同意|ok|OK|都可以|按你说的)/.test(lastUser.trim());
+      if (affirmed && overlap(v, prevAssistant) >= 0.5) continue;
+      const fromUser = overlap(v, lastUser);
+      const fromAssistant = overlap(v, parsed.reply || "");
+      if (forceFinish || (fromUser < 0.3 && fromAssistant > fromUser)) brief[k] = `${v}（待确认）`;
+    }
 
     // 快速选择题：只允许事实型字段，最多 3 个
     const FORM_BLOCKED = ["style", "acceptance", "keep", "story"];

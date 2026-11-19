@@ -132,3 +132,36 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .route.pending-route { border: 1px dashed var(--line); background: transparent; }
 .route.pending-route p { color: var(--muted); }
 .chip.escape { border-style: dashed; color: var(--muted); }
+
+/* ---------- 项目介绍页 ---------- */
+.case { background: var(--bg); min-height: 100vh; }
+.case-wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+.case-hero { background: var(--panel); border-bottom: 1px solid var(--line); padding: 40px 0 32px; }
+.case-hero h1 { font-size: 28px; line-height: 1.35; margin: 14px 0 10px; }
+.case-lead { color: var(--muted); font-size: 16px; max-width: 820px; }
+.case-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.case-actions a { text-decoration: none; display: inline-block; }
+.case section { padding: 28px 0 8px; }
+.case h2 { font-size: 20px; margin: 0 0 12px; }
+.case p, .case li { font-size: 15px; }
+.case .note { color: var(--muted); font-size: 14px; }
+.table-wrap { overflow-x: auto; }
+.case table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 14px; }
+.case th, .case td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.case th { background: var(--violet-soft); font-weight: 600; }
+.case td.strong { font-weight: 700; color: var(--violet); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.stat-n { font-size: 26px; font-weight: 800; color: var(--brand); }
+.stat-t { font-weight: 600; margin: 4px 0; }
+.stat-d { color: var(--muted); font-size: 13px; }
+.shots { display: grid; gap: 18px; }
+.shots figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.shots img { width: 100%; display: block; border-bottom: 1px solid var(--line); }
+.shots figcaption { padding: 10px 14px; font-size: 14px; color: var(--muted); }
+.lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.lesson { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.lesson-t { font-weight: 700; margin-bottom: 6px; }
+.lesson-d { font-size: 14px; color: var(--muted); }
+.case-footer { color: var(--muted); font-size: 13px; padding: 28px 0 40px; border-top: 1px solid var(--line); margin-top: 28px; }
+.header-link { color: var(--violet); text-decoration: none; font-size: 14px; margin-right: 14px; }

@@ -189,6 +189,8 @@ export default function Home() {
           <div className="logo">Brief<span>AI</span> 需求助手</div>
           <div className="sub">把「修得好看点」「剪得有氛围感」，变成修图师、剪辑师能照着做、能照着验收的需求单</div>
         </div>
+        <div>
+        <a className="header-link" href="/case">项目介绍 →</a>
         <label className="sub">
           模型{" "}
           <select value={model} onChange={(e) => setModel(e.target.value)} disabled={messages.length > 0}>
@@ -196,6 +198,7 @@ export default function Home() {
             <option value="qwen-max">通义千问 Max</option>
           </select>
         </label>
+        </div>
       </header>
 
       <main className="main">
