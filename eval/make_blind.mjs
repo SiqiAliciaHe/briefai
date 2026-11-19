@@ -13,6 +13,7 @@ const PICKS = [
   { category: "retouch", id: "R09" },
   { category: "retouch", id: "R10" },
   { category: "video", id: "V01" },
+  { category: "video", id: "V03" },
   { category: "video", id: "V04" },
 ];
 
@@ -46,8 +47,16 @@ function briefText(cat, r) {
   return lines.join("\n");
 }
 
+const only = process.argv.includes("--only") ? process.argv[process.argv.indexOf("--only") + 1].split(",") : null;
+const outFile = path.join(ROOT, "results/blind_materials.json");
+const existing = only && fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, "utf8")) : [];
 const out = [];
 for (const pick of PICKS) {
+  if (only && !only.includes(pick.id)) {
+    const prev = existing.find((x) => x.pick.id === pick.id);
+    if (prev) out.push(prev);
+    continue;
+  }
   const cat = CATEGORIES[pick.category];
   const req = load(`data/${pick.category}_requests.json`).find((x) => x.id === pick.id);
   const profile = load(pick.category === "retouch" ? "data/profiles.json" : `data/profiles_${pick.category}.json`)[pick.id];
@@ -67,5 +76,5 @@ for (const pick of PICKS) {
   console.log(`${pick.id} ✓ ${r.action}`);
   out.push({ pick, req, brief: briefText(cat, r), messages });
 }
-fs.writeFileSync(path.join(ROOT, "results/blind_materials.json"), JSON.stringify(out, null, 2));
+fs.writeFileSync(outFile, JSON.stringify(out, null, 2));
 console.log("已保存 eval/results/blind_materials.json");
