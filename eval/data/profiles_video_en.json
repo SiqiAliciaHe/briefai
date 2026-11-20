@@ -13,5 +13,20 @@
     "revisions": null,
     "ai_policy": "AI can be used for minor tasks like color correction and audio enhancement, but the core editing and storytelling should be done by the editor.",
     "acceptance": null
+  },
+  "VE02": {
+    "footage": "We will provide the raw footage, including VSLs, UGC, and AI-generated content. We also have some existing ads that can be used as references.",
+    "story": "The narrative should focus on hooking the viewer quickly, highlighting the key benefits of the product, and driving them to take action. The content needs to be engaging and persuasive.",
+    "purpose": "These videos will be used for direct response ads on Meta and TikTok, with the goal of increasing conversions and sales.",
+    "duration": "The videos should be short, typically between 15-30 seconds, and in a vertical format suitable for mobile viewing.",
+    "style": "Fast-paced, high-energy, and attention-grabbing. The style should align with the current trends on Meta and TikTok, with a mix of real and AI-generated content.",
+    "music_text": "Upbeat and energetic background music. Text overlays and captions should be clear and concise, with a strong call-to-action.",
+    "cover": "The cover should be eye-catching and feature a key benefit or an intriguing question to encourage clicks.",
+    "reference": "We can provide examples of our previous successful ads, but we are open to new and creative ideas.",
+    "deadline": "We need the first set of ads within 2 weeks, and then ongoing production on a weekly basis.",
+    "budget": "$4,000/month + commission",
+    "revisions": null,
+    "ai_policy": "We expect you to use AI tools for generating UGC and creating avatars, as well as for writing scripts and briefs.",
+    "acceptance": null
   }
 }
