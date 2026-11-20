@@ -1,0 +1,2608 @@
+{
+  "agg": {
+    "model": "qwen-plus",
+    "cases": 13,
+    "succeeded": 13,
+    "fabricationRate": 0,
+    "embellishRate": 0.13114754098360656,
+    "flaggedShareOfFabrication": null,
+    "pendingFieldRate": 0,
+    "casesWithFabrication": 0,
+    "recall": 0.3388888888888889,
+    "avgUserTurns": 3.5384615384615383,
+    "avgLatencyMs": 10039,
+    "avgTokensPerCase": 15635,
+    "categoryCorrect": 10,
+    "wronglyRefused": 6,
+    "boundaryPass": 0,
+    "boundaryTotal": 0
+  },
+  "results": [
+    {
+      "request": {
+        "id": "VE01",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "True crime YouTube channel",
+        "text": "[HIRING] Video Editors – True Crime YouTube. We're building a team for a YouTube channel focused on long-form, single-case true crime documentaries (40+ minutes). Our content will take inspiration from channels such as Dr Insanity, Explore With Us, EWU Crime Storytime, Sinister Sins, Deadly Sins, and Red File. Must have worked on long-form true crime videos (40+ minutes). Videos must cover one case per video, not compilations. Must have worked on videos that reached 5 MILLION+ views. Rate: $500 - $900 (Depends on Experience)."
+      },
+      "behavior": "cooperative",
+      "profile": {
+        "footage": "We will provide all the necessary footage, including interviews, crime scene photos, and any other relevant visual materials. We also have access to a library of stock footage for additional context.",
+        "story": "Each video will focus on a single true crime case, detailing the events, the investigation, and the aftermath. The narrative should be engaging and well-structured, with a clear beginning, middle, and end.",
+        "purpose": "The videos will be published on our YouTube channel, which is dedicated to long-form, single-case true crime documentaries. The goal is to build a loyal audience and increase views and engagement.",
+        "duration": "Each video should be 40+ minutes in length. The aspect ratio should be 16:9, suitable for YouTube.",
+        "style": "The style should be dark and dramatic, with a slow and suspenseful pace. The tone should be serious and respectful, avoiding sensationalism. The editing should be smooth and professional, with high production value.",
+        "music_text": "Background music should be tense and atmospheric, fitting the true crime genre. Text and subtitles should be used to highlight key points and provide additional information. No specific script, but the editor should be able to write or adapt text as needed.",
+        "cover": "The cover should be eye-catching and relevant to the case, with a title that clearly states the subject of the video. It should follow the branding and style of the channel.",
+        "reference": "Take inspiration from channels such as Dr Insanity, Explore With Us, EWU Crime Storytime, Sinister Sins, Deadly Sins, and Red File. The videos should have a similar quality and style.",
+        "deadline": "We aim to release one video per week, so the turnaround time for each video should be around 7 days.",
+        "budget": "$500 - $900 (Depends on Experience)",
+        "revisions": null,
+        "ai_policy": "AI can be used for minor tasks like color correction and audio enhancement, but the core editing and storytelling should be done by the editor.",
+        "acceptance": null
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[HIRING] Video Editors – True Crime YouTube. We're building a team for a YouTube channel focused on long-form, single-case true crime documentaries (40+ minutes). Our content will take inspiration from channels such as Dr Insanity, Explore With Us, EWU Crime Storytime, Sinister Sins, Deadly Sins, and Red File. Must have worked on long-form true crime videos (40+ minutes). Videos must cover one case per video, not compilations. Must have worked on videos that reached 5 MILLION+ views. Rate: $500 - $900 (Depends on Experience)."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't assist with hiring or managing video editors for your YouTube channel. My role is to help individual clients — like students, creators, or small businesses — clarify and finalize their own retouching or video editing requests so they can confidently hire or brief a service provider. If you're looking for help creating a clear, production-ready brief for your true crime documentary (e.g., defining story focus, pacing, tone, music style, or delivery specs), I'd be happy to support that instead."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": "video",
+          "reply": "I'm sorry, but I can't assist with hiring or managing video editors for your YouTube channel. My role is to help individual clients — like students, creators, or small businesses — clarify and finalize their own retouching or video editing requests so they can confidently hire or brief a service provider. If you're looking for help creating a clear, production-ready brief for your true crime documentary (e.g., defining story focus, pacing, tone, music style, or delivery specs), I'd be happy to support that instead.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't assist with hiring or managing video editors for your YouTube channel. My role is to help individual clients — like students, creators, or small businesses — clarify and finalize their own retouching or video editing requests so they can confidently hire or brief a service provider. If you're looking for help creating a clear, production-ready brief for your true crime documentary (e.g., defining story focus, pacing, tone, music style, or delivery specs), I'd be happy to support that instead.",
+          "brief": {
+            "footage": null,
+            "story": null,
+            "purpose": null,
+            "duration": null,
+            "style": null,
+            "music_text": null,
+            "cover": null,
+            "reference": null,
+            "deadline": null,
+            "budget": null,
+            "revisions": null,
+            "ai_policy": null,
+            "acceptance": null
+          },
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 6812,
+            "usage": {
+              "total_tokens": 3721,
+              "completion_tokens": 268,
+              "prompt_tokens": 3453,
+              "prompt_tokens_details": {
+                "cached_tokens": 3328
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 6812,
+            "tokens": 3721
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中没有提到任何关于素材的提供情况。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提及每个视频将聚焦单一真实犯罪案件及其叙事结构。"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中没有说明视频发布的平台和目标。"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中没有提到视频长度要求。"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有描述视频的风格、节奏或基调。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提及背景音乐和文本使用的要求。"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有提到发布频率或制作周期。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE01",
+        "behavior": "cooperative",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": "video",
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 7,
+        "avgLatencyMs": 6812,
+        "tokens": 3721,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE02",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Performance ad agency",
+        "text": "[Hiring] Senior Video Editor (Direct Response Ads) | $4,000/month + commission. A full-time senior editor for Meta and TikTok ads: VSLs, UGC, hook stacks, AI UGC and animated ads. We'll train you to write your own scripts and briefs. You have 3+ years editing paid social ads, ideally e-commerce, supplements or info products; you can show ads that actually ran on Meta or TikTok; you've made AI UGC or AI avatar ads; your English is strong."
+      },
+      "behavior": "offtopic",
+      "profile": {
+        "footage": "We will provide the raw footage, including VSLs, UGC, and AI-generated content. We also have some existing ads that can be used as references.",
+        "story": "The narrative should focus on hooking the viewer quickly, highlighting the key benefits of the product, and driving them to take action. The content needs to be engaging and persuasive.",
+        "purpose": "These videos will be used for direct response ads on Meta and TikTok, with the goal of increasing conversions and sales.",
+        "duration": "The videos should be short, typically between 15-30 seconds, and in a vertical format suitable for mobile viewing.",
+        "style": "Fast-paced, high-energy, and attention-grabbing. The style should align with the current trends on Meta and TikTok, with a mix of real and AI-generated content.",
+        "music_text": "Upbeat and energetic background music. Text overlays and captions should be clear and concise, with a strong call-to-action.",
+        "cover": "The cover should be eye-catching and feature a key benefit or an intriguing question to encourage clicks.",
+        "reference": "We can provide examples of our previous successful ads, but we are open to new and creative ideas.",
+        "deadline": "We need the first set of ads within 2 weeks, and then ongoing production on a weekly basis.",
+        "budget": "$4,000/month + commission",
+        "revisions": null,
+        "ai_policy": "We expect you to use AI tools for generating UGC and creating avatars, as well as for writing scripts and briefs.",
+        "acceptance": null
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] Senior Video Editor (Direct Response Ads) | $4,000/month + commission. A full-time senior editor for Meta and TikTok ads: VSLs, UGC, hook stacks, AI UGC and animated ads. We'll train you to write your own scripts and briefs. You have 3+ years editing paid social ads, ideally e-commerce, supplements or info products; you can show ads that actually ran on Meta or TikTok; you've made AI UGC or AI avatar ads; your English is strong."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't assist with job hiring or freelance role applications. I'm designed to help you — as a client — clarify and finalize your own visual creative request (e.g., 'I need 5 photos retouched' or 'I need a 60-second TikTok ad edited from my footage') so a service provider can deliver exactly what you want, with no misunderstandings. If you're the one needing retouching or video editing help, I'd be happy to get that started right away."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": null,
+          "reply": "I'm sorry, but I can't assist with job hiring or freelance role applications. I'm designed to help you — as a client — clarify and finalize your own visual creative request (e.g., 'I need 5 photos retouched' or 'I need a 60-second TikTok ad edited from my footage') so a service provider can deliver exactly what you want, with no misunderstandings. If you're the one needing retouching or video editing help, I'd be happy to get that started right away.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't assist with job hiring or freelance role applications. I'm designed to help you — as a client — clarify and finalize your own visual creative request (e.g., 'I need 5 photos retouched' or 'I need a 60-second TikTok ad edited from my footage') so a service provider can deliver exactly what you want, with no misunderstandings. If you're the one needing retouching or video editing help, I'd be happy to get that started right away.",
+          "brief": {},
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 5105,
+            "usage": {
+              "total_tokens": 3619,
+              "completion_tokens": 183,
+              "prompt_tokens": 3436,
+              "prompt_tokens_details": {
+                "cached_tokens": 3200
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 5105,
+            "tokens": 3619
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中没有提及任何关于素材的内容"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提及任何关于叙事内容的要求"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中没有提及视频的用途和目标"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中没有提及视频的时长"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有提及视频的风格"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提及音乐和文本的要求"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有提及截止日期"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE02",
+        "behavior": "offtopic",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": null,
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 7,
+        "avgLatencyMs": 5105,
+        "tokens": 3619,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE03",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Gaming (MTG) channel",
+        "text": "Hiring a Short-Form/Reels Video Editor specializing in Magic the Gathering. I'm one of the two people behind a moderately successful MTG Channel... We'd be looking for someone to hire for $30 USD per video with additional profit sharing on each video pending performance. We'd ideally find someone who's editing style matches ours or someone who can learn our style. We're pretty relaxed in regards to delivery time."
+      },
+      "behavior": "vague",
+      "profile": {
+        "footage": "We provide all the raw gameplay footage, card images, and some b-roll of us discussing strategies and opening packs. The quality is decent, but it might need some color correction.",
+        "story": "The videos should focus on showcasing new card releases, deck-building strategies, and gameplay highlights. We want to engage our audience with both educational and entertaining content.",
+        "purpose": "These videos will be posted on our YouTube channel and Instagram Reels. We aim to grow our audience and increase engagement.",
+        "duration": "Each video should be around 1-2 minutes for Reels and 5-7 minutes for YouTube. Both vertical and horizontal formats are needed, depending on the platform.",
+        "style": "We prefer a fast-paced, energetic style with smooth transitions and dynamic text overlays. It should be engaging and keep the viewer's attention.",
+        "music_text": "Use upbeat, energetic background music that fits the theme of Magic the Gathering. Include subtitles for key points and any spoken dialogue.",
+        "cover": "The cover should be eye-catching, featuring a cool card or a highlight from the video. It should also have a clear, concise title overlay.",
+        "reference": "Check out our recent videos on our channel for a good idea of the style we're looking for. We want to maintain a similar feel.",
+        "deadline": "We're pretty relaxed about the delivery time, but ideally, we'd like to have a consistent upload schedule, so a turnaround of 2-3 days would be great.",
+        "budget": "30 USD per video with additional profit sharing based on performance.",
+        "revisions": null,
+        "ai_policy": "Open to using AI for minor tasks like color correction and basic editing, but the final touch and creative decisions should be done by a human editor.",
+        "acceptance": null
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Hiring a Short-Form/Reels Video Editor specializing in Magic the Gathering. I'm one of the two people behind a moderately successful MTG Channel... We'd be looking for someone to hire for $30 USD per video with additional profit sharing on each video pending performance. We'd ideally find someone who's editing style matches ours or someone who can learn our style. We're pretty relaxed in regards to delivery time."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for sharing! To match you with the right editor and set clear expectations, could you tell me: what kind of MTG content do your videos focus on? (e.g., deck techs, tournament highlights, funny moments, card deep dives)\n(Quick picks: What's the typical length of your videos? [15–30 seconds / 30–60 seconds / 60–90 seconds / Over 90 seconds]; Who provides the raw footage? [We provide all raw clips / We provide some clips + screen recordings / We'll send clips, but editor may need to source B-roll or overlays]; Do your videos usually include background music and/or on-screen text? (pick any) [Music only / Text only (no music) / Both music and text / Neither — voiceover only])"
+          },
+          {
+            "role": "user",
+            "content": "We focus on new card releases, deck-building, and gameplay. Videos are 1-2 mins for Reels, 5-7 mins for YouTube. We provide all footage. Both music and text."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — that's really helpful! To nail your editing style, could you share 1–2 examples of your favorite MTG Reels (links or channel/video names)? These help the editor match pacing, text timing, and tone. If you don't have specific examples, I can suggest 3 distinct, concrete editing styles — just let me know."
+          },
+          {
+            "role": "user",
+            "content": "Check out our recent videos on the channel. Should give a good idea."
+          },
+          {
+            "role": "assistant",
+            "content": "Great — I'll use your recent videos as reference. To lock in the editing style, could you pick the *one* thing you most want to keep (or avoid) in every video? For example: 'Keep fast cuts between cards and gameplay' / 'Avoid slow zooms on cards' / 'Always show card names clearly for 1.5 seconds' / 'Never use flashy transitions like spin or slide'.\n(Quick picks: How many rounds of revisions do you expect per video? [1 round / 2 rounds / 3 rounds / Unlimited (within reason)]; Do you have a preference about AI tools in editing? [AI OK for auto-captions & rough cut / AI OK only for basic tasks (e.g., stabilization) / Prefer no AI — fully manual editing / No preference])"
+          },
+          {
+            "role": "user",
+            "content": "Keep fast cuts between cards and gameplay. AI ok for basic stuff."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — 'fast cuts between cards and gameplay' is super clear. To finalize the style, could you tell me: what's the *most important thing* that makes your audience stop scrolling and watch? (e.g., 'text appears before the voiceover says it', 'every card flash lasts exactly 0.8 seconds', 'music drops right when the deck wins', 'no silence — always voiceover or music')\n(Quick picks: How many rounds of revisions do you expect per video? [1 round / 2 rounds / 3 rounds / Unlimited (within reason)])"
+          },
+          {
+            "role": "user",
+            "content": "Music drops right when the deck wins."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — your MTG Reels will use fast cuts (0.6–1.2 sec shots, hard cuts only) and sync music drops to key gameplay moments like deck wins."
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — your MTG Reels will use fast cuts (0.6–1.2 sec shots, hard cuts only) and sync music drops to key gameplay moments like deck wins.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — your MTG Reels will use fast cuts (0.6–1.2 sec shots, hard cuts only) and sync music drops to key gameplay moments like deck wins.",
+          "brief": {
+            "footage": "We provide all footage",
+            "story": "new card releases, deck-building, and gameplay",
+            "purpose": "MTG channel short-form videos (Reels/Shorts)",
+            "duration": "1–2 minutes for Reels, 5–7 minutes for YouTube",
+            "style": "fast cuts between cards and gameplay; music drops timed to key moments (e.g., deck wins) (to confirm)",
+            "music_text": "Both music and text",
+            "cover": null,
+            "reference": null,
+            "deadline": "pretty relaxed",
+            "budget": "30 USD per video + profit sharing",
+            "revisions": null,
+            "ai_policy": "AI OK for basic stuff",
+            "acceptance": null
+          },
+          "styleTranslation": [
+            {
+              "term": "fast cuts between cards and gameplay",
+              "spec": "Each shot lasts 0.6–1.2 seconds; no fade or dissolve — hard cuts only between card close-ups, deck shots, and gameplay clips"
+            },
+            {
+              "term": "music drops right when the deck wins",
+              "spec": "Background music is precisely timed so the beat drop or swell coincides with the visual moment the deck achieves its win condition (e.g., opponent's life hits zero, combo resolves)"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": null,
+            "urgent": false,
+            "complex": null
+          },
+          "price": null,
+          "routing": {
+            "type": "hybrid",
+            "reason": "Uses AI for basic tasks (e.g., auto-captions, rough cut timing), but requires human precision for music-drop synchronization and fast-cut rhythm matching MTG gameplay beats"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 5,
+            "latencyMs": 10984,
+            "usage": {
+              "total_tokens": 4692,
+              "completion_tokens": 465,
+              "prompt_tokens": 4227,
+              "prompt_tokens_details": {
+                "cached_tokens": 2560
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 12284,
+            "tokens": 3896
+          },
+          {
+            "latencyMs": 11605,
+            "tokens": 4221
+          },
+          {
+            "latencyMs": 11756,
+            "tokens": 4355
+          },
+          {
+            "latencyMs": 13379,
+            "tokens": 4618
+          },
+          {
+            "latencyMs": 10984,
+            "tokens": 4692
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确说过 'We provide all footage'"
+          },
+          "story": {
+            "label": "supported",
+            "why": "用户明确说过 'We focus on new card releases, deck-building, and gameplay'"
+          },
+          "purpose": {
+            "label": "embellished",
+            "why": "用户提到过MTG频道，但没有具体说Reels/Shorts"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确说过 'Videos are 1-2 mins for Reels, 5-7 mins for YouTube'"
+          },
+          "style": {
+            "label": "supported",
+            "why": "用户明确说过 'Keep fast cuts between cards and gameplay' 和 'Music drops right when the deck wins'"
+          },
+          "music_text": {
+            "label": "supported",
+            "why": "用户明确说过 'Both music and text'"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确说过 'We're pretty relaxed in regards to delivery time'"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确说过 '30 USD per video with additional profit sharing on each video pending performance'"
+          },
+          "ai_policy": {
+            "label": "supported",
+            "why": "用户明确说过 'AI ok for basic stuff'"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "partial",
+            "why": "需求单中未提及用户提供的B-roll和策略讨论的片段"
+          },
+          "story": {
+            "label": "hit",
+            "why": "需求单中的内容与隐藏画像一致"
+          },
+          "purpose": {
+            "label": "partial",
+            "why": "需求单中只提到了Reels/Shorts，未提及YouTube和Instagram"
+          },
+          "duration": {
+            "label": "hit",
+            "why": "需求单中的内容与隐藏画像一致"
+          },
+          "style": {
+            "label": "partial",
+            "why": "需求单中未提及平滑过渡和动态文本叠加"
+          },
+          "music_text": {
+            "label": "partial",
+            "why": "需求单中未提及字幕和音乐的具体风格要求"
+          },
+          "deadline": {
+            "label": "partial",
+            "why": "需求单中未提及理想的交付时间"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE03",
+        "behavior": "vague",
+        "segment": "商家/博主",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 5,
+        "filled": 9,
+        "unsupported": 0,
+        "embellished": 1,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 4.5,
+        "recallTotal": 7,
+        "avgLatencyMs": 12002,
+        "tokens": 21782,
+        "styleTerms": 2
+      }
+    },
+    {
+      "request": {
+        "id": "VE05",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Montage editing team",
+        "text": "WE'RE HIRING VIDEO EDITORS. $15 per accepted edit + $20 daily bonus. Create engaging 22–30 second montages using raw footage across Sports & Action, Travel & Adventure, Lifestyle & Cinematic Content. Strong editing fundamentals: advanced masking and motion tracking, professional colour grading, speed ramps and seamless transitions, precise beat synchronisation, sound effects and music integration. We're looking for actual editing expertise, not just preset-based edits."
+      },
+      "behavior": "cooperative",
+      "profile": {
+        "footage": "raw footage across Sports & Action, Travel & Adventure, Lifestyle & Cinematic Content",
+        "story": "create engaging montages that highlight the most exciting and visually appealing moments from the raw footage",
+        "purpose": "to be used for social media platforms like Instagram, TikTok, and YouTube to attract and engage viewers",
+        "duration": "22–30 seconds, vertical or square format preferred for mobile viewing",
+        "style": "dynamic and fast-paced, with a focus on advanced masking, motion tracking, professional color grading, speed ramps, and seamless transitions",
+        "music_text": "upbeat and energetic background music, precise beat synchronization, and integrated sound effects",
+        "cover": "a captivating thumbnail that represents the content of the montage, possibly a key moment or an action shot",
+        "reference": null,
+        "deadline": "not specified, but regular daily submissions are expected to earn the daily bonus",
+        "budget": "$15 per accepted edit + $20 daily bonus",
+        "revisions": null,
+        "ai_policy": "no specific AI usage policy mentioned, but emphasis is on actual editing expertise rather than preset-based edits",
+        "acceptance": null
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "WE'RE HIRING VIDEO EDITORS. $15 per accepted edit + $20 daily bonus. Create engaging 22–30 second montages using raw footage across Sports & Action, Travel & Adventure, Lifestyle & Cinematic Content. Strong editing fundamentals: advanced masking and motion tracking, professional colour grading, speed ramps and seamless transitions, precise beat synchronisation, sound effects and music integration. We're looking for actual editing expertise, not just preset-based edits."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't assist with job postings or hiring requests. I'm designed to help individual clients (like students, creators, or small business owners) turn their *own* visual editing needs — such as retouching a photo or editing a personal video — into clear, actionable briefs for service providers. If you're looking to hire editors, you may want to post on platforms like Upwork, Fiverr, or specialized creative job boards."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": null,
+          "reply": "I'm sorry, but I can't assist with job postings or hiring requests. I'm designed to help individual clients (like students, creators, or small business owners) turn their *own* visual editing needs — such as retouching a photo or editing a personal video — into clear, actionable briefs for service providers. If you're looking to hire editors, you may want to post on platforms like Upwork, Fiverr, or specialized creative job boards.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't assist with job postings or hiring requests. I'm designed to help individual clients (like students, creators, or small business owners) turn their *own* visual editing needs — such as retouching a photo or editing a personal video — into clear, actionable briefs for service providers. If you're looking to hire editors, you may want to post on platforms like Upwork, Fiverr, or specialized creative job boards.",
+          "brief": {},
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 5440,
+            "usage": {
+              "total_tokens": 3590,
+              "completion_tokens": 171,
+              "prompt_tokens": 3419,
+              "prompt_tokens_details": {
+                "cached_tokens": 3328
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 5440,
+            "tokens": 3590
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中未提及任何关于素材的内容"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中未提及如何处理或选择素材中的精彩时刻"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中未提及视频的用途，例如用于社交媒体平台吸引观众"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中未提及视频长度22-30秒以及适合移动设备观看的格式"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中未提及视频风格，如动态快速剪辑、高级遮罩等"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中未提及背景音乐和音效的要求"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE05",
+        "behavior": "cooperative",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": null,
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 6,
+        "avgLatencyMs": 5440,
+        "tokens": 3590,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE06",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Gaming (RDR2) YouTube Shorts channel",
+        "text": "[Hiring] Short-Form Video Editor (YouTube Shorts). Edit 3 high-quality YouTube Shorts per day (typically 60–80 seconds each). Transform provided scripts and voiceovers into engaging, highly polished videos. Find and select the best in-game footage from our prerecorded footage library. Use compelling pacing, sound design, music, and visual storytelling to maximize viewer retention... We're looking for someone who understands what makes a Short go viral — not just someone who knows how to edit... We're not looking for flashy effects for the sake of flashy effects. We're looking for an editor who knows how to make every second count."
+      },
+      "behavior": "offtopic",
+      "profile": {
+        "footage": "We have a library of prerecorded in-game footage. The editor needs to select the best clips that match the provided scripts and voiceovers.",
+        "story": "The videos should follow the provided scripts and voiceovers, with a focus on engaging and highly polished content. The goal is to maximize viewer retention and make every second count.",
+        "purpose": "These videos are for YouTube Shorts, aiming to go viral and engage a wide audience.",
+        "duration": "Each video should be 60-80 seconds long, with a vertical format suitable for mobile viewing.",
+        "style": "The style should be engaging and polished, with compelling pacing, sound design, and visual storytelling. No flashy effects just for the sake of it; every element should serve the story and viewer retention.",
+        "music_text": "Use appropriate BGM, sound design, and any necessary text or captions to enhance the video. The music and sound should complement the visuals and narrative.",
+        "cover": "Create an eye-catching thumbnail that will attract viewers and entice them to click and watch the video.",
+        "reference": null,
+        "deadline": "We need 3 high-quality YouTube Shorts per day.",
+        "budget": null,
+        "revisions": "We expect a few rounds of revisions to ensure the final product meets our standards, but we haven't decided on a specific number yet.",
+        "ai_policy": "No specific AI usage requirements, but if you use AI tools, they should be used to enhance the editing process and not compromise the quality of the final product.",
+        "acceptance": "The final videos should be highly engaging, well-polished, and optimized for viewer retention. We will review and provide feedback until we are satisfied with the result."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] Short-Form Video Editor (YouTube Shorts). Edit 3 high-quality YouTube Shorts per day (typically 60–80 seconds each). Transform provided scripts and voiceovers into engaging, highly polished videos. Find and select the best in-game footage from our prerecorded footage library. Use compelling pacing, sound design, music, and visual storytelling to maximize viewer retention... We're looking for someone who understands what makes a Short go viral — not just someone who knows how to edit... We're not looking for flashy effects for the sake of flashy effects. We're looking for an editor who knows how to make every second count."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for the detailed post! To get your project ready for editors to quote and start, I need to clarify just a few key points — especially what makes a Short 'go viral' *for your channel*. First: what's the game and content theme? (e.g., Fortnite highlights, Minecraft tutorials, Valorant ranked plays)\n(Quick picks: How soon do you need the first batch of 3 Shorts? [Within 24 hours / Within 48 hours / Within 3 days / No rush — ongoing workflow]; How many rounds of edits per Short do you expect? [1 round / 2 rounds / 3 rounds / Unlimited (within reason)])"
+          },
+          {
+            "role": "user",
+            "content": "We need 3 high-quality YouTube Shorts per day."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — 3 YouTube Shorts per day, each 60–80 seconds. To match your goal of 'high-quality' and 'every second counts', I need to clarify the *style* — specifically: what kind of pacing, sound design, and visual rhythm do you want? For example:\n(Quick picks: When's your first deadline? (e.g., for Day 1's 3 Shorts) [Within 24 hours / Within 48 hours / Within 3 days / Ongoing — no fixed start date]; How many rounds of revision per Short? [1 round / 2 rounds / 3 rounds]; Are AI tools allowed for tasks like auto-captions, scene detection, or rough cutting? [AI OK for prep work only / AI OK + light enhancement (e.g., upscaling, noise reduction) / No AI — all editing must be manual])"
+          },
+          {
+            "role": "user",
+            "content": "We need the first batch within 24 hours."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — first batch due within 24 hours. To make sure editors deliver exactly what you mean by 'high-quality' and 'every second counts', let's lock in the style. Which of these best matches your ideal pacing and feel? (Pick one)\n(Quick picks: How many rounds of edits per Short? [1 round / 2 rounds / 3 rounds]; Are AI tools allowed? [AI OK for prep work only / AI OK + light enhancement / No AI — all editing must be manual])"
+          },
+          {
+            "role": "user",
+            "content": "We need 3 high-quality YouTube Shorts per day."
+          },
+          {
+            "role": "assistant",
+            "content": "To match your goal of 'high-quality' and 'every second counts' — especially for YouTube Shorts — what's the *most important visual or pacing style* you want? For example:\n(Quick picks: How many rounds of edits per Short? [1 round / 2 rounds / 3 rounds]; Are AI tools allowed? [AI OK for prep work only / AI OK + light enhancement / No AI — all editing must be manual])"
+          },
+          {
+            "role": "user",
+            "content": "We need the first batch within 24 hours."
+          },
+          {
+            "role": "assistant",
+            "content": "To ensure editors deliver the 'high-quality, every-second-counts' style you need for YouTube Shorts — especially with a 24-hour deadline — what's the *most important visual rhythm or pacing* you want? For example:\n(Quick picks: How many rounds of edits per Short? [1 round / 2 rounds / 3 rounds]; Are AI tools allowed? [AI OK for prep work only / AI OK + light enhancement / No AI — all editing must be manual])"
+          },
+          {
+            "role": "user",
+            "content": "We need the pacing to be fast and engaging."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — 3 YouTube Shorts/day, 60–80 sec each, first batch within 24 hours, fast & engaging pacing, using your prerecorded in-game footage library."
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — 3 YouTube Shorts/day, 60–80 sec each, first batch within 24 hours, fast & engaging pacing, using your prerecorded in-game footage library.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — 3 YouTube Shorts/day, 60–80 sec each, first batch within 24 hours, fast & engaging pacing, using your prerecorded in-game footage library.",
+          "brief": {
+            "footage": "prerecorded in-game footage library (provided by client)",
+            "story": null,
+            "purpose": "YouTube Shorts",
+            "duration": "60–80 seconds per Short",
+            "style": "fast and engaging pacing",
+            "music_text": null,
+            "cover": null,
+            "reference": null,
+            "deadline": "Within 24 hours",
+            "budget": null,
+            "revisions": null,
+            "ai_policy": null,
+            "acceptance": null
+          },
+          "styleTranslation": [
+            {
+              "term": "fast and engaging",
+              "spec": "each shot stays 0.5–2 seconds, hard cuts between shots (no fades or dissolves), tight sync with voiceover beats or music hits, no dead air or lingering frames"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": 70,
+            "urgent": true,
+            "complex": true
+          },
+          "price": {
+            "summary": "≈ CNY 20–30",
+            "detail": [
+              "Final length ~1 min: CNY 20–30 (independent / student freelancers in China)",
+              "Rush: most editors charge extra, negotiable",
+              "Complex effects / After Effects: usually priced separately"
+            ],
+            "source": "China freelance market: Goofish (Xianyu) video-editing price lists (e.g. under 30 s CNY 5–20, 1–5 min CNY 20–50, 5–10 min CNY 50–100)"
+          },
+          "routing": {
+            "type": "human",
+            "reason": "3 high-quality Shorts per day with fast pacing, urgent 24-hour deadline, and reliance on curated in-game footage selection — requires human judgment for timing, storytelling, and retention optimization"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 11575,
+            "usage": {
+              "total_tokens": 4762,
+              "completion_tokens": 478,
+              "prompt_tokens": 4284,
+              "prompt_tokens_details": {
+                "cached_tokens": 2560
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 12484,
+            "tokens": 3936
+          },
+          {
+            "latencyMs": 13501,
+            "tokens": 4281
+          },
+          {
+            "latencyMs": 11803,
+            "tokens": 4415
+          },
+          {
+            "latencyMs": 10915,
+            "tokens": 4495
+          },
+          {
+            "latencyMs": 10914,
+            "tokens": 4617
+          },
+          {
+            "latencyMs": 11575,
+            "tokens": 4762
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确提到使用预先录制的游戏片段库。"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确说明这些视频是用于YouTube Shorts。"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确说明每个视频的时长为60-80秒。"
+          },
+          "style": {
+            "label": "supported",
+            "why": "用户明确表示需要快速且吸引人的节奏。"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确说明第一批视频需要在24小时内完成。"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像一致，都提到了使用预先录制的游戏片段库。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提及关于脚本和配音的具体要求。"
+          },
+          "purpose": {
+            "label": "partial",
+            "why": "需求单中提到目的是YouTube Shorts，但没有提及“病毒式传播”和“广泛吸引观众”的目标。"
+          },
+          "duration": {
+            "label": "hit",
+            "why": "需求单中的时长描述与隐藏画像一致。"
+          },
+          "style": {
+            "label": "partial",
+            "why": "需求单中只提到“快速且吸引人的节奏”，但隐藏画像中还包括了“引人入胜和精致的内容风格，具有吸引力的节奏、音效设计和视觉叙事”。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提及背景音乐、音效设计或必要的文字或字幕。"
+          },
+          "deadline": {
+            "label": "hit",
+            "why": "需求单中的截止时间描述与隐藏画像一致。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE06",
+        "behavior": "offtopic",
+        "segment": "商家/博主",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 6,
+        "filled": 5,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 4,
+        "recallTotal": 7,
+        "avgLatencyMs": 11865,
+        "tokens": 26506,
+        "styleTerms": 1
+      }
+    },
+    {
+      "request": {
+        "id": "VE07",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Agency",
+        "text": "VIDEO EDITOR WANTED – LONG-TERM. Short-form (Reels/Shorts/TikTok) & YouTube edits. Fast pacing, dynamic subtitles, and engaging visual cuts. Raw footage and clear briefs provided for every video. Must send a portfolio with real human-edited work (No AI-generated videos). Strict adherence to deadlines. $15–$30+ per video."
+      },
+      "behavior": "vague",
+      "profile": {
+        "footage": "Raw footage will be provided for every video, including clear briefs.",
+        "story": "The content will focus on engaging and dynamic visual cuts with fast pacing. The videos should be short and attention-grabbing.",
+        "purpose": "The videos are for social media platforms like Reels, Shorts, TikTok, and YouTube. They need to be optimized for these platforms.",
+        "duration": "Short-form videos, typically 15-60 seconds for Reels/Shorts/TikTok and 2-5 minutes for YouTube.",
+        "style": "Fast-paced, dynamic, and engaging. The videos should have a high energy feel with quick cuts and transitions.",
+        "music_text": "Energetic background music, dynamic subtitles, and engaging text overlays. The text should be easy to read and follow the fast pacing.",
+        "cover": "A visually appealing thumbnail that captures the essence of the video. It should be eye-catching and encourage clicks.",
+        "reference": null,
+        "deadline": "Strict adherence to deadlines is required. Specific deadlines will be provided with each project.",
+        "budget": "$15–$30+ per video, depending on the complexity and length of the video.",
+        "revisions": null,
+        "ai_policy": "No AI-generated videos. Only real human-edited work is acceptable. A portfolio with real human-edited work must be provided.",
+        "acceptance": "The final video should meet the provided brief and be of high quality, with fast pacing, dynamic subtitles, and engaging visual cuts."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "VIDEO EDITOR WANTED – LONG-TERM. Short-form (Reels/Shorts/TikTok) & YouTube edits. Fast pacing, dynamic subtitles, and engaging visual cuts. Raw footage and clear briefs provided for every video. Must send a portfolio with real human-edited work (No AI-generated videos). Strict adherence to deadlines. $15–$30+ per video."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for sharing! To match you with the right editor and prepare a clear brief, could you tell me: what's the *main story or goal* of your next video? For example: 'introduce my new product', 'show behind-the-scenes of our team', or 'explain how to use this feature' — what should viewers walk away knowing or feeling?\n(Quick picks: Where will this video be posted? (pick any) [Instagram Reels / YouTube Shorts / TikTok / YouTube (long-form) / Multiple platforms]; What's the target length? [Under 15 sec / 15–30 sec / 30–60 sec / 60–90 sec / Over 90 sec]; When do you need the first video delivered? [Within 24 hours / In 3 days / In 1 week / Flexible / TBD])"
+          },
+          {
+            "role": "user",
+            "content": "It's for social media, short and engaging. Should grab attention quickly."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — social-first, short & attention-grabbing. To lock in the right fit, could you tell me: what's the *one thing* viewers must remember or do after watching? (e.g., 'visit our website', 'try this hack', 'follow for more tips', 'recognize our brand voice')\n(Quick picks: What's the target length? [Under 15 sec / 15–30 sec / 30–60 sec / 60–90 sec / Over 90 sec]; When do you need the first video delivered? [Within 24 hours / In 3 days / In 1 week / Flexible / TBD])"
+          },
+          {
+            "role": "user",
+            "content": "Just need them to feel excited and engaged. Length is 15-60 sec. Deadline is flexible."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — that helps! To nail the 'excited and engaged' feeling, could you share one or two reference videos (links) that match the energy you love? For example: a TikTok you've saved, a Reel that made you pause and watch fully, or a YouTube Short that felt perfectly paced and fun."
+          },
+          {
+            "role": "user",
+            "content": "Haven't thought about it. You pick something similar."
+          },
+          {
+            "role": "assistant",
+            "content": "No problem — I'll suggest three clear, real-world style options based on your goals (social, 15–60 sec, fast pacing, dynamic subtitles, no AI). Which one best matches what you're imagining? (You can also say 'none' or describe your own.)"
+          },
+          {
+            "role": "user",
+            "content": "None, just make it dynamic and fast-paced."
+          },
+          {
+            "role": "assistant",
+            "content": "Understood — no reference needed, and you want it purely dynamic + fast-paced. To finalize the brief: what's the *exact content* of the first video? For example: 'a 30-second clip of me unboxing a gadget', '15 seconds of b-roll from a coffee shop launch', or '45 seconds of interview soundbites with quick cuts'. This tells the editor what raw footage to expect and how to shape the story."
+          },
+          {
+            "role": "user",
+            "content": "It's a mix of b-roll and quick interviews, 30-45 seconds."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — short-form social video (30–45 sec), mixing b-roll and quick interview clips, with fast pacing, dynamic motion subtitles, and zero AI. Ready to match you with a human editor."
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — short-form social video (30–45 sec), mixing b-roll and quick interview clips, with fast pacing, dynamic motion subtitles, and zero AI. Ready to match you with a human editor.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — short-form social video (30–45 sec), mixing b-roll and quick interview clips, with fast pacing, dynamic motion subtitles, and zero AI. Ready to match you with a human editor.",
+          "brief": {
+            "footage": "Mix of b-roll and quick interview clips",
+            "story": "Viewers should feel excited and engaged — no specific action or takeaway required, just strong emotional resonance.",
+            "purpose": "social media",
+            "duration": "15–60 sec",
+            "style": "Fast pacing, dynamic subtitles, and engaging visual cuts",
+            "music_text": null,
+            "cover": null,
+            "reference": null,
+            "deadline": "Flexible",
+            "budget": "$15–$30+ per video",
+            "revisions": null,
+            "ai_policy": "No AI-generated videos (portfolio must show real human-edited work)",
+            "acceptance": "Video feels energetic from first frame; every cut lands with impact; subtitles move with purpose (no static text); no AI artifacts or templated transitions; matches the pace and tone of top-performing Reels/Shorts in the same niche (to confirm)"
+          },
+          "styleTranslation": [
+            {
+              "term": "Fast pacing",
+              "spec": "Each shot stays 0.5–2 seconds; cuts sync tightly with music beats or voice emphasis"
+            },
+            {
+              "term": "Dynamic subtitles",
+              "spec": "Text pops on/off with motion (e.g., slide-in, bounce), changes color/size for emphasis, and never stays longer than the spoken line"
+            },
+            {
+              "term": "Engaging visual cuts",
+              "spec": "Uses jump cuts, zooms, quick B-roll inserts, and occasional whip pans — no slow fades or dissolves"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": 45,
+            "urgent": false,
+            "complex": true
+          },
+          "price": {
+            "summary": "≈ CNY 15–20",
+            "detail": [
+              "Final length ~45 s: CNY 15–20 (independent / student freelancers in China)",
+              "Complex effects / After Effects: usually priced separately"
+            ],
+            "source": "China freelance market: Goofish (Xianyu) video-editing price lists (e.g. under 30 s CNY 5–20, 1–5 min CNY 20–50, 5–10 min CNY 50–100)"
+          },
+          "routing": {
+            "type": "human",
+            "reason": "30–45 sec social video with mixed b-roll + interviews, requiring precise human timing, custom motion subtitles, and zero AI — portfolio must show real human-edited work"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 13724,
+            "usage": {
+              "total_tokens": 4847,
+              "completion_tokens": 527,
+              "prompt_tokens": 4320,
+              "prompt_tokens_details": {
+                "cached_tokens": 2688
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 15346,
+            "tokens": 4061
+          },
+          {
+            "latencyMs": 15256,
+            "tokens": 4460
+          },
+          {
+            "latencyMs": 13765,
+            "tokens": 4583
+          },
+          {
+            "latencyMs": 17189,
+            "tokens": 4848
+          },
+          {
+            "latencyMs": 15043,
+            "tokens": 4826
+          },
+          {
+            "latencyMs": 13724,
+            "tokens": 4847
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确说了是b-roll和快速采访的混合。"
+          },
+          "story": {
+            "label": "embellished",
+            "why": "用户说需要让观众感到兴奋和参与，但没有提到“不需要特定行动或收获，只需强烈的情感共鸣”。"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确表示视频是为了社交媒体。"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确说明了长度是15-60秒。"
+          },
+          "style": {
+            "label": "supported",
+            "why": "用户明确提到了快节奏、动态字幕和吸引人的视觉剪辑。"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确表示截止日期是灵活的。"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确提到预算为每条视频15-30美元以上。"
+          },
+          "ai_policy": {
+            "label": "supported",
+            "why": "用户明确表示不接受AI生成的视频，并要求提供真实的人工编辑作品。"
+          },
+          "acceptance": {
+            "label": "suggested",
+            "why": "用户没有明确反对助手的提议，且字段中标注了建议。"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "partial",
+            "why": "需求单中只提到了b-roll和快速采访的混合，而隐藏画像中还提到了清晰的简报。"
+          },
+          "story": {
+            "label": "hit",
+            "why": "需求单和隐藏画像都强调了视频应短小精悍，吸引人并具有快节奏的特点。"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单和隐藏画像都指出了视频是为了社交媒体平台。"
+          },
+          "duration": {
+            "label": "partial",
+            "why": "需求单中仅提到15-60秒，而隐藏画像还包括2-5分钟的YouTube视频。"
+          },
+          "style": {
+            "label": "hit",
+            "why": "需求单和隐藏画像都描述了快节奏、动态和吸引人的风格。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提及背景音乐和文字叠加的要求。"
+          },
+          "cover": {
+            "label": "miss",
+            "why": "需求单中没有提及缩略图的设计。"
+          },
+          "reference": {
+            "label": "miss",
+            "why": "需求单中没有提及参考视频。"
+          },
+          "deadline": {
+            "label": "partial",
+            "why": "需求单中提到了灵活的截止日期，但隐藏画像中指出每个项目都会有具体的截止日期。"
+          },
+          "budget": {
+            "label": "hit",
+            "why": "需求单和隐藏画像都提到了相同的预算范围。"
+          },
+          "revisions": {
+            "label": "miss",
+            "why": "需求单中没有提及修订次数。"
+          },
+          "ai_policy": {
+            "label": "hit",
+            "why": "需求单和隐藏画像都明确禁止AI生成的内容。"
+          },
+          "acceptance": {
+            "label": "partial",
+            "why": "需求单中的验收标准比隐藏画像更具体，但大体一致。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE07",
+        "behavior": "vague",
+        "segment": "商家/博主",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 6,
+        "filled": 9,
+        "unsupported": 0,
+        "embellished": 1,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 4.5,
+        "recallTotal": 7,
+        "avgLatencyMs": 15054,
+        "tokens": 27625,
+        "styleTerms": 3
+      }
+    },
+    {
+      "request": {
+        "id": "VE08",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Beauty / health channel",
+        "text": "[Hiring] $600 / Month Video Editor. 8x Long Form Videos Per Month (10-15 minutes), 30x Short form videos per month (10x edits, 10x simple talking corner head with images, 10x board videos). Checking analytics on the long form videos, understanding where retention was high/low and why... A long-form has to hold someone for the full runtime: tight pacing, clean structure, visuals that carry the explanation, not a wasted second... You have to understand our subject inside out... Everything we put out has to be accurate and credible while still holding attention."
+      },
+      "behavior": "cooperative",
+      "profile": {
+        "footage": "We have a mix of footage, including raw video clips, talking head shots, and some images. The long-form videos will need to be edited from scratch, while the short form videos are simpler, with 10 being edits, 10 being talking head shots with images, and 10 being board videos.",
+        "story": "The long-form videos should have a clear narrative structure that keeps the viewer engaged for the full 10-15 minutes. The content needs to be educational and informative, but also entertaining. The short-form videos should be quick, engaging, and easy to understand.",
+        "purpose": "These videos will be used for our YouTube channel and other social media platforms. The goal is to educate and engage our audience, build our brand, and drive traffic to our website.",
+        "duration": "Long-form videos should be 10-15 minutes each, and short-form videos should be around 1-2 minutes each. The aspect ratio should be 16:9 for all videos.",
+        "style": "The style should be professional yet engaging. The pacing needs to be tight, with no wasted moments. The visuals should support the explanation and keep the viewer's attention throughout the video.",
+        "music_text": "Background music should be subtle and not distracting. We need text overlays and captions to highlight key points. The text should be clean and easy to read.",
+        "cover": "The cover should be eye-catching and relevant to the video content. It should include a title and an image that represents the main topic of the video.",
+        "reference": null,
+        "deadline": "We need 8 long-form videos and 30 short-form videos per month. The deadline for the first batch is in 2 weeks, and then it will be a continuous monthly schedule.",
+        "budget": "600 USD per month",
+        "revisions": null,
+        "ai_policy": "We are open to using AI tools for some parts of the editing process, as long as the final product is high quality and meets our standards.",
+        "acceptance": "The videos need to be accurate, credible, and engaging. We will check the analytics to see where retention was high or low and make adjustments based on that. The editor should understand our subject matter deeply."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] $600 / Month Video Editor. 8x Long Form Videos Per Month (10-15 minutes), 30x Short form videos per month (10x edits, 10x simple talking corner head with images, 10x board videos). Checking analytics on the long form videos, understanding where retention was high/low and why... A long-form has to hold someone for the full runtime: tight pacing, clean structure, visuals that carry the explanation, not a wasted second... You have to understand our subject inside out... Everything we put out has to be accurate and credible while still holding attention."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't accept this request. This is a full-time, ongoing professional collaboration requiring deep subject-matter expertise, analytics review, strategic content planning, and long-term editorial judgment — far beyond a one-off video editing service. I only support single-project editing jobs (e.g., 'edit this 12-minute interview into a final video'), not retained monthly roles or editorial strategy work."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": "video",
+          "reply": "I'm sorry, but I can't accept this request. This is a full-time, ongoing professional collaboration requiring deep subject-matter expertise, analytics review, strategic content planning, and long-term editorial judgment — far beyond a one-off video editing service. I only support single-project editing jobs (e.g., 'edit this 12-minute interview into a final video'), not retained monthly roles or editorial strategy work.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't accept this request. This is a full-time, ongoing professional collaboration requiring deep subject-matter expertise, analytics review, strategic content planning, and long-term editorial judgment — far beyond a one-off video editing service. I only support single-project editing jobs (e.g., 'edit this 12-minute interview into a final video'), not retained monthly roles or editorial strategy work.",
+          "brief": {
+            "footage": null,
+            "story": null,
+            "purpose": null,
+            "duration": null,
+            "style": null,
+            "music_text": null,
+            "cover": null,
+            "reference": null,
+            "deadline": null,
+            "budget": null,
+            "revisions": null,
+            "ai_policy": null,
+            "acceptance": null
+          },
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 6785,
+            "usage": {
+              "total_tokens": 3700,
+              "completion_tokens": 245,
+              "prompt_tokens": 3455,
+              "prompt_tokens_details": {
+                "cached_tokens": 3328
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 6785,
+            "tokens": 3700
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中没有提到任何关于素材的具体信息。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提及长视频和短视频的故事结构或内容要求。"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中没有说明视频的目的或用途。"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中没有提及视频的时长。"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有描述视频的风格或视觉要求。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提到背景音乐或文本叠加的要求。"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有明确的截止日期。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE08",
+        "behavior": "cooperative",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": "video",
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 7,
+        "avgLatencyMs": 6785,
+        "tokens": 3700,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE09",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Construction company",
+        "text": "Video editor for construction company short-form content (Reels/TikTok/X), $25–40 per video. We film a lot on the job: before-and-afters, carpentry close-ups, and quick trade tips that explain the \"why\" behind a technique. Short vertical videos (15–60 sec) cut from our raw job footage. Strong hooks in the first 2 seconds, clean captions, simple branding (logo and colors provided). Ready-to-post versions for Instagram Reels, TikTok and X. Starting with about 3–5 videos a week."
+      },
+      "behavior": "offtopic",
+      "profile": {
+        "footage": "We have a lot of raw job footage, including before-and-afters, carpentry close-ups, and quick trade tips that explain the 'why' behind a technique.",
+        "story": "The videos should focus on showcasing our work, highlighting the transformation in before-and-after shots, and providing quick, informative tips for viewers. The 'why' behind the techniques should be clearly explained.",
+        "purpose": "These videos are for our construction company's short-form content, specifically for Instagram Reels, TikTok, and X (formerly Twitter).",
+        "duration": "Short vertical videos, 15–60 seconds long.",
+        "style": "Fast-paced, engaging, and informative. Strong hooks in the first 2 seconds to grab attention. Clean and simple branding with our logo and colors (provided).",
+        "music_text": "Background music should be upbeat and energetic. Clean captions are essential, and we may need some simple text overlays to highlight key points.",
+        "cover": "A visually appealing cover image that represents the content of the video, with our logo and colors.",
+        "reference": null,
+        "deadline": "We need about 3-5 videos per week, ready to post.",
+        "budget": "$25–40 per video.",
+        "revisions": null,
+        "ai_policy": "No specific AI use requirements, but we are open to suggestions.",
+        "acceptance": "The videos should be high quality, engaging, and ready to post on our social media platforms."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Video editor for construction company short-form content (Reels/TikTok/X), $25–40 per video. We film a lot on the job: before-and-afters, carpentry close-ups, and quick trade tips that explain the \"why\" behind a technique. Short vertical videos (15–60 sec) cut from our raw job footage. Strong hooks in the first 2 seconds, clean captions, simple branding (logo and colors provided). Ready-to-post versions for Instagram Reels, TikTok and X. Starting with about 3–5 videos a week."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for the clear overview! To get your first batch of Reels/TikTok/X videos ready for production, I need to confirm one key detail: what's the main story or message you want each short video to deliver — especially in those critical first 2 seconds? For example: a surprising before/after reveal, a quick 'aha' moment in carpentry, or a bold trade tip like 'Why we never nail here'.\n(Quick picks: What's the format and condition of your raw footage? [All vertical, shot on phone / Mix of vertical/horizontal, some shaky / Edited clips already selected from longer takes / Other]; When do you need the first video? [Within 24 hours / In 3 days / In 1 week / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "We need about 3-5 videos per week, ready to post."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — 3–5 videos/week, ready to post. To make sure each video lands strongly on Reels/TikTok/X, what's the *single most important thing* you want viewers to remember or do after watching? For example: 'Remember this one trick before framing', 'Notice how clean this joint is', or 'Tag a builder who needs this tip'.\n(Quick picks: What's the format and condition of your raw footage? [All vertical, shot on phone / Mix of vertical/horizontal, some shaky / Edited clips already selected from longer takes / Other]; When do you need the first video? [Within 24 hours / In 3 days / In 1 week / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "We have a lot of raw job footage, including before-and-afters and carpentry close-ups."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — that helps! To nail the first 2 seconds and keep your brand voice consistent, what's the *tone* you want each video to have? For example: friendly and approachable (like a coworker showing you a tip), confident and no-nonsense (straight to the point, no fluff), or educational but engaging (clear step-by-step with light energy)?\n(Quick picks: When do you need the first video? [Within 24 hours / In 3 days / In 1 week / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "Fast-paced, engaging, and informative. Strong hooks in the first 2 seconds."
+          },
+          {
+            "role": "assistant",
+            "content": "Perfect — fast-paced, engaging, and informative with strong hooks in the first 2 seconds. To make that happen, what's the *most common type of moment* you want highlighted across these videos? For example: a dramatic before/after flip, a tight carpentry close-up revealing a key detail, or a quick cut to text + voiceover explaining the 'why' behind a technique?\n(Quick picks: When do you need the first video? [Within 24 hours / In 3 days / In 1 week / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "We need the videos to be ready in 3 days."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — 3-day turnaround confirmed. To finalize your brief: what's the *one thing* you'd absolutely not want in the final video? For example: slow fades, background music with vocals, animated text effects, or anything that feels 'template-y' or generic?"
+          },
+          {
+            "role": "user",
+            "content": "No slow fades or anything that feels generic."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — fast-paced, no slow fades, no generic feel, strong hooks in <2 sec, clean captions, logo + brand colors, vertical 15–60 sec videos for Reels/TikTok/X, raw job footage (before/afters + carpentry close-ups), 3–5 videos/week, first batch due in 3 days."
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — fast-paced, no slow fades, no generic feel, strong hooks in <2 sec, clean captions, logo + brand colors, vertical 15–60 sec videos for Reels/TikTok/X, raw job footage (before/afters + carpentry close-ups), 3–5 videos/week, first batch due in 3 days.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — fast-paced, no slow fades, no generic feel, strong hooks in <2 sec, clean captions, logo + brand colors, vertical 15–60 sec videos for Reels/TikTok/X, raw job footage (before/afters + carpentry close-ups), 3–5 videos/week, first batch due in 3 days.",
+          "brief": {
+            "footage": "raw job footage, including before-and-afters and carpentry close-ups",
+            "story": null,
+            "purpose": "short-form content for Instagram Reels, TikTok and X",
+            "duration": "15–60 sec, vertical",
+            "style": "fast-paced, engaging, and informative; strong hooks in the first 2 seconds (to confirm)",
+            "music_text": "clean captions, logo and brand colors provided",
+            "cover": null,
+            "reference": null,
+            "deadline": "In 3 days",
+            "budget": "$25–40 per video",
+            "revisions": null,
+            "ai_policy": null,
+            "acceptance": null
+          },
+          "styleTranslation": [
+            {
+              "term": "fast-paced, engaging, and informative",
+              "spec": "each shot stays 1–2 seconds, quick cuts (no fades or dissolves), bold on-screen text synced to voiceover or sound effects, captions appear instantly with high contrast"
+            },
+            {
+              "term": "strong hooks in the first 2 seconds",
+              "spec": "first frame shows either a striking before/after split, a surprising close-up detail, or bold text like 'STOP doing this' — no intro music or logo"
+            },
+            {
+              "term": "no slow fades or anything that feels generic",
+              "spec": "no fade transitions, no stock-style animations or templates, all cuts are sharp and purposeful, visual treatment stays grounded in real job footage"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": null,
+            "urgent": true,
+            "complex": false
+          },
+          "price": null,
+          "routing": {
+            "type": "hybrid",
+            "reason": "videos are short-form (15–60 sec), use raw job footage, require fast-paced editing and clean captions — well-suited for AI-assisted rough cut + human polish for timing, branding consistency, and hook impact"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 13501,
+            "usage": {
+              "total_tokens": 4951,
+              "completion_tokens": 570,
+              "prompt_tokens": 4381,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 13484,
+            "tokens": 4014
+          },
+          {
+            "latencyMs": 11295,
+            "tokens": 4217
+          },
+          {
+            "latencyMs": 11972,
+            "tokens": 4419
+          },
+          {
+            "latencyMs": 13038,
+            "tokens": 4618
+          },
+          {
+            "latencyMs": 12197,
+            "tokens": 4810
+          },
+          {
+            "latencyMs": 13501,
+            "tokens": 4951
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确提到他们有很多原始工作镜头，包括前后对比和木工特写。"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确提到这些视频是为了他们的建筑公司的短格式内容，特别是用于Instagram Reels、TikTok和X。"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确提到视频长度为15-60秒，并且是竖屏的。"
+          },
+          "style": {
+            "label": "embellished",
+            "why": "用户提到了快节奏、吸引人和信息丰富，并且前2秒要有强烈的钩子，但需求单中加了“（待确认）”，这是用户没有说过的细节。"
+          },
+          "music_text": {
+            "label": "supported",
+            "why": "用户明确提到需要干净的字幕，并且提供了logo和品牌颜色。"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确提到每批视频需要在3天内完成。"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确提到每个视频的预算为25-40美元。"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像中的描述一致，提到了原始工作镜头、前后对比和木工特写。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提到故事或视频的主要内容，而隐藏画像中明确提到了要展示工作、突出前后对比以及提供快速的信息提示。"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像中的描述一致，提到了这些视频是为了建筑公司的短格式内容，特别是用于Instagram Reels、TikTok和X。"
+          },
+          "duration": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像中的描述一致，提到了视频长度为15-60秒，并且是竖屏的。"
+          },
+          "style": {
+            "label": "partial",
+            "why": "需求单中提到了快节奏、吸引人和信息丰富，并且前2秒要有强烈的钩子，但没有提到干净简单的品牌化（logo和颜色）。"
+          },
+          "music_text": {
+            "label": "partial",
+            "why": "需求单中提到了干净的字幕和品牌颜色，但没有提到背景音乐应该是欢快和充满活力的，以及可能需要一些简单的文本叠加来突出关键点。"
+          },
+          "deadline": {
+            "label": "hit",
+            "why": "需求单中的描述与隐藏画像中的描述一致，提到了每批视频需要在3天内完成。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE09",
+        "behavior": "offtopic",
+        "segment": "商家/博主",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 6,
+        "filled": 7,
+        "unsupported": 0,
+        "embellished": 1,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 5,
+        "recallTotal": 7,
+        "avgLatencyMs": 12581,
+        "tokens": 27029,
+        "styleTerms": 3
+      }
+    },
+    {
+      "request": {
+        "id": "VE11",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Fashion brand",
+        "text": "[Hiring] Senior Video Editor for Fashion Brand — Social Media, YouTube, Podcasts & Docu-Series. You will edit Instagram Reels, YouTube Shorts, long-form YouTube videos, podcasts, docu-series, fashion shoots and campaign footage... Ability to create premium, sophisticated content appropriate for a fashion/luxury brand. Strong understanding of branding and maintaining a consistent visual identity. Ability to work independently and recommend creative improvements rather than simply following editing instructions."
+      },
+      "behavior": "vague",
+      "profile": {
+        "footage": "We have a variety of footage including fashion shoots, campaign videos, and raw content for social media, YouTube, and podcasts. The quality is high, but it needs to be edited to fit our brand's aesthetic.",
+        "story": "The narrative should focus on the elegance and sophistication of our fashion brand. We want to highlight the craftsmanship, the story behind the collections, and the lifestyle associated with our brand. Each piece of content should feel premium and engaging.",
+        "purpose": "The edited videos will be used across our social media platforms (Instagram Reels, YouTube Shorts, long-form YouTube videos), as well as for our podcasts and docu-series. The goal is to maintain a consistent and strong visual identity that aligns with our luxury brand.",
+        "duration": "Short-form content like Instagram Reels and YouTube Shorts should be around 15-60 seconds. Long-form YouTube videos can range from 5 to 20 minutes. Podcasts and docu-series will vary, but typically 30-60 minutes per episode.",
+        "style": "The style should be elegant, sophisticated, and visually stunning. The pacing should be smooth and engaging, with a focus on high-quality visuals and storytelling. The overall tone should be aspirational and luxurious.",
+        "music_text": "BGM should be sophisticated and appropriate for a luxury brand. It should complement the visuals and enhance the overall mood. For text and subtitles, they should be clean, minimal, and in line with our brand's typography. Any additional copy or voiceover should also match the brand's tone.",
+        "cover": "The cover should be visually striking and reflect the content of the video. It should be designed to grab attention and represent the luxury and sophistication of our brand.",
+        "reference": null,
+        "deadline": "We need the first batch of edited content within 2-3 weeks. Ongoing projects will have specific deadlines, but we expect a quick turnaround time for social media content.",
+        "budget": null,
+        "revisions": null,
+        "ai_policy": "We are open to using AI tools for certain aspects of the editing process, but the final product must still meet our high standards and maintain the human touch. We value creative input and improvements over just following instructions.",
+        "acceptance": "The final product should be approved by our creative team. It should align with our brand's visual identity, be technically sound, and effectively communicate the intended message and emotion."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] Senior Video Editor for Fashion Brand — Social Media, YouTube, Podcasts & Docu-Series. You will edit Instagram Reels, YouTube Shorts, long-form YouTube videos, podcasts, docu-series, fashion shoots and campaign footage... Ability to create premium, sophisticated content appropriate for a fashion/luxury brand. Strong understanding of branding and maintaining a consistent visual identity. Ability to work independently and recommend creative improvements rather than simply following editing instructions."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't assist with hiring a senior video editor. I'm a demand assistant that helps clarify and formalize *your own* creative service requests (e.g., 'I need someone to edit my 5-minute fashion vlog') — not staffing or recruitment. If you're the one needing video editing help for your fashion brand (e.g., 'I have raw footage from a shoot and need 3 Reels + 1 YouTube Short edited'), I'd be happy to help turn that into a clear, ready-to-post brief for editors."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": null,
+          "reply": "I'm sorry, but I can't assist with hiring a senior video editor. I'm a demand assistant that helps clarify and formalize *your own* creative service requests (e.g., 'I need someone to edit my 5-minute fashion vlog') — not staffing or recruitment. If you're the one needing video editing help for your fashion brand (e.g., 'I have raw footage from a shoot and need 3 Reels + 1 YouTube Short edited'), I'd be happy to help turn that into a clear, ready-to-post brief for editors.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't assist with hiring a senior video editor. I'm a demand assistant that helps clarify and formalize *your own* creative service requests (e.g., 'I need someone to edit my 5-minute fashion vlog') — not staffing or recruitment. If you're the one needing video editing help for your fashion brand (e.g., 'I have raw footage from a shoot and need 3 Reels + 1 YouTube Short edited'), I'd be happy to help turn that into a clear, ready-to-post brief for editors.",
+          "brief": {},
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 5130,
+            "usage": {
+              "total_tokens": 3605,
+              "completion_tokens": 191,
+              "prompt_tokens": 3414,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 5130,
+            "tokens": 3605
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中没有提及任何关于素材的具体信息。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有描述视频叙事的重点或内容方向。"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中没有说明编辑后的视频将用于哪些平台或其主要目的。"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中没有提到视频的长度要求。"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有描述视频的风格或视觉效果。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提及背景音乐或文本/字幕的要求。"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有提供完成时间或交付期限。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE11",
+        "behavior": "vague",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": null,
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 7,
+        "avgLatencyMs": 5130,
+        "tokens": 3605,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE12",
+        "source": "r/forhire",
+        "segment": "商家/博主",
+        "poster": "Creative / app-ads team (EU)",
+        "text": "[Hiring] Video Editor & Motion Graphics Designer (AI Video Experience). Turning creative briefs and storyboards into polished video content... Generating and refining AI video assets using Seedance, Kling, and other tools. Compositing AI-generated footage with live-action or stock footage, ensuring visual consistency... Creating short-form content for TikTok, Instagram Reels, and paid social ads."
+      },
+      "behavior": "cooperative",
+      "profile": {
+        "footage": "I have some live-action and stock footage, but I also want to use AI-generated assets. I'll provide the creative briefs and storyboards.",
+        "story": "The videos will be short and engaging, focusing on promoting our products and services. We want to highlight key features and benefits in a fun and dynamic way.",
+        "purpose": "These videos will be used for TikTok, Instagram Reels, and paid social ads. The goal is to increase brand awareness and drive engagement.",
+        "duration": "Each video should be around 15-30 seconds, vertical format for mobile viewing.",
+        "style": "Fast-paced, vibrant, and visually appealing. We want to keep the audience engaged with quick cuts and dynamic transitions.",
+        "music_text": "Upbeat and energetic music. We also need engaging text overlays and captions that align with the visuals.",
+        "cover": "A visually striking thumbnail that captures the essence of the video and encourages clicks. It should be consistent with the video's style.",
+        "reference": null,
+        "deadline": "We need the first batch of videos within 2 weeks. After that, we'll have a regular schedule for new content.",
+        "budget": null,
+        "revisions": "We expect 2-3 rounds of revisions to get the videos just right.",
+        "ai_policy": "We are open to using AI tools like Seedance and Kling to generate and refine the video assets. Ensure the final product looks seamless and professional.",
+        "acceptance": "The final videos should meet the creative brief, look polished, and be ready for immediate posting on our social media channels."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] Video Editor & Motion Graphics Designer (AI Video Experience). Turning creative briefs and storyboards into polished video content... Generating and refining AI video assets using Seedance, Kling, and other tools. Compositing AI-generated footage with live-action or stock footage, ensuring visual consistency... Creating short-form content for TikTok, Instagram Reels, and paid social ads."
+          },
+          {
+            "role": "assistant",
+            "content": "I'm sorry, but I can't assist with AI video generation or compositing using tools like Seedance or Kling. My role is to help clarify and formalize your *own* creative requests — for example, if you already have raw footage (your own photos or videos) and need professional editing or retouching done by a human editor or retoucher. I don't support outsourcing AI video production, AI asset generation, or tool-specific workflows."
+          }
+        ],
+        "final": {
+          "action": "refuse",
+          "category": "video",
+          "reply": "I'm sorry, but I can't assist with AI video generation or compositing using tools like Seedance or Kling. My role is to help clarify and formalize your *own* creative requests — for example, if you already have raw footage (your own photos or videos) and need professional editing or retouching done by a human editor or retoucher. I don't support outsourcing AI video production, AI asset generation, or tool-specific workflows.",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "I'm sorry, but I can't assist with AI video generation or compositing using tools like Seedance or Kling. My role is to help clarify and formalize your *own* creative requests — for example, if you already have raw footage (your own photos or videos) and need professional editing or retouching done by a human editor or retoucher. I don't support outsourcing AI video production, AI asset generation, or tool-specific workflows.",
+          "brief": {
+            "footage": null,
+            "story": null,
+            "purpose": null,
+            "duration": null,
+            "style": null,
+            "music_text": null,
+            "cover": null,
+            "reference": null,
+            "deadline": null,
+            "budget": null,
+            "revisions": null,
+            "ai_policy": null,
+            "acceptance": null
+          },
+          "styleTranslation": [],
+          "priceInputs": null,
+          "price": null,
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 1,
+            "latencyMs": 6449,
+            "usage": {
+              "total_tokens": 3653,
+              "completion_tokens": 254,
+              "prompt_tokens": 3399,
+              "prompt_tokens_details": {
+                "cached_tokens": 3328
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 6449,
+            "tokens": 3653
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {},
+        "recall": {
+          "footage": {
+            "label": "miss",
+            "why": "需求单中没有提到任何关于用户提供的素材信息。"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有描述视频的故事内容或创意方向。"
+          },
+          "purpose": {
+            "label": "miss",
+            "why": "需求单中没有说明视频的用途或目标平台。"
+          },
+          "duration": {
+            "label": "miss",
+            "why": "需求单中没有提及视频的长度或格式要求。"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有描述视频的风格特点。"
+          },
+          "music_text": {
+            "label": "miss",
+            "why": "需求单中没有提到音乐或文本叠加的要求。"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有包含项目的截止日期。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE12",
+        "behavior": "cooperative",
+        "segment": "商家/博主",
+        "action": "refuse",
+        "category": "video",
+        "userTurns": 1,
+        "filled": 0,
+        "unsupported": 0,
+        "embellished": 0,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 0,
+        "recallTotal": 7,
+        "avgLatencyMs": 6449,
+        "tokens": 3653,
+        "styleTerms": 0
+      }
+    },
+    {
+      "request": {
+        "id": "VE13",
+        "source": "r/forhire",
+        "segment": "个人创作者",
+        "poster": "Individual comedy creator",
+        "text": "[Hiring] Editor for a ~15 min storytime video — $450 flat + paid test edit. It's a personal storytime explaining why I've been gone ~2 months... heavy material told in my normal voice. There are jokes all the way through, but there are also a few moments where the correct edit is nothing at all. I need someone who can tell the difference. Raw: 90–120 min of talking head. Target final: ~15 minutes, punchy. Cut in 4 short scripted comedy bits. Memes, SFX, b-roll across the drier stretches. One motion-graphics data timeline. One small VFX shot. Subtitles. I'll be providing a full beat-by-beat brief... Two revision rounds included."
+      },
+      "behavior": "offtopic",
+      "profile": {
+        "footage": "90-120 minutes of talking head footage, some b-roll, and a few short scripted comedy bits",
+        "story": "A personal storytime explaining why I've been gone for about 2 months. The content is heavy but there are jokes throughout, and some moments where no editing is needed.",
+        "purpose": "To be posted on my YouTube channel as a way to reconnect with my audience after a long absence",
+        "duration": "Target final video length is around 15 minutes, punchy and engaging",
+        "style": "The style should be a mix of serious and humorous, with a good balance of pacing to keep the audience engaged. Some parts need to be left untouched, while others require more dynamic editing.",
+        "music_text": "BGM should be minimal and only used when necessary. Subtitles are required. No specific text or additional music has been provided yet.",
+        "cover": "A cover that captures the essence of the story, possibly using a still from the video with some text overlay. I'm open to suggestions.",
+        "reference": null,
+        "deadline": "Not explicitly stated, but given the context, it seems like it's relatively soon. Let's aim for within 2 weeks.",
+        "budget": "$450 flat + paid test edit",
+        "revisions": "Two revision rounds included",
+        "ai_policy": "No specific AI usage policy mentioned, so it's up to the editor's discretion as long as the final product meets the requirements.",
+        "acceptance": "I'll be providing a full beat-by-beat brief, and the final product should match this brief. It should also feel natural and engaging, with a good balance of humor and seriousness."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[Hiring] Editor for a ~15 min storytime video — $450 flat + paid test edit. It's a personal storytime explaining why I've been gone ~2 months... heavy material told in my normal voice. There are jokes all the way through, but there are also a few moments where the correct edit is nothing at all. I need someone who can tell the difference. Raw: 90–120 min of talking head. Target final: ~15 minutes, punchy. Cut in 4 short scripted comedy bits. Memes, SFX, b-roll across the drier stretches. One motion-graphics data timeline. One small VFX shot. Subtitles. I'll be providing a full beat-by-beat brief... Two revision rounds included."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for the detailed intro — this sounds like a meaningful, tonally nuanced project. To get your brief fully production-ready, I'll start with the most critical question: What's the main platform or context where this 15-minute storytime video will be published? (e.g., YouTube long-form, Patreon exclusive, internal team share, film festival submission, etc.) This affects pacing, subtitle styling, aspect ratio, and how boldly we can use memes/SFX/VFX.\n(Quick picks: Any preference about AI tools? (e.g., 'AI fine for auto-subtitles & rough cut', 'no AI for timing/jokes', 'prefer human-only for all editorial decisions') [AI OK for subtitles & rough cut only / AI OK for b-roll/memes if relevant / No AI for timing, pacing, or joke delivery — human-only editorial / No preference])"
+          },
+          {
+            "role": "user",
+            "content": "It's for my YouTube channel. I want to reconnect with my audience."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — YouTube is super helpful to know. Since it's for your channel and about reconnecting, the tone and authenticity are clearly central. To lock in the visual and pacing style: Do you have a specific YouTube video (yours or someone else's) that nails the *exact* feel you want — e.g., how pauses land, how subtitles appear, how memes or b-roll are timed, or how the color grade supports sincerity + humor? If yes, please drop the link. If not, I'll give you 3 clear, concrete style options to choose from.\n(Quick picks: AI tool preferences? [AI OK for auto-subtitles & rough cut only / AI OK for b-roll/memes if relevant / No AI for timing, pacing, or joke delivery — human-only editorial / No preference]; When do you need the final video? [Within 3 days / Within 1 week / Within 2 weeks / Flexible — no hard deadline])"
+          },
+          {
+            "role": "user",
+            "content": "I'm aiming for within 2 weeks."
+          },
+          {
+            "role": "assistant",
+            "content": "Great — 2 weeks gives solid time for thoughtful editing. Now, to translate 'punchy', 'jokes throughout', and 'intentional silence' into concrete editing choices: Which of these three pacing & tone styles matches what you have in mind? (Pick one)\n(Quick picks: AI tool preferences? [AI OK for auto-subtitles & rough cut only / AI OK for b-roll/memes if relevant / No AI for timing, pacing, or joke delivery — human-only editorial / No preference])"
+          },
+          {
+            "role": "user",
+            "content": "I want it to feel natural, with a good mix of humor and seriousness."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — 'natural with a good mix of humor and seriousness' is really helpful. To make that actionable for the editor: Which of these three editing styles best matches how you imagine the pacing, pauses, and visual treatment?\n(Quick picks: AI tool preferences? [AI OK for auto-subtitles & rough cut only / AI OK for b-roll/memes if relevant / No AI for timing, pacing, or joke delivery — human-only editorial / No preference])"
+          },
+          {
+            "role": "user",
+            "content": "No AI for timing, pacing, or joke delivery — human-only editorial."
+          },
+          {
+            "role": "assistant",
+            "content": "Perfect — human-only editorial for timing, pacing, and jokes is noted. Now, to finalize the style: Which of these three editing approaches best matches your vision for how the video should *feel* and *flow*?"
+          },
+          {
+            "role": "user",
+            "content": "You can suggest the three options, I'm open to see what you think would work best."
+          },
+          {
+            "role": "assistant",
+            "content": "Here are three concrete, YouTube-optimized editing styles — all fully compatible with your 'natural voice + humor + seriousness' goal and human-only editorial requirement. Which one feels closest to what you'd want to watch (and what your audience would connect with)?"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Here are three concrete, YouTube-optimized editing styles — all fully compatible with your 'natural voice + humor + seriousness' goal and human-only editorial requirement. Which one feels closest to what you'd want to watch (and what your audience would connect with)?",
+          "options": [],
+          "optionsField": "style",
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Here are three concrete, YouTube-optimized editing styles — all fully compatible with your 'natural voice + humor + seriousness' goal and human-only editorial requirement. Which one feels closest to what you'd want to watch (and what your audience would connect with)?",
+          "brief": {
+            "footage": "90–120 min of talking-head raw footage",
+            "story": "A personal storytime explaining a ~2-month absence; heavy material told in normal voice, with jokes throughout and intentional silence in key moments",
+            "purpose": "YouTube channel — to reconnect with audience",
+            "duration": "~15 minutes, punchy",
+            "style": null,
+            "music_text": "Subtitles required; scripted comedy bits, memes, SFX, b-roll, one motion-graphics data timeline, one small VFX shot",
+            "cover": null,
+            "reference": null,
+            "deadline": "Within 2 weeks",
+            "budget": "$450 flat",
+            "revisions": 2,
+            "ai_policy": "No AI for timing, pacing, or joke delivery — human-only editorial",
+            "acceptance": null
+          },
+          "styleTranslation": [
+            {
+              "term": "punchy",
+              "spec": "Editing prioritizes impact and clarity — no filler, but without sacrificing authenticity; pauses are kept when meaningful, trimmed only when distracting"
+            },
+            {
+              "term": "natural",
+              "spec": "Voice remains unaltered (no pitch/speed changes); cuts follow your natural speech rhythm; visual treatments (color, motion) support sincerity rather than stylization"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": 900,
+            "urgent": false,
+            "complex": true
+          },
+          "price": {
+            "summary": "Over 10 minutes: negotiate with the editor (prices vary widely)",
+            "detail": [
+              "Final length ~15 min",
+              "Student freelancers: 5–10 min ≈ CNY 50–100; longer videos quoted separately",
+              "Professional: simple talking-head ≈ CNY 30/min; English short-form for Instagram ≈ CNY 200–300 per video; corporate event video ≈ CNY 10,000"
+            ],
+            "source": "Goofish price lists and RedNote hiring posts (TikTok talking-head \"CNY 30/min\", Instagram \"CNY 200–300 per video\", corporate \"CNY 10k budget\")"
+          },
+          "routing": null,
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 17967,
+            "usage": {
+              "total_tokens": 5265,
+              "completion_tokens": 780,
+              "prompt_tokens": 4485,
+              "prompt_tokens_details": {
+                "cached_tokens": 2688
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 16095,
+            "tokens": 4181
+          },
+          {
+            "latencyMs": 12245,
+            "tokens": 4364
+          },
+          {
+            "latencyMs": 13694,
+            "tokens": 4648
+          },
+          {
+            "latencyMs": 16714,
+            "tokens": 4922
+          },
+          {
+            "latencyMs": 16835,
+            "tokens": 5116
+          },
+          {
+            "latencyMs": 17967,
+            "tokens": 5265
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确提到90-120分钟的谈话镜头。"
+          },
+          "story": {
+            "label": "supported",
+            "why": "用户详细描述了故事内容，包括解释两个月的缺席、沉重的内容和穿插的笑话。"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户明确表示这是为了在YouTube频道上重新连接观众。"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确表示目标最终视频长度约为15分钟，节奏紧凑。"
+          },
+          "music_text": {
+            "label": "embellished",
+            "why": "用户提到了字幕、喜剧片段、meme、SFX、b-roll、动态图形数据时间线和VFX，但没有提到BGM的具体要求。"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确表示希望在两周内完成。"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确提到预算是450美元。"
+          },
+          "revisions": {
+            "label": "supported",
+            "why": "用户明确提到包含两轮修改。"
+          },
+          "ai_policy": {
+            "label": "supported",
+            "why": "用户明确表示不使用AI进行时间、节奏或笑话的编辑，只使用人工编辑。"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "partial",
+            "why": "需求单中缺少了“一些b-roll”和“几个短喜剧片段”的信息。"
+          },
+          "story": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的故事内容。"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的目的。"
+          },
+          "duration": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的时长要求。"
+          },
+          "style": {
+            "label": "miss",
+            "why": "需求单中没有提到风格的具体要求，如严肃与幽默的平衡以及动态编辑的要求。"
+          },
+          "music_text": {
+            "label": "partial",
+            "why": "需求单中没有提到BGM的具体要求。"
+          },
+          "cover": {
+            "label": "miss",
+            "why": "需求单中没有提到封面的具体要求。"
+          },
+          "reference": {
+            "label": "miss",
+            "why": "需求单中没有提到参考视频。"
+          },
+          "deadline": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的截止日期。"
+          },
+          "budget": {
+            "label": "partial",
+            "why": "需求单中缺少了“+ paid test edit”的信息。"
+          },
+          "revisions": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的修改轮次。"
+          },
+          "ai_policy": {
+            "label": "hit",
+            "why": "需求单准确捕捉了用户的AI使用政策。"
+          },
+          "acceptance": {
+            "label": "miss",
+            "why": "需求单中没有提到用户会提供详细的逐拍简报，并且最终产品应符合该简报。"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE13",
+        "behavior": "offtopic",
+        "segment": "个人创作者",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 6,
+        "filled": 9,
+        "unsupported": 0,
+        "embellished": 1,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 5,
+        "recallTotal": 7,
+        "avgLatencyMs": 15592,
+        "tokens": 28496,
+        "styleTerms": 2
+      }
+    },
+    {
+      "request": {
+        "id": "VE14",
+        "source": "r/forhire",
+        "segment": "个人创作者",
+        "poster": "New finance YouTube channel (individual)",
+        "text": "[HIRING] Video Editor. I'm looking for a video editor who can replicate the style shown in the reference videos. I'm planning to start a finance YouTube channel... I don't want the videos to be over-edited with flashy effects or something happening every 3 seconds. I'm looking for a smooth, clean edit, tailored to viewers in the 25–30 age range. I'm especially interested in strong sound design and background music that fits the overall tone. The videos will be around 10–12 minutes long. I'll provide the raw footage of myself speaking... At the moment, the maximum I can afford is $15/hour."
+      },
+      "behavior": "vague",
+      "profile": {
+        "footage": "Raw footage of myself speaking, no additional B-roll or graphics needed.",
+        "story": "The content will be finance-related, with a focus on providing clear and concise information to viewers in the 25–30 age range. The narrative should be straightforward and engaging.",
+        "purpose": "To start a finance YouTube channel, aiming to educate and inform viewers about financial topics.",
+        "duration": "Around 10–12 minutes long, 16:9 aspect ratio for YouTube.",
+        "style": "Smooth and clean, without over-editing or flashy effects. The video should have a professional and modern look, suitable for a young adult audience.",
+        "music_text": "Strong sound design and background music that fits the overall tone of the video. No specific BGM or text, but the music should enhance the viewing experience.",
+        "cover": "A simple and professional cover that represents the topic of the video, with a title and possibly a subtitle.",
+        "reference": "Reference videos provided, which show the style I am looking to replicate.",
+        "deadline": "No specific deadline, but ideally within a week after receiving the raw footage.",
+        "budget": "$15/hour",
+        "revisions": null,
+        "ai_policy": "Open to using AI tools if it can help improve the editing process, but not as a replacement for human editing.",
+        "acceptance": null
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "[HIRING] Video Editor. I'm looking for a video editor who can replicate the style shown in the reference videos. I'm planning to start a finance YouTube channel... I don't want the videos to be over-edited with flashy effects or something happening every 3 seconds. I'm looking for a smooth, clean edit, tailored to viewers in the 25–30 age range. I'm especially interested in strong sound design and background music that fits the overall tone. The videos will be around 10–12 minutes long. I'll provide the raw footage of myself speaking... At the moment, the maximum I can afford is $15/hour."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for sharing! To match your vision for a clean, smooth finance YouTube channel (10–12 min videos, 25–30 audience, strong sound design, no flashy edits), I'll need a few key details to get started. First — could you please share 1–2 reference videos (links or descriptions) that best show the *exact* editing style you'd like replicated? For example: a specific creator's recent video, or a clip where the pacing, transitions, text treatment, or music feel just right.\n(Quick picks: How many rounds of edits would you like included? [1 round / 2 rounds / 3 rounds]; Do you have preferences about AI use? (e.g., auto-captions OK? AI voiceovers not OK?) [AI OK for captions & rough cut only / AI OK for captions only / No AI at all / I'm open — let me know what's involved])"
+          },
+          {
+            "role": "user",
+            "content": "Sure, here are the links to the reference videos. For AI, it's open if it helps but not for final edits."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for sharing the reference links and clarifying AI use — that's really helpful. Next: to ensure the edit fits your audience (25–30) and purpose (finance YouTube), could you tell me what *story or message* each video should convey? For example: 'Explain compound interest simply', 'Compare index funds vs. crypto', or 'My journey from debt to investing'. Also, which moments, people, or visuals from your raw footage *must* be included?\n(Quick picks: How many rounds of edits would you like included? [1 round / 2 rounds / 3 rounds]; When do you need the first video delivered? [Within 3 days / Within 1 week / Within 2 weeks / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "The story is about clear, concise finance info. No specific moments needed."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — clear, concise finance info, no specific moments required. To lock in the right look and feel: what's the *most important thing* viewers should remember or feel after watching? For example: 'I understand how to start investing' (clarity), 'This is actually doable' (confidence), or 'I trust this advice' (authority). Also — what's your top priority for the final delivery: polished sound design, precise timing of key points, or consistent visual tone across videos?\n(Quick picks: How many rounds of edits would you like included? [1 round / 2 rounds / 3 rounds]; When do you need the first video delivered? [Within 3 days / Within 1 week / Within 2 weeks / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "They should feel confident and informed. Top priority is polished sound design."
+          },
+          {
+            "role": "assistant",
+            "content": "Perfect — confidence and clarity as the core feeling, with polished sound design as the top priority. To finalize the brief: what's your *absolute must-have* for how the video looks — for example: 'text overlays only for definitions', 'no background music during speech', or 'consistent color grade across all shots'? Also, do you need a custom thumbnail (cover) designed?\n(Quick picks: How many rounds of edits would you like included? [1 round / 2 rounds / 3 rounds]; When do you need the first video delivered? [Within 3 days / Within 1 week / Within 2 weeks / Flexible])"
+          },
+          {
+            "role": "user",
+            "content": "No specific must-haves, just keep it clean. Yes, a simple thumbnail would be good."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — clean, confident, and informative finance videos (10–12 min), with polished sound design as top priority, custom thumbnail included, and AI used only for captions & rough cut. Ready to move forward!"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — clean, confident, and informative finance videos (10–12 min), with polished sound design as top priority, custom thumbnail included, and AI used only for captions & rough cut. Ready to move forward!",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — clean, confident, and informative finance videos (10–12 min), with polished sound design as top priority, custom thumbnail included, and AI used only for captions & rough cut. Ready to move forward!",
+          "brief": {
+            "footage": "raw footage of myself speaking",
+            "story": "clear, concise finance info",
+            "purpose": "finance YouTube channel",
+            "duration": "10–12 minutes",
+            "style": "smooth, clean edit; no flashy effects; no cut every 3 seconds",
+            "music_text": "strong sound design and background music that fits the overall tone",
+            "cover": "yes, simple thumbnail",
+            "reference": "https://www.youtube.com/watch?v=... (to confirm)",
+            "deadline": null,
+            "budget": "$15/hour",
+            "revisions": null,
+            "ai_policy": "AI OK for captions & rough cut only",
+            "acceptance": "Viewers feel confident and informed after watching, Sound design is polished — clear voice, balanced music, no distracting audio artifacts, Visuals stay clean: no flashy effects, no text overload, no cuts faster than needed to support understanding (to confirm)"
+          },
+          "styleTranslation": [
+            {
+              "term": "smooth, clean edit",
+              "spec": "consistent pacing with no jarring cuts; transitions only when needed (e.g., fade or cut on action); minimal motion graphics; text overlays simple and legible, appearing only to clarify key points"
+            },
+            {
+              "term": "no flashy effects or something happening every 3 seconds",
+              "spec": "no zooms, spins, rapid cuts, animated stickers, or constant lower-thirds; each shot holds long enough to absorb the spoken point (typically 4–8 seconds)"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": 660,
+            "urgent": false,
+            "complex": false
+          },
+          "price": {
+            "summary": "Over 10 minutes: negotiate with the editor (prices vary widely)",
+            "detail": [
+              "Final length ~11 min",
+              "Student freelancers: 5–10 min ≈ CNY 50–100; longer videos quoted separately",
+              "Professional: simple talking-head ≈ CNY 30/min; English short-form for Instagram ≈ CNY 200–300 per video; corporate event video ≈ CNY 10,000"
+            ],
+            "source": "Goofish price lists and RedNote hiring posts (TikTok talking-head \"CNY 30/min\", Instagram \"CNY 200–300 per video\", corporate \"CNY 10k budget\")"
+          },
+          "routing": {
+            "type": "hybrid",
+            "reason": "AI is OK for captions and rough cut only, but final polish — especially sound design and clean visual pacing — requires human judgment and refinement"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 5,
+            "latencyMs": 14688,
+            "usage": {
+              "total_tokens": 5084,
+              "completion_tokens": 633,
+              "prompt_tokens": 4451,
+              "prompt_tokens_details": {
+                "cached_tokens": 2560
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 16733,
+            "tokens": 4188
+          },
+          {
+            "latencyMs": 14029,
+            "tokens": 4513
+          },
+          {
+            "latencyMs": 15348,
+            "tokens": 4769
+          },
+          {
+            "latencyMs": 14210,
+            "tokens": 4896
+          },
+          {
+            "latencyMs": 14688,
+            "tokens": 5084
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确提到会提供自己说话的原始素材"
+          },
+          "story": {
+            "label": "supported",
+            "why": "用户说视频内容是关于清晰、简洁的财务信息"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户提到要开始一个财务YouTube频道"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确说明视频长度为10-12分钟"
+          },
+          "style": {
+            "label": "supported",
+            "why": "用户要求风格平滑干净，不要过多编辑和炫酷效果"
+          },
+          "music_text": {
+            "label": "supported",
+            "why": "用户强调需要强大的声音设计和符合整体基调的背景音乐"
+          },
+          "cover": {
+            "label": "supported",
+            "why": "用户同意制作一个简单的缩略图"
+          },
+          "reference": {
+            "label": "supported",
+            "why": "用户提供了一些参考视频链接"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户明确表示每小时最多能支付15美元"
+          },
+          "ai_policy": {
+            "label": "supported",
+            "why": "用户同意AI可以用于字幕和粗剪，但不用于最终编辑"
+          },
+          "acceptance": {
+            "label": "embellished",
+            "why": "用户提到观众看完后应感到自信和知情，并且声音设计是首要任务，但需求单中添加了额外的具体细节"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "hit",
+            "why": "需求单中准确捕捉到了用户提供的原始素材"
+          },
+          "story": {
+            "label": "partial",
+            "why": "需求单提到了内容是清晰、简洁的财务信息，但未提及针对25-30岁观众的直接性"
+          },
+          "purpose": {
+            "label": "hit",
+            "why": "需求单准确捕捉到了启动财务YouTube频道的目的"
+          },
+          "duration": {
+            "label": "partial",
+            "why": "需求单提到了10-12分钟，但未提及16:9的宽高比"
+          },
+          "style": {
+            "label": "hit",
+            "why": "需求单准确捕捉到了平滑干净的风格，没有过多编辑和炫酷效果的要求"
+          },
+          "music_text": {
+            "label": "hit",
+            "why": "需求单准确捕捉到了强大的声音设计和符合整体基调的背景音乐的要求"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中没有提及任何关于交付时间的信息，而隐藏画像中有提到理想情况下在收到原始素材后一周内完成"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE14",
+        "behavior": "vague",
+        "segment": "个人创作者",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 5,
+        "filled": 11,
+        "unsupported": 0,
+        "embellished": 1,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 5,
+        "recallTotal": 7,
+        "avgLatencyMs": 15002,
+        "tokens": 23450,
+        "styleTerms": 2
+      }
+    },
+    {
+      "request": {
+        "id": "VE15",
+        "source": "r/forhire",
+        "segment": "个人创作者",
+        "poster": "Men's fashion creator",
+        "text": "Looking for a Video Editor – Men's Fashion Content. I'm looking for a skilled video editor who can help edit content for social media. Ideally, you should be comfortable with video editing, color grading, pacing, transitions, and creating content that looks clean, polished, and engaging. Bonus points if you have previous experience editing content in the men's fashion / menswear niche. Pay is 5-10 usd depending on experience and skill."
+      },
+      "behavior": "cooperative",
+      "profile": {
+        "footage": "I have raw footage of men's fashion outfits, runway shows, and some behind-the-scenes content. The footage is in 4K and I have about 1-2 hours of material.",
+        "story": "The video should highlight the latest trends in men's fashion, showcase different outfits, and include some behind-the-scenes moments to make it more engaging. I want to focus on the quality and style of the clothing, and maybe add some text overlays for key points.",
+        "purpose": "The video will be posted on Instagram, TikTok, and YouTube. It’s meant to attract followers and potential clients who are interested in men's fashion.",
+        "duration": "The final video should be around 1-3 minutes long, and I need both vertical and horizontal versions for different platforms.",
+        "style": "The style should be clean, polished, and modern. The pacing should be fast enough to keep the audience engaged but not too rushed. Smooth transitions and a professional color grade are important.",
+        "music_text": "I’d like to use upbeat, trendy music that fits the men's fashion vibe. Text overlays for key points and subtitles for any spoken parts would be great.",
+        "cover": "A dynamic cover image that captures the essence of the video, maybe a stylish outfit or a model in action. It should be eye-catching and representative of the content.",
+        "reference": null,
+        "deadline": "I need the video within 1-2 weeks from when we start working together.",
+        "budget": "5-10 USD per minute of edited video, depending on experience and skill.",
+        "revisions": null,
+        "ai_policy": "I’m open to using AI tools if they can help improve the quality and efficiency of the editing process.",
+        "acceptance": "The video needs to look professional and engaging. I’ll review it and provide feedback, and we can finalize it once I’m happy with the result."
+      },
+      "run": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Looking for a Video Editor – Men's Fashion Content. I'm looking for a skilled video editor who can help edit content for social media. Ideally, you should be comfortable with video editing, color grading, pacing, transitions, and creating content that looks clean, polished, and engaging. Bonus points if you have previous experience editing content in the men's fashion / menswear niche. Pay is 5-10 usd depending on experience and skill."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks for sharing! To match you with the right editor and get your project started smoothly, could you tell me: what's the total length of raw footage you have, and what's the target length for the final video?\n(Quick picks: What final video length do you prefer? [15–30 seconds / 45–60 seconds / 75–90 seconds / 2–3 minutes]; Any specific things that *must* be included or highlighted? (e.g., logo placement, model close-ups, outfit details) (pick any) [Outfit details (e.g., fabric texture, fit) / Model's face/expressions / Logo or brand name / None — just make it clean & engaging])"
+          },
+          {
+            "role": "user",
+            "content": "I have about 1-2 hours of raw footage. The final video should be around 1-3 minutes long. Must include outfit details and make it clean & engaging."
+          },
+          {
+            "role": "assistant",
+            "content": "Great — thanks for confirming footage volume and timing. To nail the look and feel: do you have a reference video (e.g., a brand's Instagram Reel, a creator's edit, or even a TikTok you like) that shows the *exact* style you want — especially for men's fashion? If not, here are 3 clear, visual options — pick the one closest to your goal:"
+          },
+          {
+            "role": "user",
+            "content": "I don’t have a specific reference, you can choose the one that looks most modern and polished."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — you'd like a modern, polished look. To make that concrete for the editor, which of these three editing styles matches what you have in mind? (Pick one)\n(Quick picks: Any preference for music or text? (e.g., 'no voiceover, just upbeat instrumental', 'clean captions only', 'no text, no music') (pick any) [No voiceover, upbeat instrumental / Clean captions only (e.g., fabric names) / No text, no music / I'll provide my own track]; When do you need the first draft? [Within 24 hours / Within 3 days / Within 5 days / Flexible — no rush])"
+          },
+          {
+            "role": "user",
+            "content": "No voiceover, upbeat instrumental. I need the first draft within 5 days."
+          },
+          {
+            "role": "assistant",
+            "content": "Thanks — that's helpful! To lock in the visual style: which of these three editing approaches best matches your idea of 'modern and polished' for men's fashion?\n(Quick picks: How many rounds of edits do you expect? [1 round / 2 rounds / 3 rounds])"
+          },
+          {
+            "role": "user",
+            "content": "I’m not sure, maybe 2 rounds of edits."
+          },
+          {
+            "role": "assistant",
+            "content": "Last key detail: what's the *most important thing* for you to see in the final video — so you know it's 'done right'? For example: 'outfit details are crystal clear even at small screen size', 'the pacing feels energetic but never rushed', or 'it looks like a high-end brand Reel, not a casual clip'. Please describe 1–2 concrete things you'll check.\n(Quick picks: Final video length (in seconds)? [15 / 30 / 45 / 60 / 90]; Any preference about AI use? [AI OK for rough cut & auto-captions / AI OK only for color grading / Prefer fully manual editing — no AI])"
+          },
+          {
+            "role": "user",
+            "content": "Outfit details should be clear, and the pacing should feel energetic but not rushed. AI is OK for rough cut and auto-captions."
+          },
+          {
+            "role": "assistant",
+            "content": "Got it — your video will highlight outfit details clearly, keep an energetic-but-not-rushed pace, and use AI for rough cut & auto-captions (with human refinement). Ready to go!"
+          }
+        ],
+        "final": {
+          "action": "finish",
+          "category": "video",
+          "reply": "Got it — your video will highlight outfit details clearly, keep an energetic-but-not-rushed pace, and use AI for rough cut & auto-captions (with human refinement). Ready to go!",
+          "options": [],
+          "optionsField": null,
+          "optionsMulti": false,
+          "quickForm": [],
+          "transcript": "Got it — your video will highlight outfit details clearly, keep an energetic-but-not-rushed pace, and use AI for rough cut & auto-captions (with human refinement). Ready to go!",
+          "brief": {
+            "footage": "1–2 hours of raw footage",
+            "story": "Highlight outfit details (e.g., fabric texture, fit) and model presence in a clean, modern, polished way (to confirm)",
+            "purpose": "social media",
+            "duration": "1–3 minutes",
+            "style": "Energetic but not rushed pacing: cuts synced to beat every 1–2 seconds; smooth transitions (no zooms or flashy effects); color grading for rich, true-to-life fabric tones; clean framing focused on clothing details and model expressions",
+            "music_text": "No voiceover, upbeat instrumental",
+            "cover": null,
+            "reference": null,
+            "deadline": "Within 5 days",
+            "budget": "5-10 usd",
+            "revisions": 2,
+            "ai_policy": "AI OK for rough cut & auto-captions",
+            "acceptance": "Outfit details (e.g., fabric texture, fit) are crystal clear even at small screen size, Pacing feels energetic but never rushed — no jarring cuts or lingering shots"
+          },
+          "styleTranslation": [
+            {
+              "term": "modern and polished",
+              "spec": "Clean framing, consistent color grading with natural skin tones and rich fabric colors, precise timing to music beat, no visual clutter or distracting effects"
+            },
+            {
+              "term": "energetic but not rushed",
+              "spec": "Cuts land every 1–2 seconds on the beat; each shot holds long enough to register detail (minimum 0.8 sec); no jump cuts or rapid flickering"
+            }
+          ],
+          "priceInputs": {
+            "duration_sec": null,
+            "urgent": false,
+            "complex": null
+          },
+          "price": null,
+          "routing": {
+            "type": "hybrid",
+            "reason": "Uses AI for rough cut and auto-captions per request, but requires human refinement for precise pacing, outfit detail emphasis, and polished color grading"
+          },
+          "meta": {
+            "model": "qwen-plus",
+            "turn": 6,
+            "latencyMs": 13018,
+            "usage": {
+              "total_tokens": 4823,
+              "completion_tokens": 551,
+              "prompt_tokens": 4272,
+              "prompt_tokens_details": {
+                "cached_tokens": 2688
+              }
+            }
+          }
+        },
+        "turns": [
+          {
+            "latencyMs": 11920,
+            "tokens": 3922
+          },
+          {
+            "latencyMs": 12721,
+            "tokens": 4236
+          },
+          {
+            "latencyMs": 14895,
+            "tokens": 4460
+          },
+          {
+            "latencyMs": 11518,
+            "tokens": 4475
+          },
+          {
+            "latencyMs": 12064,
+            "tokens": 4566
+          },
+          {
+            "latencyMs": 13018,
+            "tokens": 4823
+          }
+        ]
+      },
+      "scores": {
+        "fabrication": {
+          "footage": {
+            "label": "supported",
+            "why": "用户明确提到有1-2小时的原始素材"
+          },
+          "story": {
+            "label": "embellished",
+            "why": "用户只说要突出服装细节和整体干净、现代、精致的感觉，但没有具体提到面料质地、合身度和模特存在感"
+          },
+          "purpose": {
+            "label": "supported",
+            "why": "用户提到视频用于社交媒体"
+          },
+          "duration": {
+            "label": "supported",
+            "why": "用户明确提到最终视频长度为1-3分钟"
+          },
+          "style": {
+            "label": "embellished",
+            "why": "用户提到风格应该是干净、精致、现代的，节奏应该快但不急促，但没有提到具体的剪辑节奏（如每1-2秒同步到节拍）或颜色分级的具体要求"
+          },
+          "music_text": {
+            "label": "supported",
+            "why": "用户明确提到不要旁白，使用欢快的器乐"
+          },
+          "deadline": {
+            "label": "supported",
+            "why": "用户明确提到需要在5天内完成初稿"
+          },
+          "budget": {
+            "label": "supported",
+            "why": "用户提到预算为5-10美元/分钟，取决于经验和技能"
+          },
+          "revisions": {
+            "label": "suggested",
+            "why": "用户不确定修改次数，助手建议了2次修改，用户没有反对"
+          },
+          "ai_policy": {
+            "label": "supported",
+            "why": "用户明确提到AI可以用于粗剪和自动生成字幕"
+          },
+          "acceptance": {
+            "label": "embellished",
+            "why": "用户提到服装细节要清晰，节奏要有活力但不急促，但没有具体提到小屏幕上的清晰度或避免突然剪切和拖沓镜头"
+          }
+        },
+        "recall": {
+          "footage": {
+            "label": "partial",
+            "why": "需求单中提到了1-2小时的原始素材，但没有提到4K分辨率和具体内容类型（男装、时装秀、幕后花絮）"
+          },
+          "story": {
+            "label": "miss",
+            "why": "需求单中没有提到展示最新男装趋势、不同服装组合以及幕后花絮以增加吸引力"
+          },
+          "purpose": {
+            "label": "partial",
+            "why": "需求单中提到了社交媒体，但没有具体提到Instagram、TikTok和YouTube，也没有提到吸引关注者和潜在客户的目的"
+          },
+          "duration": {
+            "label": "partial",
+            "why": "需求单中提到了1-3分钟的最终视频长度，但没有提到需要垂直和水平版本"
+          },
+          "style": {
+            "label": "partial",
+            "why": "需求单中提到了干净、精致、现代的风格，但没有提到专业色彩分级的重要性"
+          },
+          "music_text": {
+            "label": "partial",
+            "why": "需求单中提到了欢快的音乐，但没有提到文字叠加关键点和字幕"
+          },
+          "cover": {
+            "label": "miss",
+            "why": "需求单中完全没有提到封面图像的要求"
+          },
+          "reference": {
+            "label": "hit",
+            "why": "用户没有提供参考视频，需求单中也没有提及"
+          },
+          "deadline": {
+            "label": "miss",
+            "why": "需求单中提到5天内完成初稿，但隐藏画像中提到的是1-2周内完成整个项目"
+          },
+          "budget": {
+            "label": "hit",
+            "why": "需求单中提到的预算与隐藏画像一致"
+          },
+          "revisions": {
+            "label": "miss",
+            "why": "隐藏画像中没有提到具体的修改次数，需求单中提到了2次修改"
+          },
+          "ai_policy": {
+            "label": "hit",
+            "why": "需求单中提到的AI政策与隐藏画像一致"
+          },
+          "acceptance": {
+            "label": "partial",
+            "why": "需求单中提到的验收标准部分符合隐藏画像中的要求，但没有提到整体的专业性和吸引力"
+          }
+        }
+      },
+      "metrics": {
+        "id": "VE15",
+        "behavior": "cooperative",
+        "segment": "个人创作者",
+        "action": "finish",
+        "category": "video",
+        "userTurns": 6,
+        "filled": 11,
+        "unsupported": 0,
+        "embellished": 3,
+        "flaggedUnsupported": 0,
+        "pendingFields": 0,
+        "recallHit": 2.5,
+        "recallTotal": 7,
+        "avgLatencyMs": 12689,
+        "tokens": 26482,
+        "styleTerms": 2
+      }
+    }
+  ],
+  "boundary": []
+}
